@@ -39,17 +39,6 @@ public class PlayerAttack : MonoBehaviour
             //_audioSource.clip = _audioClip;
             //_audioSource.Play();
             _sword.SetActive(true);
-
-            hits = Physics2D.CircleCastAll(_attackTransform.position, _attackRange, transform.forward, 0f, _ennemiesLayer);
-            for (int i = 0; i < hits.Length; i++)
-            {
-                IDamageable iDamageable = hits[i].collider.gameObject.GetComponent<IDamageable>();
-
-                if (iDamageable != null)
-                {
-                    iDamageable.TakeDamage(_damage);
-                }
-            }
         }
     }
     private void AttackDelay()

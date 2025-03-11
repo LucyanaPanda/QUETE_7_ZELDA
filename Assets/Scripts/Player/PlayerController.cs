@@ -51,10 +51,8 @@ public class PlayerController : MonoBehaviour
     {
         if (isRight)
             _parentTransform.localScale = _lookRight;
-            //_transformBody.localScale = _lookRight;
         else if (!isRight)
             _parentTransform.localScale = _lookLeft;
-            //_transformBody.localScale = _lookLeft;
 
     }
 }

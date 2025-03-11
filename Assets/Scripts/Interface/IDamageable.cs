@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    public int health { get; }
+    public float health { get; }
 
-    public void TakeDamage(int damage) { }
+    public void TakeDamage(float damage) { }
 }
