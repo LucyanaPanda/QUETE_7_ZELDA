@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private Transform _parentTransform;
     private Vector3 _dir;
-    private Transform _transformBody;
+    //private Transform _transformBody;
 
     [Header("LookAt")]
     [SerializeField] private Vector3 _lookRight;
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _transformBody = GetComponent<Transform>();
+        //_transformBody = GetComponent<Transform>();
     }
 
     private void Update()
@@ -50,9 +50,11 @@ public class PlayerController : MonoBehaviour
     private void LookAtDirection(bool isRight)
     {
         if (isRight)
-            _transformBody.localScale = _lookRight;
+            _parentTransform.localScale = _lookRight;
+            //_transformBody.localScale = _lookRight;
         else if (!isRight)
-            _transformBody.localScale = _lookLeft;
+            _parentTransform.localScale = _lookLeft;
+            //_transformBody.localScale = _lookLeft;
 
     }
 }

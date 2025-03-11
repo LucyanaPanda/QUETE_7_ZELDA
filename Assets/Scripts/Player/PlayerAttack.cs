@@ -9,10 +9,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _attackTimer;
     [SerializeField] private float _attackMaxTimer;
     [SerializeField] private float _attackRange;
+    [SerializeField] private GameObject _sword;
     private Transform _attackTransform;
 
     [Header("LayerMask")]
-    [SerializeField] private LayerMask _attackLayer;
+    [SerializeField] private LayerMask _ennemiesLayer;
 
     [Header("Sounds effect")]
     [SerializeField] private AudioSource _audioSource;
@@ -37,9 +38,9 @@ public class PlayerAttack : MonoBehaviour
             _attackTimer -= _attackMaxTimer;
             //_audioSource.clip = _audioClip;
             //_audioSource.Play();
-            Debug.Log("Attacked");
+            _sword.SetActive(true);
 
-            hits = Physics2D.CircleCastAll(_attackTransform.position, _attackRange, transform.forward, 0f, _attackLayer);
+            hits = Physics2D.CircleCastAll(_attackTransform.position, _attackRange, transform.forward, 0f, _ennemiesLayer);
             for (int i = 0; i < hits.Length; i++)
             {
                 IDamageable iDamageable = hits[i].collider.gameObject.GetComponent<IDamageable>();
