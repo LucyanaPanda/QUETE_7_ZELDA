@@ -3,11 +3,13 @@ using UnityEngine.InputSystem;
 
 public class EnemyAttack : MonoBehaviour
 {
+    [Header("EnemyManager")]
+    [SerializeField] private EnemyManager _manager;
+
     [Header("Attack")]
-    [SerializeField] private int _damage;
-    [SerializeField] private float _attackTimer;
-    [SerializeField] private float _attackMaxTimer;
-    [SerializeField] private GameObject _sword;
+    [SerializeField] private float _attack, _minAttack, _maxAttack;
+    [SerializeField] private float _attackTimer, _attackMaxTimer;
+    [SerializeField] private Sword _sword;
 
     [Header("Enemy Radar")]
     [SerializeField] private EnemyRadar _radar;
@@ -16,13 +18,22 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
 
+    private void Start()
+    {
+        _minAttack = _manager.creatureData.minAttack;
+        _maxAttack = _manager.creatureData.maxAttack;
+
+        _attackTimer = _manager.creatureData.attackTimer;
+        _attackMaxTimer = _manager.creatureData.attackMaxTimer;
+    }
+
     private void Update()
     {
         AttackDelay();
         if (_radar.CanAttackPlayer)
         {
             OnAttack();
-            Debug.Log("Attacking.");
+            Debug.Log("Attacking");
         }
     }
 
@@ -33,7 +44,9 @@ public class EnemyAttack : MonoBehaviour
             _attackTimer -= _attackMaxTimer;
             //_audioSource.clip = _audioClip;
             //_audioSource.Play();
-            _sword.SetActive(true);
+            _sword.gameObject.SetActive(true);
+            _attack = _manager.creatureData.attack;
+            _sword.damage = _attack;
         }
     }
     private void AttackDelay()

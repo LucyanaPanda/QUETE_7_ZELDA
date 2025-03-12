@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783396c44c923044bbc35a10f2a48121, type: 3}
+  m_Name: Enenmy
+  m_EditorClassIdentifier: 
+  id: 1
+  nameCreature: Enemy
+  description: Fellow soldier of the "NOM" people, it is destinated to fight any
+    humans he encounters
+  image: {fileID: 7685206120247198685, guid: 970781748b2baab4baaf44b5577f0ff3, type: 3}
+  health: 3
+  minHealth: 0
+  maxHealth: 10
+  defense: 0
+  minDefense: 0
+  maxDefense: 5
+  attack: 1
+  minAttack: 1
+  maxAttack: 5
+  speed: 0
+  minSpeed: 0
+  maxSpeed: 0
+  attackTimer: 0
+  attackMaxTimer: 0
