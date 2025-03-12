@@ -45,7 +45,6 @@ public class EnemyAttack : MonoBehaviour
             //_audioSource.clip = _audioClip;
             //_audioSource.Play();
             _sword.gameObject.SetActive(true);
-            _attack = _manager.creatureData.attack;
             _sword.damage = _attack;
         }
     }

@@ -31,6 +31,7 @@ public class EnemyRadar : MonoBehaviour
     {
         _collider.radius = _rad;
         _speed = _manager.creatureData.speed;
+        _initPos = transform.position;
     }
 
     private void Update()

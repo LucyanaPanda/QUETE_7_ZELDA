@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23129263365f2114185816217ec0d514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!212 &8662259703188287175
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -352,7 +353,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aff5f2da7f8da40498ae425e92045d66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  creatureData: {fileID: 11400000, guid: 080989489a2f4ec4fbb66873f180c9ee, type: 2}
   _health: 3
+  _minHealth: 0
+  _maxHealth: 0
+  _defense: 0
+  _minDefense: 0
+  _maxDefense: 0
 --- !u!50 &3103751668891342739
 Rigidbody2D:
   serializedVersion: 5
@@ -406,7 +413,7 @@ Transform:
   m_GameObject: {fileID: 8367152386125703845}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.453, y: 3.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -425,10 +432,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d376b5fc5aeb3429c3415fba801aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
+  _manager: {fileID: 3855215449952575124}
+  _attack: 0
+  _minAttack: 0
+  _maxAttack: 0
   _attackTimer: 1
   _attackMaxTimer: 1
-  _sword: {fileID: 2105136895846488126}
+  _sword: {fileID: 440955969351741188}
   _radar: {fileID: 8681973516740827966}
   _audioSource: {fileID: 0}
   _audioClip: {fileID: 0}
@@ -513,12 +523,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb33eea1d03d8a48ad84c5d06f84ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 3855215449952575124}
   _transformBody: {fileID: 4099804982606351416}
   _rb: {fileID: 3103751668891342739}
-  _speed: 1
   _minDist: 0.2
   CanAttackPlayer: 0
-  _rad: 0
-  _collider: {fileID: 0}
+  _rad: 3
+  _collider: {fileID: 5253830283576551846}
   _lookRight: {x: 1, y: 1, z: 1}
   _lookLeft: {x: -1, y: 1, z: 1}

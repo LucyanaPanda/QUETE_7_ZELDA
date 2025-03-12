@@ -46,7 +46,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     private void IfDead()
     {
-        if (_health <= 0)
+        if (_health <= _minHealth)
             Destroy(gameObject);
     }
 
