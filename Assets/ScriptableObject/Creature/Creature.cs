@@ -5,7 +5,7 @@ public class Creature : ScriptableObject
 {
     [Header("Identification")]
     public int id;
-    public string nameItem;
+    public string nameCreature;
     public string description;
     public Sprite image;
 
@@ -19,6 +19,9 @@ public class Creature : ScriptableObject
     public float attack;
     public float minAttack;
     public float maxAttack;
+    public float speed;
+    public float minSpeed;
+    public float maxSpeed;
     public float attackTimer;
     public float attackMaxTimer;
 

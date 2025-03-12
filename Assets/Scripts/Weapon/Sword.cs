@@ -2,10 +2,9 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Transform))]
 public class Sword : MonoBehaviour
 {
-    private float _damage = 1.5f;
+    public float damage;
     private Animator _animator;
 
     void OnEnable()
@@ -26,7 +25,7 @@ public class Sword : MonoBehaviour
         IDamageable iDamageable = collision.GetComponent<IDamageable>();
         if (iDamageable != null)
         {
-            iDamageable.TakeDamage(_damage);
+            iDamageable.TakeDamage(damage);
         }
     }
 }

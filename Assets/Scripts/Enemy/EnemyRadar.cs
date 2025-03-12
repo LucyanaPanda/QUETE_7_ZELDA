@@ -4,12 +4,14 @@ using static UnityEngine.GraphicsBuffer;
 [RequireComponent(typeof(CircleCollider2D))]
 public class EnemyRadar : MonoBehaviour
 {
+    [Header("EnemyManager")]
+    [SerializeField] private EnemyManager _manager;
+
     [Header("Movement")]
     [SerializeField] private Transform _transformBody;
     [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private float _speed;
     [SerializeField] private float _minDist;
-    private Vector2 _dir;
+    private float _speed;
     private bool _isReturning;
     public bool CanAttackPlayer;
 
@@ -28,6 +30,8 @@ public class EnemyRadar : MonoBehaviour
     private void Start()
     {
         _collider.radius = _rad;
+        _speed = _manager.creatureData.speed;
+        _initPos = transform.position;
     }
 
     private void Update()

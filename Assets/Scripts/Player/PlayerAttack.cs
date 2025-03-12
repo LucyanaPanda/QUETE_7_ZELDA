@@ -4,15 +4,27 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Transform))]
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("PlayerManager")]
+    [SerializeField] private PlayerManager _manager;
+
     [Header("Attack")]
-    [SerializeField] private int _damage;
-    [SerializeField] private float _attackTimer;
-    [SerializeField] private float _attackMaxTimer;
-    [SerializeField] private GameObject _sword;
+    [SerializeField] private Sword _sword;
+    private float _attackTimer, _attackMaxTimer;
+    private float _attack, _minAttack, _maxAttack;
 
     [Header("Sounds effect")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioClip;
+
+    private void Start()
+    {
+        _attack = _manager.creatureData.attack;
+        _minAttack = _manager.creatureData.minAttack;
+        _maxAttack = _manager.creatureData.maxAttack;
+
+        _attackTimer = _manager.creatureData.attackTimer;
+        _attackMaxTimer = _manager.creatureData.attackMaxTimer;
+    }
 
     private void Update()
     {
@@ -26,7 +38,8 @@ public class PlayerAttack : MonoBehaviour
             _attackTimer -= _attackMaxTimer;
             //_audioSource.clip = _audioClip;
             //_audioSource.Play();
-            _sword.SetActive(true);
+            _sword.gameObject.SetActive(true);
+            _sword.damage = _attack;
         }
     }
     private void AttackDelay()

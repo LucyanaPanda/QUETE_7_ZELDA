@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23129263365f2114185816217ec0d514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
 --- !u!212 &5344830770333056549
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -180,6 +181,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8594085567740547135}
   - component: {fileID: 2838555883696699467}
+  - component: {fileID: 2848365692934849786}
   - component: {fileID: 2836682106071841508}
   - component: {fileID: 1938037219959909858}
   - component: {fileID: 1296204053065141046}
@@ -260,6 +262,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2848365692934849786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3677696608245676134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7acf386d5a42d6419fbbd4e9feba5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creatureData: {fileID: 11400000, guid: 64145099223c518458231e5c4f507667, type: 2}
 --- !u!114 &2836682106071841508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204593953c11e6441bd1eb94687ab9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _manager: {fileID: 2848365692934849786}
   _parentTransform: {fileID: 2325023631242424389}
   _lookRight: {x: 1, y: 1, z: 1}
   _lookLeft: {x: -1, y: 1, z: 1}
@@ -420,10 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae94fee4e08b2784f9c4644e1eda0437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 1
-  _attackTimer: 0.8
-  _attackMaxTimer: 0.8
-  _sword: {fileID: 1959817664571099933}
+  _manager: {fileID: 2848365692934849786}
+  _sword: {fileID: 5797220263269820888}
   _audioSource: {fileID: 0}
   _audioClip: {fileID: 0}
 --- !u!114 &3581235716064331157

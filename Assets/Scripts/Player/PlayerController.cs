@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Transform))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("PlayerManager")]
+    [SerializeField] private PlayerManager _manager;
+
     [Header("Movement")]
-    [SerializeField] private float _speed;
     [SerializeField] private Transform _parentTransform;
+    private float _speed, _minSpeed, _maxSpeed;
     private Vector3 _dir;
-    //private Transform _transformBody;
 
     [Header("LookAt")]
     [SerializeField] private Vector3 _lookRight;
@@ -21,7 +23,9 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        //_transformBody = GetComponent<Transform>();
+        _speed = _manager.creatureData.speed;
+        _minSpeed = _manager.creatureData.minSpeed;
+        _maxSpeed = _manager.creatureData.maxSpeed;
     }
 
     private void Update()
@@ -53,6 +57,6 @@ public class PlayerController : MonoBehaviour
             _parentTransform.localScale = _lookRight;
         else if (!isRight)
             _parentTransform.localScale = _lookLeft;
-
     }
 }
+

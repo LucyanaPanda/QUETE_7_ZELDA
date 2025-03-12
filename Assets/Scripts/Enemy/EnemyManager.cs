@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class PlayerManager : MonoBehaviour, IDamageable
+[RequireComponent(typeof(SpriteRenderer))]
+public class EnemyManager : MonoBehaviour, IDamageable
 {
     [Header("Data")]
     public Creature creatureData;
-    private float _health, _minHealth, _maxHealth;
-    private float _defense, _minDefense, _maxDefense;
+    public float _health, _minHealth, _maxHealth;
+    public float _defense, _minDefense, _maxDefense;
 
     private SpriteRenderer _spriteRenderer;
 
@@ -40,11 +42,12 @@ public class PlayerManager : MonoBehaviour, IDamageable
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;
         IfDead();
-    }
+    } 
 
     private void IfDead()
     {
-        if (_health < _minHealth)
+        if (_health <= _minHealth)
             Destroy(gameObject);
     }
+
 }
