@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Transform))]
-public class PlayerAttack : MonoBehaviour
+public class EnemyAttack : MonoBehaviour
 {
     [Header("Attack")]
     [SerializeField] private int _damage;
     [SerializeField] private float _attackTimer;
     [SerializeField] private float _attackMaxTimer;
     [SerializeField] private GameObject _sword;
+
+    [Header("Enemy Radar")]
+    [SerializeField] private EnemyRadar _radar;
 
     [Header("Sounds effect")]
     [SerializeField] private AudioSource _audioSource;
@@ -17,9 +19,14 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         AttackDelay();
+        if (_radar.CanAttackPlayer)
+        {
+            OnAttack();
+            Debug.Log("Attacking.");
+        }
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    public void OnAttack()
     {
         if (_attackTimer >= _attackMaxTimer)
         {
