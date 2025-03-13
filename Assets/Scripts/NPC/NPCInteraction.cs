@@ -7,11 +7,13 @@ public class NPCInteraction : MonoBehaviour
 {
     [SerializeField] private GameObject _interactionPanel;
     [SerializeField] private GameObject _dialoguePanel;
+    private NPCDialogue _dialogueScript;
     private BoxCollider2D _collider;
 
     private void Start()
     {
         _collider = GetComponent<BoxCollider2D>();
+        _dialogueScript = GetComponent<NPCDialogue>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,12 +30,18 @@ public class NPCInteraction : MonoBehaviour
         { 
             _interactionPanel.SetActive(false);
             _dialoguePanel.SetActive(false);
+            _dialogueScript.enabled = false;
         }
     }
 
     public void InteractionStarted(InputAction.CallbackContext context)
     {
-        if (context.started && _dialoguePanel.activeInHierarchy) 
-            _dialoguePanel.SetActive(true);
+        if (context.started && !_dialoguePanel.activeInHierarchy) 
+        { 
+            _dialoguePanel.SetActive(true); 
+            _dialogueScript.enabled = true;
+            _interactionPanel.SetActive(false);
+            Debug.Log("bouya");
+        }
     }
 }
