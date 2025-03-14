@@ -16,21 +16,11 @@ public class ItemScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision == null)
+        PlayerInventory inventory = collision.GetComponent<PlayerInventory>();
+        if (inventory != null)
         {
-            Debug.Log("Return");
-            return;
+            inventory.AddToInventory(this);
+            Destroy(this.gameObject);
         }
-        Debug.Log("Triggered");
-        //PlayerInventory inventory = collision.GetComponent<PlayerInventory>();
-        //if (inventory != null)
-        //{
-        //    inventory.AddToInventory(this);
-        //    Destroy(this.gameObject);
-        //}
-        //else
-        //{
-        //    Debug.Log("ojhsf");
-        //}
     }
 }
