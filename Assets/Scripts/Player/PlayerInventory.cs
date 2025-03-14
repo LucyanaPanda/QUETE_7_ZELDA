@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     [Header("Inventory")]
-    public static Dictionary<string, int> _inventory = new Dictionary<string, int>();
+    public static Dictionary<Item, int> inventory = new Dictionary<Item, int>();
 
     [Header("Money")]
     public static int money;
@@ -13,9 +13,9 @@ public class PlayerInventory : MonoBehaviour
     {
         if (ItemInInventory(item))
         {
-            _inventory[item.ItemData.name]++;
+            inventory[item.ItemData]++;
         } else 
-            _inventory.Add(item.ItemData.name, 1);
+            inventory.Add(item.ItemData, 1);
         DisplayInventory();
     }
 
@@ -34,12 +34,12 @@ public class PlayerInventory : MonoBehaviour
     {
         if (ItemInInventory(item))
         {
-            if (_inventory[item.ItemData.name] > 0)
+            if (inventory[item.ItemData] > 0)
             {
-                _inventory[item.ItemData.name]--;
-                if (_inventory[item.ItemData.name] == 0)
+                inventory[item.ItemData]--;
+                if (inventory[item.ItemData] == 0)
                 {
-                    _inventory.Remove(item.ItemData.name);
+                    inventory.Remove(item.ItemData);
                 }
             }
         }
@@ -47,12 +47,12 @@ public class PlayerInventory : MonoBehaviour
 
     public bool ItemInInventory(ItemScript item)
     {
-        return _inventory.ContainsKey(item.ItemData.name);
+        return inventory.ContainsKey(item.ItemData);
     }
 
     public void DisplayInventory()
     {
-        foreach (KeyValuePair<string, int> entry in _inventory)
+        foreach (KeyValuePair<Item, int> entry in inventory)
         {
             Debug.Log(entry.Key + " : " + entry.Value);
         }
