@@ -5,15 +5,13 @@ public class PlayerManager : MonoBehaviour, IDamageable
 {
     [Header("Data")]
     public Creature creatureData;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     private float _health, _minHealth, _maxHealth;
     private float _defense, _minDefense, _maxDefense;
-
-    private SpriteRenderer _spriteRenderer;
 
     private void Start()
     {
         //Sprite
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = creatureData.image;
 
         //Health
