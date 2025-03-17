@@ -10,8 +10,9 @@ public class InventoryUI : MonoBehaviour
 {
     [Header("Inventory")]
     [SerializeField] private GameObject _inventoryPanel;
-    [SerializeField] private List<Slot> _slots;
+    [SerializeField] private List<InventorySlot> _slots;
     public static bool inventoryVisible = false;
+    public static bool _shownInventory = false;
 
     [Header("PauseManager")]
     [SerializeField] private PauseManager _pauseManager;
@@ -34,7 +35,11 @@ public class InventoryUI : MonoBehaviour
             _inventoryPanel.SetActive(true);
             inventoryVisible = true;
             _pauseManager.PauseGame();
-            DisplayInventory();
+            if (!_shownInventory)
+            {
+                DisplayInventory();
+                _shownInventory = true;
+            }
         }
     }
 
@@ -45,7 +50,7 @@ public class InventoryUI : MonoBehaviour
        {
             _slots[index].image.sprite = entry.Key.image;
             _slots[index].quantityText.text = entry.Value.ToString();
-            _slots[index].currentItem = entry.Key;
+            _slots[index].dragableItem.currentItem = entry.Key;
             index++;
        }
     }

@@ -8,6 +8,6 @@ using UnityEngine.UIElements;
 public class InventoryInteractionUI : MonoBehaviour
 {
     [Header("Slots")]
-    [SerializeField] private List<Slot> _slots;
+    [SerializeField] private List<InventorySlot> _slots;
     [SerializeField] private Sprite _emptySlotSprite;
 }
