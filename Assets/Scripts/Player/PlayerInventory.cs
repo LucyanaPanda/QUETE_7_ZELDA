@@ -9,6 +9,13 @@ public class PlayerInventory : MonoBehaviour
     [Header("Money")]
     public static int money;
 
+    public void AddMoney(int amout)
+    {
+        money += amout;
+        Debug.Log("Current money:" + money.ToString());
+        //PlayerManager.PlayCoinSound(_coinClip, _audioSource);
+    }
+
     public void AddToInventory(ItemScript item)
     {
         if (ItemInInventory(item))
