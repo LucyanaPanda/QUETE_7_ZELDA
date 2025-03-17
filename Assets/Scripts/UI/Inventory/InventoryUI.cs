@@ -12,7 +12,6 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject _inventoryPanel;
     [SerializeField] private List<InventorySlot> _slots;
     public static bool inventoryVisible = false;
-    public static bool _shownInventory = false;
 
     [Header("PauseManager")]
     [SerializeField] private PauseManager _pauseManager;
@@ -35,11 +34,7 @@ public class InventoryUI : MonoBehaviour
             _inventoryPanel.SetActive(true);
             inventoryVisible = true;
             _pauseManager.PauseGame();
-            if (!_shownInventory)
-            {
-                DisplayInventory();
-                _shownInventory = true;
-            }
+            DisplayInventory();
         }
     }
 
