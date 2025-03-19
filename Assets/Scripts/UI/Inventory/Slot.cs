@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IDropHandler
@@ -23,6 +24,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("Called");
         SwipeItem(eventData.pointerDrag);
     }
 
@@ -47,5 +49,17 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         image = dragableItem.GetComponent<Image>();
         quantityText = dragableItem.GetComponentInChildren<TMP_Text>();
+    }
+
+    public void UpdateInformation()
+    {
+        if (dragableItem.currentItem != null)
+        {
+            quantityText.text = PlayerInventory.inventory[dragableItem.currentItem].ToString();
+            return;
+        }
+
+        image.sprite = null;
+        quantityText.text = "";
     }
 }

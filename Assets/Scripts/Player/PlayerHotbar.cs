@@ -20,14 +20,26 @@ public class PlayerHotbar : MonoBehaviour
 
     public void OnUseItem(InputAction.CallbackContext context)
     {
-        foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+        Debug.Log("Called");
+        if (context.started)
         {
-            if (entry.Key == _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem)
+            foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
             {
-                if (entry.Value - 1 <= 0) 
-                    PlayerInventory.inventory.Remove(entry.Key);
-                else
-                    PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+                if (entry.Key == _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem)
+                {
+                    if (entry.Value - 1 <= 0)
+                    {
+                        PlayerInventory.inventory.Remove(entry.Key);
+                        _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem = null;
+                        Debug.Log("All objects used");
+                    }
+                    else
+                    {
+                        PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+                        Debug.Log("Used");
+                    }
+                    _hotbarUi.slots[_currentSlotSelected].UpdateInformation();
+                }
             }
         }
     }
