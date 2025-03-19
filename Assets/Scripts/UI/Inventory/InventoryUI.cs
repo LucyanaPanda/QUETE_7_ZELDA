@@ -99,4 +99,15 @@ public class InventoryUI : MonoBehaviour
         return 0;
     }
 
+    public void UpdateInventory(ItemScript item)
+    {
+        foreach( Slot slot in slots)
+        {
+            if (slot.dragableItem != null && slot.dragableItem.currentItem != null && slot.dragableItem.currentItem == item.ItemData)
+            {
+                slot.UpdateInformation();
+            }
+        }
+    }
+
 }
