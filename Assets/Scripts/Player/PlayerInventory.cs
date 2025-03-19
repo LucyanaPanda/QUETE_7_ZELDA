@@ -1,22 +1,38 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerInventory : MonoBehaviour
 {
     [Header("Inventory")]
     public static Dictionary<Item, int> inventory = new Dictionary<Item, int>();
+    public List<Item> _items = new List<Item>();
+    public static readonly string inventorySaveKey = "player_inventory";
+    [SerializeField] private InventoryUI _inventoryUi;
 
     [Header("Money")]
     public static int money;
 
-    public void AddToInventory(ItemScript item)
+    public bool AddToInventory(ItemScript item)
     {
         if (ItemInInventory(item))
         {
             inventory[item.ItemData]++;
-        } else 
-            inventory.Add(item.ItemData, 1);
+        } else
+        {
+            if (inventory.Count < _inventoryUi.slots.Count )
+                inventory.Add(item.ItemData, 1);
+            else
+            {
+                Debug.Log("Inventory Full");
+                return false;
+            }
+        }
         DisplayInventory();
+        SaveInventory();
+        return true;
     }
 
     public void BuyItem(ItemScript item)
@@ -28,6 +44,7 @@ public class PlayerInventory : MonoBehaviour
         }
         PlayerInventory.money -= item.ItemData.price;
         AddToInventory(item);
+        //Add a sound clip
     }
 
     public void RemoveAnItem(ItemScript item)
@@ -56,5 +73,73 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log(entry.Key + " : " + entry.Value);
         }
+    }
+
+    public void SaveInventory()
+    {
+        InventoryData inventoryData = new InventoryData();
+
+        foreach (KeyValuePair<Item, int> entry in inventory)
+        {
+            InventorySlotData slotData = new InventorySlotData
+            {
+                itemName = entry.Key.name, // Assuming item name is unique
+                quantity = entry.Value,
+                slotIndex = GetItemSlot(entry.Key)  // Get the UI position of the item
+            };
+
+            inventoryData.slots.Add(slotData);
+        }
+
+        string json = JsonUtility.ToJson(inventoryData);
+        PlayerPrefs.SetString(inventorySaveKey, json);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadInventory()
+    {
+        if (PlayerPrefs.HasKey(inventorySaveKey))
+        {
+            string json = PlayerPrefs.GetString(inventorySaveKey);
+            InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(json);
+
+            inventory.Clear();
+
+            foreach (InventorySlotData slotData in inventoryData.slots)
+            {
+                Debug.Log(slotData.itemName + " || " + slotData.quantity.ToString());
+                Item item = FindItemByName(slotData.itemName);
+                if (item != null)
+                {
+                    inventory[item] = slotData.quantity;
+                }
+            }
+            DisplayInventory();
+        }
+    }
+
+    public Item FindItemByName(string name)
+    {
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i].name == name)
+            {
+                return _items[i];
+            }
+        }
+        return null;
+    }
+
+    public int GetItemSlot(Item item)
+    {
+        foreach (InventorySlot slot in _inventoryUi.slots)
+        {
+            if (slot.dragableItem != null && slot.dragableItem.currentItem == item)
+            {
+                Debug.Log(slot.position);
+                return slot.position;
+            }
+        }
+        return -1;
     }
 }

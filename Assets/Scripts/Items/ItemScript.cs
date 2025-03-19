@@ -19,8 +19,8 @@ public class ItemScript : MonoBehaviour
         PlayerInventory inventory = collision.GetComponent<PlayerInventory>();
         if (inventory != null)
         {
-            inventory.AddToInventory(this);
-            Destroy(this.gameObject);
+            if (inventory.AddToInventory(this))
+                Destroy(this.gameObject);
         }
     }
 }
