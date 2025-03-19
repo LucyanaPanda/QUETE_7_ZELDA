@@ -11,7 +11,7 @@ public class InventoryUI : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private PlayerInventory _playerInventory;
     [SerializeField] private GameObject _inventoryPanel;
-    public List<InventorySlot> slots;
+    public List<Slot> slots;
     public bool inventoryVisible = false;
 
     [Header("PauseManager")]
@@ -66,8 +66,6 @@ public class InventoryUI : MonoBehaviour
     {
         List<int> occupiedSlots = new List<int>();
 
-        _playerInventory.DisplayInventory();
-
         foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
         {
             int slotIndex = GetSavedSlotIndex(entry.Key);
@@ -92,7 +90,7 @@ public class InventoryUI : MonoBehaviour
 
         if (inventoryData != null )
         {
-            foreach (InventorySlotData slotData in inventoryData.slots)
+            foreach (SlotData slotData in inventoryData.slots)
             {
                 if (slotData.itemName.Equals(item.name))
                 {

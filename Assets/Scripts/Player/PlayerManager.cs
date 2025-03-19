@@ -6,8 +6,11 @@ public class PlayerManager : MonoBehaviour, IDamageable
     [Header("Data")]
     public Creature creatureData;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    private float _health, _minHealth, _maxHealth;
-    private float _defense, _minDefense, _maxDefense;
+    public float health, minHealth, maxHealth;
+    public float attackTimer, attackMaxTimer;
+    public float attack, minAttack, maxAttack;
+    public float defense, minDefense, maxDefense;
+    public float speed, minSpeed, maxSpeed;
 
     private void Start()
     {
@@ -15,14 +18,27 @@ public class PlayerManager : MonoBehaviour, IDamageable
         _spriteRenderer.sprite = creatureData.image;
 
         //Health
-        _health = creatureData.health;
-        _minHealth = creatureData.minHealth;
-        _maxHealth = creatureData.maxHealth;
+        health = creatureData.health;
+        minHealth = creatureData.minHealth;
+        maxHealth = creatureData.maxHealth;
+
+        //Attack
+        attack = creatureData.attack;
+        minAttack = creatureData.minAttack;
+        maxAttack = creatureData.maxAttack;
+
+        attackTimer = creatureData.attackTimer;
+        attackMaxTimer = creatureData.attackMaxTimer;
 
         //Defense
-        _defense = creatureData.defense;
-        _minDefense = creatureData.minDefense;
-        _maxDefense = creatureData.maxDefense;
+        defense = creatureData.defense;
+        minDefense = creatureData.minDefense;
+        maxDefense = creatureData.maxDefense;
+
+        //Speed
+        speed = creatureData.speed;
+        minSpeed = creatureData.minSpeed;
+        maxSpeed = creatureData.maxSpeed;
     }
 
     public void TakeDamage(float damage)
@@ -32,8 +48,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     public IEnumerator Damage(float damage)
     {
-        Debug.Log(damage - _defense);
-        _health -= damage - _defense;
+        Debug.Log(damage - defense);
+        health -= damage - defense;
         _spriteRenderer.color = Color.red;
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;
@@ -42,7 +58,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     private void IfDead()
     {
-        if (_health < _minHealth)
+        if (health < minHealth)
             Destroy(gameObject);
     }
 }

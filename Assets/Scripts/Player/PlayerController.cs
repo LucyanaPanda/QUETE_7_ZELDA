@@ -6,11 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("PlayerManager")]
-    [SerializeField] private PlayerManager _manager;
+    [SerializeField] private PlayerManager _player;
 
     [Header("Movement")]
     [SerializeField] private Transform _parentTransform;
-    private float _speed, _minSpeed, _maxSpeed;
     private Vector3 _dir;
 
     [Header("LookAt")]
@@ -21,13 +20,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _jumpClip;
 
-    private void Start()
-    {
-        _speed = _manager.creatureData.speed;
-        _minSpeed = _manager.creatureData.minSpeed;
-        _maxSpeed = _manager.creatureData.maxSpeed;
-    }
-
     private void Update()
     {
         MovePlayer();
@@ -36,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         _dir.Normalize();
-        _parentTransform.position += _dir * _speed * Time.deltaTime;
+        _parentTransform.position += _dir * _player.speed * Time.deltaTime;
 
         // à amélirorer pour qu'on voit derrière et devant
         if (_dir.x < 0)

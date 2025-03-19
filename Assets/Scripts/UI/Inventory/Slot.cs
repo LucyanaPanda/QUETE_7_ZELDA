@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IDropHandler
+public class Slot : MonoBehaviour, IDropHandler
 {
     [Header("Slot")]
     public Image image;
@@ -23,7 +23,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        
         SwipeItem(eventData.pointerDrag);
     }
 
@@ -31,7 +30,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
 
         DrageableItem item = droppedItem.GetComponent<DrageableItem>(); // Get the item dropped
-        InventorySlot slot = item._transformParent.gameObject.GetComponent<InventorySlot>(); // Get the slot of the item dropped
+        Slot slot = item._transformParent.gameObject.GetComponent<Slot>(); // Get the slot of the item dropped
         DrageableItem copyCurrentItem = dragableItem; // make a copy of the current item of this slot
         Transform transformParentOtherItem = item._transformParent; // make a copy of the transform's item dropped
         item._transformParent = transform; // Item dropped became infant of this slot

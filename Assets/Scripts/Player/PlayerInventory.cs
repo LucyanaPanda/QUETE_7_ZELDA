@@ -30,7 +30,6 @@ public class PlayerInventory : MonoBehaviour
                 return false;
             }
         }
-        DisplayInventory();
         SaveInventory();
         return true;
     }
@@ -81,7 +80,7 @@ public class PlayerInventory : MonoBehaviour
 
         foreach (KeyValuePair<Item, int> entry in inventory)
         {
-            InventorySlotData slotData = new InventorySlotData
+            SlotData slotData = new SlotData
             {
                 itemName = entry.Key.name, // Assuming item name is unique
                 quantity = entry.Value,
@@ -105,16 +104,14 @@ public class PlayerInventory : MonoBehaviour
 
             inventory.Clear();
 
-            foreach (InventorySlotData slotData in inventoryData.slots)
+            foreach (SlotData slotData in inventoryData.slots)
             {
-                Debug.Log(slotData.itemName + " || " + slotData.quantity.ToString());
                 Item item = FindItemByName(slotData.itemName);
                 if (item != null)
                 {
                     inventory[item] = slotData.quantity;
                 }
             }
-            DisplayInventory();
         }
     }
 
@@ -132,11 +129,10 @@ public class PlayerInventory : MonoBehaviour
 
     public int GetItemSlot(Item item)
     {
-        foreach (InventorySlot slot in _inventoryUi.slots)
+        foreach (Slot slot in _inventoryUi.slots)
         {
             if (slot.dragableItem != null && slot.dragableItem.currentItem == item)
             {
-                Debug.Log(slot.position);
                 return slot.position;
             }
         }
