@@ -20,6 +20,7 @@ public class PlayerInventory : MonoBehaviour
         if (ItemInInventory(item))
         {
             inventory[item.ItemData]++;
+            _inventoryUi.UpdateInventory(item);
         } else
         {
             if (inventory.Count < _inventoryUi.slots.Count )

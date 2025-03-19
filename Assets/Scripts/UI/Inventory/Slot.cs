@@ -23,11 +23,6 @@ public class Slot : MonoBehaviour, IDropHandler
         GetNecessaryComponents();
     }
 
-    private void Update()
-    {
-         UpdateInformation();
-    }
-
 
     public void OnDrop(PointerEventData eventData)
     {
