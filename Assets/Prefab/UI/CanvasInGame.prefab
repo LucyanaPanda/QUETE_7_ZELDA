@@ -3637,8 +3637,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5344f585ab2e57e469a78f404f6bb7a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInventory: {fileID: 0}
   _inventoryPanel: {fileID: 542852349044385308}
-  _slots:
+  slots:
   - {fileID: 1122590042610670381}
   - {fileID: 6163247533929145156}
   - {fileID: 7702950451207084131}
@@ -3687,6 +3688,7 @@ MonoBehaviour:
   - {fileID: 7649117042576839050}
   - {fileID: 4676808449724332956}
   - {fileID: 6430710590973430073}
+  inventoryVisible: 0
   _pauseManager: {fileID: 5900647942635037634}
 --- !u!114 &6962598031285344608
 MonoBehaviour:
