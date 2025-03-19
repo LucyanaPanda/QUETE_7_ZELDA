@@ -9,9 +9,10 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     [Header("Inventory")]
+    [SerializeField] private PlayerInventory _playerInventory;
     [SerializeField] private GameObject _inventoryPanel;
-    public static List<InventorySlot> _slots;
-    public static bool inventoryVisible = false;
+    public List<InventorySlot> slots;
+    public bool inventoryVisible = false;
 
     [Header("PauseManager")]
     [SerializeField] private PauseManager _pauseManager;
@@ -27,13 +28,16 @@ public class InventoryUI : MonoBehaviour
         {
             _inventoryPanel.SetActive(false);
             inventoryVisible = false;
+            _playerInventory.SaveInventory();
             _pauseManager.ResumeGame();
+            
         }
         else
         {
             _inventoryPanel.SetActive(true);
             inventoryVisible = true;
             _pauseManager.PauseGame();
+            _playerInventory.LoadInventory();
             LoadAndDisplayInventory();
         }
     }
@@ -52,43 +56,56 @@ public class InventoryUI : MonoBehaviour
 
     public void InitializeSlotsPositions()
     {
-        for (int i = 0; i < _slots.Count; i++)
+        for (int i = 0; i < slots.Count; i++)
         {
-            _slots[i].position = i;
+            slots[i].position = i;
         }
     }
 
     public void LoadAndDisplayInventory()
     {
-        int index = 0;
         List<int> occupiedSlots = new List<int>();
+
+        _playerInventory.DisplayInventory();
 
         foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
         {
             int slotIndex = GetSavedSlotIndex(entry.Key);
 
-            if (slotIndex == -1 || slotIndex >= _slots.Count || occupiedSlots.Contains(slotIndex))
+            if (slotIndex == -1 || slotIndex >= slots.Count || occupiedSlots.Contains(slotIndex))
             {
                 slotIndex = GetNextAvailableSlot(occupiedSlots);
             }
 
             occupiedSlots.Add(slotIndex);
 
-            _slots[slotIndex].image.sprite = entry.Key.image;
-            _slots[slotIndex].quantityText.text = entry.Value.ToString();
-            _slots[slotIndex].dragableItem.currentItem = entry.Key;
+            slots[slotIndex].image.sprite = entry.Key.image;
+            slots[slotIndex].quantityText.text = entry.Value.ToString();
+            slots[slotIndex].dragableItem.currentItem = entry.Key;
         }
     }
 
     private int GetSavedSlotIndex(Item item)
     {
-        // Implement a lookup to find the saved slot index for the given item
+        string json = PlayerPrefs.GetString(PlayerInventory.inventorySaveKey);
+        InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(json);
+
+        if (inventoryData != null )
+        {
+            foreach (InventorySlotData slotData in inventoryData.slots)
+            {
+                if (slotData.itemName.Equals(item.name))
+                {
+                    return slotData.slotIndex;
+                }
+            }
+        }
         return -1;  // Return -1 if not found
     }
 
     private int GetNextAvailableSlot(List<int> occupiedSlots)
     {
-        for (int i = 0; i < _slots.Count; i++)
+        for (int i = 0; i < slots.Count; i++)
         {
             if (!occupiedSlots.Contains(i))
                 return i;

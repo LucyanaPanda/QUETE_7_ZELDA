@@ -1,24 +1,38 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerInventory : MonoBehaviour
 {
     [Header("Inventory")]
     public static Dictionary<Item, int> inventory = new Dictionary<Item, int>();
-    [SerializeField] private List<Item> _items = new List<Item>();
-    private const string INVENTORY_SAVE_KEY = "player_inventory";
+    public List<Item> _items = new List<Item>();
+    public static readonly string inventorySaveKey = "player_inventory";
+    [SerializeField] private InventoryUI _inventoryUi;
 
     [Header("Money")]
     public static int money;
 
-    public void AddToInventory(ItemScript item)
+    public bool AddToInventory(ItemScript item)
     {
         if (ItemInInventory(item))
         {
             inventory[item.ItemData]++;
-        } else 
-            inventory.Add(item.ItemData, 1);
+        } else
+        {
+            if (inventory.Count < _inventoryUi.slots.Count )
+                inventory.Add(item.ItemData, 1);
+            else
+            {
+                Debug.Log("Inventory Full");
+                return false;
+            }
+        }
         DisplayInventory();
+        SaveInventory();
+        return true;
     }
 
     public void BuyItem(ItemScript item)
@@ -30,6 +44,7 @@ public class PlayerInventory : MonoBehaviour
         }
         PlayerInventory.money -= item.ItemData.price;
         AddToInventory(item);
+        //Add a sound clip
     }
 
     public void RemoveAnItem(ItemScript item)
@@ -77,31 +92,33 @@ public class PlayerInventory : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(inventoryData);
-        PlayerPrefs.SetString(INVENTORY_SAVE_KEY, json);
+        PlayerPrefs.SetString(inventorySaveKey, json);
         PlayerPrefs.Save();
     }
 
     public void LoadInventory()
     {
-        if (PlayerPrefs.HasKey(INVENTORY_SAVE_KEY))
+        if (PlayerPrefs.HasKey(inventorySaveKey))
         {
-            string json = PlayerPrefs.GetString(INVENTORY_SAVE_KEY);
+            string json = PlayerPrefs.GetString(inventorySaveKey);
             InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(json);
 
             inventory.Clear();
 
             foreach (InventorySlotData slotData in inventoryData.slots)
             {
+                Debug.Log(slotData.itemName + " || " + slotData.quantity.ToString());
                 Item item = FindItemByName(slotData.itemName);
                 if (item != null)
                 {
                     inventory[item] = slotData.quantity;
                 }
             }
+            DisplayInventory();
         }
     }
 
-    private Item FindItemByName(string name)
+    public Item FindItemByName(string name)
     {
         for (int i = 0; i < _items.Count; i++)
         {
@@ -113,9 +130,16 @@ public class PlayerInventory : MonoBehaviour
         return null;
     }
 
-    private int GetItemSlot(Item item)
+    public int GetItemSlot(Item item)
     {
-        // Implement a method to retrieve the current UI slot position of an item
-        return 0;
+        foreach (InventorySlot slot in _inventoryUi.slots)
+        {
+            if (slot.dragableItem != null && slot.dragableItem.currentItem == item)
+            {
+                Debug.Log(slot.position);
+                return slot.position;
+            }
+        }
+        return -1;
     }
 }
