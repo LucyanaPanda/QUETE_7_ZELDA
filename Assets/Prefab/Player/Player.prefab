@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204593953c11e6441bd1eb94687ab9e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _manager: {fileID: 8223113858120323366}
+  _player: {fileID: 8223113858120323366}
   _parentTransform: {fileID: 2325023631242424389}
   _lookRight: {x: 1, y: 1, z: 1}
   _lookLeft: {x: -1, y: 1, z: 1}
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae94fee4e08b2784f9c4644e1eda0437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _manager: {fileID: 8223113858120323366}
+  _player: {fileID: 8223113858120323366}
   _sword: {fileID: 5797220263269820888}
   _audioSource: {fileID: 0}
   _audioClip: {fileID: 0}
@@ -479,6 +479,138 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &6314298918467165637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 796465724135199443}
+  - component: {fileID: 7062051365608700860}
+  - component: {fileID: 2282065761009075035}
+  m_Layer: 6
+  m_Name: PlayerHotbar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &796465724135199443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6314298918467165637}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2325023631242424389}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7062051365608700860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6314298918467165637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de89c4197ac005b4db54c81bab154619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _items:
+  - {fileID: 11400000, guid: 838ec51fc8d1c5f40a7b97a2173da1ba, type: 2}
+  _hotbarUi: {fileID: 0}
+  _hotbarSlotSelected: {fileID: 0}
+  _currentSlotSelected: 0
+--- !u!114 &2282065761009075035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6314298918467165637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4bd5f85a8a320be41b09f1a7573b99c2, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bfdfadeb-9ddc-452f-be1c-9ba16f8f9c5b
+    m_ActionName: 'Player/PlayerMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f791bc3-ac08-421b-a493-fc5052ef97f7
+    m_ActionName: 'Player/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66db40a6-98b0-4809-bb5c-c18256e1babc
+    m_ActionName: 'Player/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 75a1a5db-1e95-45c6-a511-7f97bd5e6678
+    m_ActionName: 'Player/PauseGame[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fbadde01-5da0-4fd1-934c-0c5a1a181296
+    m_ActionName: 'Player/Inventory[/Keyboard/b]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7062051365608700860}
+        m_TargetAssemblyTypeName: PlayerHotbar, Assembly-CSharp
+        m_MethodName: OnUseItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d99ea573-4872-4f74-bc12-4a267906907c
+    m_ActionName: 'UseItem/UseItem[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7062051365608700860}
+        m_TargetAssemblyTypeName: PlayerHotbar, Assembly-CSharp
+        m_MethodName: OnScroll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a4ee9617-f966-4566-977b-b717a8364592
+    m_ActionName: 'UseItem/ScollItem[/Mouse/scroll/up,/Mouse/scroll/down]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &9041970845336116040
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +646,7 @@ Transform:
   m_Children:
   - {fileID: 8594085567740547135}
   - {fileID: 8798807591679657900}
+  - {fileID: 796465724135199443}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1151111025984976973
@@ -603,6 +736,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creatureData: {fileID: 11400000, guid: 64145099223c518458231e5c4f507667, type: 2}
   _spriteRenderer: {fileID: 2838555883696699467}
+  health: 0
+  minHealth: 0
+  maxHealth: 0
+  attackTimer: 0
+  attackMaxTimer: 0
+  attack: 0
+  minAttack: 0
+  maxAttack: 0
+  defense: 0
+  minDefense: 0
+  maxDefense: 0
+  speed: 0
+  minSpeed: 0
+  maxSpeed: 0
 --- !u!114 &6115601308462047733
 MonoBehaviour:
   m_ObjectHideFlags: 0

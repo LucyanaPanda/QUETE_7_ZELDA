@@ -4,11 +4,11 @@ using UnityEngine;
 [System.Serializable]
 public class InventoryData
 {
-    public List<InventorySlotData> slots = new List<InventorySlotData>();
+    public List<SlotData> slots = new List<SlotData>();
 }
 
 [System.Serializable]
-public class InventorySlotData
+public class SlotData
 {
     public string itemName;  // Use unique identifiers for items
     public int quantity;

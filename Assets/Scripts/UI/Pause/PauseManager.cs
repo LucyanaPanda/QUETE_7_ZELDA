@@ -7,6 +7,9 @@ public class PauseManager : MonoBehaviour
     private bool _gameIsPaused;
     [SerializeField] private GameObject _pausePanel;
 
+    [Header("HotbarUI")]
+    [SerializeField] private GameObject _hotbarUIPanel;
+
     [Header("Settings")]
     private bool _isSettingsOn; 
     [SerializeField] private GameObject _settingsPanel;
@@ -21,11 +24,13 @@ public class PauseManager : MonoBehaviour
             if (!_gameIsPaused)
             {
                 _pausePanel.SetActive(true);
+                _hotbarUIPanel.SetActive(false);
                 PauseGame();
             }
             else
             {
                 _pausePanel.SetActive(false);
+                _hotbarUIPanel.SetActive(true);
                 ResumeGame();
             }
         }

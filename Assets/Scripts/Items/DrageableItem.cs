@@ -11,7 +11,7 @@ public class DrageableItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     [SerializeField] private Image _image;
     [SerializeField] private RectTransform _transform;
     public Transform _transformParent;
-    public InventorySlot _currentSlot;
+    public Slot _currentSlot;
 
     [Header("Item Infos")]
     public Item currentItem;
