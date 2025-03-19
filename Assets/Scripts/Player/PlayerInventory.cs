@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
     public static Dictionary<Item, int> inventory = new Dictionary<Item, int>();
     public List<Item> _items = new List<Item>();
     public static readonly string inventorySaveKey = "player_inventory";
-    [SerializeField] private InventoryUI _inventoryUi;
+    public InventoryUI _inventoryUi;
 
     [Header("Money")]
     public static int money;
@@ -34,32 +34,32 @@ public class PlayerInventory : MonoBehaviour
         return true;
     }
 
-    public void BuyItem(ItemScript item)
-    {
-        if (item.ItemData.price < PlayerInventory.money)
-        {
-            Debug.Log("Cannot buy this item");
-            return;
-        }
-        PlayerInventory.money -= item.ItemData.price;
-        AddToInventory(item);
-        //Add a sound clip
-    }
+    //public void BuyItem(ItemScript item)
+    //{
+    //    if (item.ItemData.price < PlayerInventory.money)
+    //    {
+    //        Debug.Log("Cannot buy this item");
+    //        return;
+    //    }
+    //    PlayerInventory.money -= item.ItemData.price;
+    //    AddToInventory(item);
+    //    //Add a sound clip
+    //}
 
-    public static void RemoveAnItem(ItemScript item)
-    {
-        if (ItemInInventory(item))
-        {
-            if (inventory[item.ItemData] > 0)
-            {
-                inventory[item.ItemData]--;
-                if (inventory[item.ItemData] == 0)
-                {
-                    inventory.Remove(item.ItemData);
-                }
-            }
-        }
-    }
+    //public static void RemoveAnItem(ItemScript item)
+    //{
+    //    if (ItemInInventory(item))
+    //    {
+    //        if (inventory[item.ItemData] > 0)
+    //        {
+    //            inventory[item.ItemData]--;
+    //            if (inventory[item.ItemData] == 0)
+    //            {
+    //                inventory.Remove(item.ItemData);
+    //            }
+    //        }
+    //    }
+    //}
 
     public static bool ItemInInventory(ItemScript item)
     {

@@ -42,18 +42,6 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    //public void DisplayInventory()
-    //{
-    //    int index = 0;
-    //    foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
-    //    {
-    //        _slots[index].image.sprite = entry.Key.image;
-    //        _slots[index].quantityText.text = entry.Value.ToString();
-    //        _slots[index].dragableItem.currentItem = entry.Key;
-    //        index++;
-    //    }
-    //}
-
     public void InitializeSlotsPositions()
     {
         for (int i = 0; i < slots.Count; i++)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,7 @@ public class Slot : MonoBehaviour, IDropHandler
     public Image image;
     public TMP_Text quantityText;
     public int position;
+    public bool _isSlotHotbar;
 
     [Header("Item")]
     public DrageableItem dragableItem;
@@ -21,11 +23,20 @@ public class Slot : MonoBehaviour, IDropHandler
         GetNecessaryComponents();
     }
 
+    private void Update()
+    {
+         UpdateInformation();
+    }
+
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Called");
         SwipeItem(eventData.pointerDrag);
+
+        if (_isSlotHotbar)
+        {
+            MoveItems();
+        }
     }
 
     public void SwipeItem(GameObject droppedItem)
@@ -45,6 +56,17 @@ public class Slot : MonoBehaviour, IDropHandler
         GetNecessaryComponents();
     }
 
+    public void MoveItems()
+    {
+        foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+        {
+            if (entry.Key == dragableItem.currentItem)
+            {
+                PlayerHotbar.AddItem(entry.Key, entry.Value);
+            }
+        }
+    }
+
     public void GetNecessaryComponents()
     {
         image = dragableItem.GetComponent<Image>();
@@ -55,8 +77,15 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         if (dragableItem.currentItem != null)
         {
-            quantityText.text = PlayerInventory.inventory[dragableItem.currentItem].ToString();
+            if (PlayerInventory.inventory.ContainsKey(dragableItem.currentItem))
+            {
+                quantityText.text = PlayerInventory.inventory[dragableItem.currentItem].ToString();
+                return;
+            }
+
+            quantityText.text = PlayerHotbar.hotbar[dragableItem.currentItem].ToString();
             return;
+            
         }
 
         image.sprite = null;
