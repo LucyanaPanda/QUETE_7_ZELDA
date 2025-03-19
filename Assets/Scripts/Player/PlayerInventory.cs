@@ -46,7 +46,7 @@ public class PlayerInventory : MonoBehaviour
         //Add a sound clip
     }
 
-    public void RemoveAnItem(ItemScript item)
+    public static void RemoveAnItem(ItemScript item)
     {
         if (ItemInInventory(item))
         {
@@ -61,7 +61,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public bool ItemInInventory(ItemScript item)
+    public static bool ItemInInventory(ItemScript item)
     {
         return inventory.ContainsKey(item.ItemData);
     }

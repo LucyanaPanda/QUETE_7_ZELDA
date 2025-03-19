@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHotbar : MonoBehaviour
 {
@@ -7,12 +8,48 @@ public class PlayerHotbar : MonoBehaviour
     public static Dictionary<Item, int> hotbar = new Dictionary<Item, int>();
     public List<Item> _items = new List<Item>();
     public static readonly string hotbarSaveKey = "player_hotbar";
+
     [SerializeField] private HotbarUI _hotbarUi;
+    [SerializeField] private Transform _hotbarSlotSelected;
+    [SerializeField] private int _currentSlotSelected;
 
     private void Start()
     {
         LoadHotbar();
     }
+
+    public void OnUseItem(InputAction.CallbackContext context)
+    {
+        foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+        {
+            if (entry.Key == _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem)
+            {
+                if (entry.Value - 1 <= 0) 
+                    PlayerInventory.inventory.Remove(entry.Key);
+                else
+                    PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+            }
+        }
+    }
+
+    //Scrolling system
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _currentSlotSelected += (int)context.ReadValue<float>();
+            _currentSlotSelected = (_currentSlotSelected + 4) % 4;
+            ChangeSelectedSlot();
+        }
+    }
+
+    private void ChangeSelectedSlot()
+    {
+        _hotbarSlotSelected.SetParent(_hotbarUi.slots[_currentSlotSelected].transform);
+        _hotbarSlotSelected.localPosition = Vector3.zero;
+    }
+
+    //SaveLoadSystem
 
     public void SaveHotbar()
     {

@@ -9,10 +9,6 @@ public class HotbarUI : MonoBehaviour
     [SerializeField] private GameObject _horbarPanelInventory;
     [SerializeField] private GameObject _horbarPanelInGame;
     public List<Slot> slots;
-    public bool hotbarInventoryVisible = false;
-
-    [Header("PauseManager")]
-    [SerializeField] private PauseManager _pauseManager;
 
     private void Start()
     {
