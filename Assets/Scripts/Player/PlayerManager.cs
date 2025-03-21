@@ -59,6 +59,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
     private void IfDead()
     {
         if (health < minHealth)
-            Destroy(gameObject);
+            Debug.Log("Player Dead");
+
+        //Respawn player if dead
+
     }
 }

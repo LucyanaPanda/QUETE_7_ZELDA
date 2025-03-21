@@ -20,6 +20,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void Start()
     {
+        _attack = _manager.creatureData.attack;
         _minAttack = _manager.creatureData.minAttack;
         _maxAttack = _manager.creatureData.maxAttack;
 
@@ -33,7 +34,6 @@ public class EnemyAttack : MonoBehaviour
         if (_radar.CanAttackPlayer)
         {
             OnAttack();
-            Debug.Log("Attacking");
         }
     }
 
