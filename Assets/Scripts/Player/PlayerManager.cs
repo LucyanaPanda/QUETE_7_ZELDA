@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
@@ -11,6 +12,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public float attack, minAttack, maxAttack;
     public float defense, minDefense, maxDefense;
     public float speed, minSpeed, maxSpeed;
+
+    private readonly UnityEvent _onDamageTaken = new();
 
     private void Start()
     {
@@ -39,6 +42,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
         speed = creatureData.speed;
         minSpeed = creatureData.minSpeed;
         maxSpeed = creatureData.maxSpeed;
+
+        _onDamageTaken.Invoke();
     }
 
     public void TakeDamage(float damage)
@@ -50,6 +55,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         Debug.Log(damage - defense);
         health -= damage - defense;
+        _onDamageTaken.Invoke();
         _spriteRenderer.color = Color.red;
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;
@@ -61,4 +67,6 @@ public class PlayerManager : MonoBehaviour, IDamageable
         if (health < minHealth)
             Destroy(gameObject);
     }
+
+    public UnityEvent OnDamageTaken => _onDamageTaken;
 }
