@@ -19,15 +19,15 @@ MonoBehaviour:
   image: {fileID: -427066485589525634, guid: 05478aef66e1d4046ad04fea4d905c62, type: 3}
   health: 3
   minHealth: 0
-  maxHealth: 10
+  maxHealth: 3
   defense: 0
   minDefense: 0
-  maxDefense: 5
+  maxDefense: 3
   attack: 1
   minAttack: 1
-  maxAttack: 5
+  maxAttack: 3
   speed: 5
   minSpeed: 5
-  maxSpeed: 10
+  maxSpeed: 5
   attackTimer: 1
   attackMaxTimer: 1
