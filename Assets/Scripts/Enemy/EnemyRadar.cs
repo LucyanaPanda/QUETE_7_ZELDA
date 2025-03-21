@@ -40,18 +40,21 @@ public class EnemyRadar : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        PlayerManager playermanager = collision.gameObject.GetComponent<PlayerManager>();
+        if (playermanager != null)
         {
             FollowPlayer(collision.transform);
             isReturning = false;
-            isFollowingPlayer = true;
+            isFollowingPlayer = true; 
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
             isReturning = true;
+        }
     }
 
     private void FollowPlayer(Transform _target)
