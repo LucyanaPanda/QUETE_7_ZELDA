@@ -11,4 +11,5 @@ public class PlayerData
     public float attack, minAttack, maxAttack;
     public float defense, minDefense, maxDefense;
     public float speed, minSpeed, maxSpeed;
+    public Vector3 spawnpoint;
 }

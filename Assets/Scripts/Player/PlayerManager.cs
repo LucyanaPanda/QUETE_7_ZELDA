@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public float attack, minAttack, maxAttack;
     public float defense, minDefense, maxDefense;
     public float speed, minSpeed, maxSpeed;
+    public Vector3 _spawnpoint;
     public readonly static string playerDataSaveKey = "PlayerData";
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -48,6 +50,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
             minSpeed = creatureData.minSpeed;
             maxSpeed = creatureData.maxSpeed;
 
+            //Spawnpoint
+            _spawnpoint = transform.position;
+
             _onDamageTaken.Invoke();
         }
     }
@@ -71,7 +76,16 @@ public class PlayerManager : MonoBehaviour, IDamageable
     private void IfDead()
     {
         if (health < minHealth)
-            Destroy(gameObject);
+        {
+            transform.position = _spawnpoint;
+            health = maxHealth;
+        }
+    }
+
+    public void UseSpawnpoint(Vector3 pos)
+    {
+        _spawnpoint = pos;
+        SavePlayerData();
     }
 
     public void SavePlayerData()
@@ -100,6 +114,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
         playerData.speed = speed;
         playerData.minSpeed = minSpeed;
         playerData.maxSpeed = maxSpeed;
+
+        //Spawnpoint
+        playerData.spawnpoint = _spawnpoint;
       
 
         string json = JsonUtility.ToJson(playerData);
@@ -138,6 +155,10 @@ public class PlayerManager : MonoBehaviour, IDamageable
             speed = playerData.speed;
             minSpeed = playerData.minSpeed;
             maxSpeed = playerData.maxSpeed;
+
+            //Spawnpoint
+            _spawnpoint = playerData.spawnpoint;
+
             Debug.Log("Loaded data successful");
             return true;
         }

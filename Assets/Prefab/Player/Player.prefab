@@ -249,7 +249,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: -427066485589525634, guid: 05478aef66e1d4046ad04fea4d905c62, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 8223113858120323366}
+  _playerInteractions: {fileID: 9035160161475601802}
   _parentTransform: {fileID: 2325023631242424389}
   _lookRight: {x: 1, y: 1, z: 1}
   _lookLeft: {x: -1, y: 1, z: 1}
@@ -325,7 +326,19 @@ MonoBehaviour:
     m_ActionId: 8f791bc3-ac08-421b-a493-fc5052ef97f7
     m_ActionName: 'Player/Attack[/Mouse/leftButton]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2836682106071841508}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 66db40a6-98b0-4809-bb5c-c18256e1babc
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
@@ -641,6 +654,7 @@ GameObject:
   - component: {fileID: 8223113858120323366}
   - component: {fileID: 6115601308462047733}
   - component: {fileID: 2591870801811355247}
+  - component: {fileID: 9035160161475601802}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -752,7 +766,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creatureData: {fileID: 11400000, guid: 64145099223c518458231e5c4f507667, type: 2}
-  _spriteRenderer: {fileID: 2838555883696699467}
   health: 0
   minHealth: 0
   maxHealth: 0
@@ -767,6 +780,8 @@ MonoBehaviour:
   speed: 0
   minSpeed: 0
   maxSpeed: 0
+  _spawnpoint: {x: 0, y: 0, z: 0}
+  _spriteRenderer: {fileID: 2838555883696699467}
 --- !u!114 &6115601308462047733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -828,3 +843,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.75750303, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &9035160161475601802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041970845336116040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0dd31b89fa3ef42ac0a2518588ab87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionCanvas: {fileID: 0}
