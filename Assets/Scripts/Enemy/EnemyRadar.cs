@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 [RequireComponent(typeof(CircleCollider2D))]
 public class EnemyRadar : MonoBehaviour
@@ -12,15 +11,14 @@ public class EnemyRadar : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private float _minDist;
     private float _speed;
-    private bool _isReturning;
+    public bool isReturning;
+    public bool isFollowingPlayer;
     public bool CanAttackPlayer;
+    public Vector3 _initPos;
 
     [Header("Radius of Radar")]
     [SerializeField] private float _rad;
     [SerializeField] private CircleCollider2D _collider;
-
-    //Initial Position
-    private Vector3 _initPos;
 
     [Header("LookAt")]
     [SerializeField] private Vector3 _lookRight;
@@ -36,7 +34,7 @@ public class EnemyRadar : MonoBehaviour
 
     private void Update()
     {
-        if (_isReturning)
+        if (isReturning)
             ReturnToInitPos();
     }
 
@@ -45,16 +43,15 @@ public class EnemyRadar : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             FollowPlayer(collision.transform);
-            _isReturning = false;
+            isReturning = false;
+            isFollowingPlayer = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
-        {
-            _isReturning = true;
-        }
+            isReturning = true;
     }
 
     private void FollowPlayer(Transform _target)
@@ -64,31 +61,30 @@ public class EnemyRadar : MonoBehaviour
         {
             Vector3 pos = Vector3.MoveTowards(_transformBody.position, _target.position, _speed * Time.deltaTime);
             _rb.MovePosition(pos);
-            LookAtTarget(_target.position);
+            LookAtTarget(_target.position, _transformBody);
             CanAttackPlayer = false;
         }
         else
-        {
             CanAttackPlayer = true;
-        }
     }
 
     private void ReturnToInitPos()
     {
         Vector3 pos = Vector3.MoveTowards(_transformBody.position, _initPos, _speed * Time.deltaTime);
         if (pos == Vector3.zero)
-            _isReturning = false;
+            isReturning = false;
         _rb.MovePosition(pos);
-        LookAtTarget(_initPos);
+        LookAtTarget(_initPos, _transformBody);
         CanAttackPlayer = false;
+        isFollowingPlayer = false;
     }
 
-    private void LookAtTarget(Vector3 destination)
+    public void LookAtTarget(Vector3 destination, Transform transform)
     {
-        Vector2 distance = destination - _transformBody.position;
+        Vector2 distance = destination - transform.position;
         if (distance.x > 0)
-            _transformBody.localScale = _lookRight;
+            transform.localScale = _lookRight;
         else if (distance.x < 0)
-            _transformBody.localScale = _lookLeft;
+            transform.localScale = _lookLeft;
     }
 }
