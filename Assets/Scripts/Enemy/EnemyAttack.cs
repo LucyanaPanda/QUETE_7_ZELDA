@@ -34,7 +34,6 @@ public class EnemyAttack : MonoBehaviour
         if (_radar.CanAttackPlayer)
         {
             OnAttack();
-            Debug.Log("Attacking");
         }
     }
 
