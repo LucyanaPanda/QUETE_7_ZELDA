@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
@@ -12,11 +14,16 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public float attack, minAttack, maxAttack;
     public float defense, minDefense, maxDefense;
     public float speed, minSpeed, maxSpeed;
+    public Vector3 _spawnpoint;
     public readonly static string playerDataSaveKey = "PlayerData";
+
+    [Header("FadeInOut")]
+    [SerializeField] private Image image;
+    [SerializeField] private Animator _animatorImage;
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    private readonly UnityEvent _onDamageTaken = new();
+    private readonly UnityEvent _onHealthChanged = new();
 
     private void Start()
     {
@@ -48,8 +55,14 @@ public class PlayerManager : MonoBehaviour, IDamageable
             minSpeed = creatureData.minSpeed;
             maxSpeed = creatureData.maxSpeed;
 
-            _onDamageTaken.Invoke();
+            //Spawnpoint
+            _spawnpoint = transform.position;
+
+            _onHealthChanged.Invoke();
         }
+
+        transform.position = _spawnpoint;
+        _onHealthChanged.Invoke();
     }
 
     public void TakeDamage(float damage)
@@ -61,17 +74,32 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         Debug.Log(damage - defense);
         health -= damage - defense;
-        _onDamageTaken.Invoke();
+        _onHealthChanged.Invoke();
         _spriteRenderer.color = Color.red;
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;
-        IfDead();
+        StartCoroutine(IfDead());
     }
 
-    private void IfDead()
+    IEnumerator  IfDead()
     {
-        if (health < minHealth)
-            Destroy(gameObject);
+        if (health <= minHealth)
+        {
+            image.enabled = true;
+            _animatorImage.Play("FadeIn");
+            yield return new WaitForSecondsRealtime(1f);
+            transform.position = _spawnpoint;
+            health = maxHealth;
+            _animatorImage.Play("FadeOut");
+            _onHealthChanged.Invoke();
+        }
+        yield return null;
+    }
+
+    public void UseSpawnpoint(Vector3 pos)
+    {
+        _spawnpoint = pos;
+        SavePlayerData();
     }
 
     public void SavePlayerData()
@@ -100,6 +128,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
         playerData.speed = speed;
         playerData.minSpeed = minSpeed;
         playerData.maxSpeed = maxSpeed;
+
+        //Spawnpoint
+        playerData.spawnpoint = _spawnpoint;
       
 
         string json = JsonUtility.ToJson(playerData);
@@ -138,6 +169,11 @@ public class PlayerManager : MonoBehaviour, IDamageable
             speed = playerData.speed;
             minSpeed = playerData.minSpeed;
             maxSpeed = playerData.maxSpeed;
+
+            //Spawnpoint
+            _spawnpoint = playerData.spawnpoint;
+
+            Debug.Log(_spawnpoint);
             Debug.Log("Loaded data successful");
             return true;
         }
@@ -145,5 +181,5 @@ public class PlayerManager : MonoBehaviour, IDamageable
         return false;
     }
 
-    public UnityEvent OnDamageTaken => _onDamageTaken;
+    public UnityEvent OnHealthChanged => _onHealthChanged;
 }

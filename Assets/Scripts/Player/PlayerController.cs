@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Transform))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("PlayerManager")]
+    [Header("Player")]
     [SerializeField] private PlayerManager _player;
+    [SerializeField] private PlayerInteractions _playerInteractions;
 
     [Header("Movement")]
     [SerializeField] private Transform _parentTransform;
@@ -19,6 +20,11 @@ public class PlayerController : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _jumpClip;
+
+    private void Start()
+    {
+        _parentTransform.position = _player._spawnpoint;
+    }
 
     private void Update()
     {
@@ -49,6 +55,12 @@ public class PlayerController : MonoBehaviour
             _parentTransform.localScale = _lookRight;
         else if (!isRight)
             _parentTransform.localScale = _lookLeft;
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            _playerInteractions.TryInteract();
     }
 }
 
