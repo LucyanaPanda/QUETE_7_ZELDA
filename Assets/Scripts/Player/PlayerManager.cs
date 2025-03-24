@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
@@ -16,9 +17,13 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public Vector3 _spawnpoint;
     public readonly static string playerDataSaveKey = "PlayerData";
 
+    [Header("FadeInOut")]
+    [SerializeField] private Image image;
+    [SerializeField] private Animator _animatorImage;
+
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    private readonly UnityEvent _onDamageTaken = new();
+    private readonly UnityEvent _onHealthChanged = new();
 
     private void Start()
     {
@@ -53,10 +58,11 @@ public class PlayerManager : MonoBehaviour, IDamageable
             //Spawnpoint
             _spawnpoint = transform.position;
 
-            _onDamageTaken.Invoke();
+            _onHealthChanged.Invoke();
         }
 
         transform.position = _spawnpoint;
+        _onHealthChanged.Invoke();
     }
 
     public void TakeDamage(float damage)
@@ -68,20 +74,26 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         Debug.Log(damage - defense);
         health -= damage - defense;
-        _onDamageTaken.Invoke();
+        _onHealthChanged.Invoke();
         _spriteRenderer.color = Color.red;
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;
-        IfDead();
+        StartCoroutine(IfDead());
     }
 
-    private void IfDead()
+    IEnumerator  IfDead()
     {
-        if (health < minHealth)
+        if (health <= minHealth)
         {
+            image.enabled = true;
+            _animatorImage.Play("FadeIn");
+            yield return new WaitForSecondsRealtime(1f);
             transform.position = _spawnpoint;
             health = maxHealth;
+            _animatorImage.Play("FadeOut");
+            _onHealthChanged.Invoke();
         }
+        yield return null;
     }
 
     public void UseSpawnpoint(Vector3 pos)
@@ -169,5 +181,5 @@ public class PlayerManager : MonoBehaviour, IDamageable
         return false;
     }
 
-    public UnityEvent OnDamageTaken => _onDamageTaken;
+    public UnityEvent OnHealthChanged => _onHealthChanged;
 }

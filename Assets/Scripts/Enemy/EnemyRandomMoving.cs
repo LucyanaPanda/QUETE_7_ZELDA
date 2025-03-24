@@ -49,7 +49,6 @@ public class EnemyRandomMoving : MonoBehaviour
         _direction = _destination - (Vector2)_transform.position;
         _direction.Normalize();
         _transform.position += (Vector3)_direction * _enemyManager.creatureData.speed * Time.deltaTime;
-        Debug.Log(_direction);
         _enemyRadar.LookAtTarget(_destination, _transform);
         CheckPosition();
     }

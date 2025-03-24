@@ -9,7 +9,7 @@ public class HPBar : MonoBehaviour
 
     private void Start()
     {
-        _playerManager.OnDamageTaken.AddListener(() => UpdateBar());
+        _playerManager.OnHealthChanged.AddListener(() => UpdateBar());
     }
 
     private void UpdateBar()
