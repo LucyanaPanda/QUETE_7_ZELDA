@@ -55,6 +55,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
             _onDamageTaken.Invoke();
         }
+
+        transform.position = _spawnpoint;
     }
 
     public void TakeDamage(float damage)
@@ -159,6 +161,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
             //Spawnpoint
             _spawnpoint = playerData.spawnpoint;
 
+            Debug.Log(_spawnpoint);
             Debug.Log("Loaded data successful");
             return true;
         }
