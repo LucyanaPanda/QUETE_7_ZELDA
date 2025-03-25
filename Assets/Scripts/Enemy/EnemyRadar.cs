@@ -51,7 +51,8 @@ public class EnemyRadar : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        PlayerManager playerManager = collision.gameObject.GetComponent<PlayerManager>();
+        if (playerManager != null)
         {
             isReturning = true;
         }

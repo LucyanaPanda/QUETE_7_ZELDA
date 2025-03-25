@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class BigObjectEngima : MonoBehaviour
@@ -13,7 +14,8 @@ public class BigObjectEngima : MonoBehaviour
     [Header("Interaction")]
     [SerializeField] private bool _playerInZone;
 
-    public static bool BigObjectEnigmaResolved;
+    public bool solved;
+    private readonly UnityEvent _onPuzzleResolved = new();
 
     private void Start()
     {
@@ -27,8 +29,9 @@ public class BigObjectEngima : MonoBehaviour
 
     public void CompletedPuzzle()
     {
-        BigObjectEnigmaResolved = true;
+        solved = true;
         StartCoroutine(StableBigObject());
+        _onPuzzleResolved.Invoke();
     }
 
     IEnumerator StableBigObject()
@@ -39,7 +42,7 @@ public class BigObjectEngima : MonoBehaviour
 
     public void OnResetPuzzle(InputAction.CallbackContext context)
     {
-        if (context.started && _playerInZone && !BigObjectEnigmaResolved) 
+        if (context.started && _playerInZone && !solved) 
             ResetPuzzle();
     }
 
@@ -60,5 +63,5 @@ public class BigObjectEngima : MonoBehaviour
         if (_playerInZone)
             _playerInZone = false;
     }
-
+    public UnityEvent OnPuzzleSolved => _onPuzzleResolved;
 }

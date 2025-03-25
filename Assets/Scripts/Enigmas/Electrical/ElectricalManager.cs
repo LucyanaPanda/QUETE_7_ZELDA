@@ -1,12 +1,16 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ElectricalManager : MonoBehaviour
 {
     [Header("Pedestales")]
     [SerializeField] private List<Pedestal> _pedestals;
     private int _enumLength;
+
+    public bool solved;
+    private readonly UnityEvent _onPuzzleResolved = new();
 
     private void Start()
     {
@@ -27,7 +31,8 @@ public class ElectricalManager : MonoBehaviour
         }
 
         Debug.Log("Puzzle Resolved");
-        //Invoke the recompsense function
+        solved = true;
+        _onPuzzleResolved.Invoke();
     }
 
     enum Direction
@@ -37,4 +42,6 @@ public class ElectricalManager : MonoBehaviour
         East,
         West
     }
+
+    public UnityEvent OnPuzzleSolved => _onPuzzleResolved;
 }
