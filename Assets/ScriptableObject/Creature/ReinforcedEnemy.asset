@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783396c44c923044bbc35a10f2a48121, type: 3}
+  m_Name: ReinforcedEnemy
+  m_EditorClassIdentifier: 
+  id: 2
+  nameCreature: Reinforced Enemy
+  description: Fellow soldier of the "NOM" people, it is destinated to fight any
+    humans he encounters
+  image: {fileID: -1362583856912145195, guid: 2fdf668f2d5ee2144b170116514e689a, type: 3}
+  health: 5
+  minHealth: 0
+  maxHealth: 5
+  defense: 1
+  minDefense: 1
+  maxDefense: 1
+  attack: 1.5
+  minAttack: 1.5
+  maxAttack: 5
+  speed: 1
+  minSpeed: 1
+  maxSpeed: 1
+  attackTimer: 1.5
+  attackMaxTimer: 1.5

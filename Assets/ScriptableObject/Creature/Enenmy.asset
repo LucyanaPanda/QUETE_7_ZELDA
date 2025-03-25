@@ -16,18 +16,18 @@ MonoBehaviour:
   nameCreature: Enemy
   description: Fellow soldier of the "NOM" people, it is destinated to fight any
     humans he encounters
-  image: {fileID: 7685206120247198685, guid: 970781748b2baab4baaf44b5577f0ff3, type: 3}
+  image: {fileID: -1362583856912145195, guid: 2fdf668f2d5ee2144b170116514e689a, type: 3}
   health: 3
   minHealth: 0
-  maxHealth: 10
+  maxHealth: 3
   defense: 0
   minDefense: 0
-  maxDefense: 5
+  maxDefense: 0
   attack: 1
   minAttack: 1
-  maxAttack: 5
+  maxAttack: 1
   speed: 1
   minSpeed: 1
-  maxSpeed: 5
+  maxSpeed: 1
   attackTimer: 1
   attackMaxTimer: 1
