@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDamageable
@@ -20,6 +21,10 @@ public class PlayerManager : MonoBehaviour, IDamageable
     [Header("FadeInOut")]
     [SerializeField] private Image image;
     [SerializeField] private Animator _animatorImage;
+
+    [Header("Map")]
+    [SerializeField] private List<GameObject> _mapsOutsides;
+    [SerializeField] private List<GameObject> _mapsHidden;
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
@@ -81,19 +86,39 @@ public class PlayerManager : MonoBehaviour, IDamageable
         StartCoroutine(IfDead());
     }
 
-    IEnumerator  IfDead()
+    public IEnumerator  IfDead()
     {
         if (health <= minHealth)
         {
-            image.enabled = true;
             _animatorImage.Play("FadeIn");
             yield return new WaitForSecondsRealtime(1f);
+            ResetMap();
             transform.position = _spawnpoint;
             health = maxHealth;
             _animatorImage.Play("FadeOut");
             _onHealthChanged.Invoke();
         }
         yield return null;
+    }
+
+    public IEnumerator OnFade()
+    {
+        _animatorImage.Play("FadeIn");
+        yield return new WaitForSecondsRealtime(1f);
+        _animatorImage.Play("FadeOut");
+    }
+
+    private void ResetMap()
+    {
+        foreach (GameObject map in _mapsOutsides)
+        {
+            map.SetActive(true);
+        }
+
+        foreach(GameObject map in _mapsHidden)
+        {
+            map.SetActive(false);
+        }
     }
 
     public void UseSpawnpoint(Vector3 pos)

@@ -9,7 +9,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject _pausePanel;
 
     [Header("Player Interface")]
-    [SerializeField] private GameObject _playerInterface;
+    [SerializeField] private GameObject _playerHotbar;
+    [SerializeField] private GameObject _playerHpBar;
 
     [Header("HotbarUI")]
     [SerializeField] private GameObject _hotbarUIPanel;
@@ -37,14 +38,16 @@ public class PauseManager : MonoBehaviour
            _pausePanelGameObject.SetActive(true);
             _pausePanel.SetActive(true);
             _hotbarUIPanel.SetActive(false);
-            _playerInterface.SetActive(false);
+            _playerHotbar.SetActive(false);
+            _playerHpBar.SetActive(false);
             PauseGame();
         }
         else
         {
             _pausePanelGameObject.SetActive(false);
             _hotbarUIPanel.SetActive(true);
-            _playerInterface.SetActive(true);
+            _playerHotbar.SetActive(true);
+            _playerHpBar.SetActive(true);
             ResumeGame();
         }
     }
