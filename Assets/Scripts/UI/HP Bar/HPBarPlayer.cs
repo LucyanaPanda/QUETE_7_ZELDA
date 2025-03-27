@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HPBar : MonoBehaviour
+public class HPBarPlayer : MonoBehaviour
 {
     [Header("Player")]
     [SerializeField] private PlayerManager _playerManager;
