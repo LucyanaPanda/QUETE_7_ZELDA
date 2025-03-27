@@ -527,8 +527,11 @@ MonoBehaviour:
   _transformBody: {fileID: 8792604082604285624}
   _rb: {fileID: 8322231139499714702}
   _minDist: 0.7
+  isReturning: 0
+  isFollowingPlayer: 0
   CanAttackPlayer: 0
-  _rad: 3
+  _initPos: {x: 0, y: 0, z: 0}
+  _rad: 1.5
   _collider: {fileID: 1938693191446580873}
   _lookRight: {x: 1, y: 1, z: 1}
   _lookLeft: {x: -1, y: 1, z: 1}

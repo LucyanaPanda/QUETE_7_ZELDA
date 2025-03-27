@@ -14,6 +14,10 @@ public class InventoryUI : MonoBehaviour
     public List<Slot> slots;
     public bool inventoryVisible = false;
 
+    [Header("Player Interface")]
+    [SerializeField] private GameObject _playerHotbar;
+    [SerializeField] private GameObject _playerHpBar;
+
     [Header("PauseManager")]
     [SerializeField] private PauseManager _pauseManager;
 
@@ -27,6 +31,8 @@ public class InventoryUI : MonoBehaviour
         if (inventoryVisible)
         {
             _inventoryPanel.SetActive(false);
+            _playerHpBar.SetActive(true);
+            _playerHpBar.SetActive(true);
             inventoryVisible = false;
             _playerInventory.SaveInventory();
             _pauseManager.ResumeGame();
@@ -35,6 +41,8 @@ public class InventoryUI : MonoBehaviour
         else
         {
             _inventoryPanel.SetActive(true);
+            _playerHpBar.SetActive(false);
+            _playerHpBar.SetActive(false);
             inventoryVisible = true;
             _pauseManager.PauseGame();
             _playerInventory.LoadInventory();

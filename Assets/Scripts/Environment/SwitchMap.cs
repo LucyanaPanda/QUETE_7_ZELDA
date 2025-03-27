@@ -9,15 +9,10 @@ public class SwitchMap : MonoBehaviour
     [SerializeField] private GameObject _inside;
     private bool _isInside;
     private bool _once;
-    private Collider2D _path;
-
-    private void Start()
-    {
-        _path = GetComponent<Collider2D>();
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Player");
         if(!_once)
         {
             SwitchingMap();
@@ -44,8 +39,9 @@ public class SwitchMap : MonoBehaviour
 
     IEnumerator DeactivatingColliderForAFewSeconds()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(1f);
         _once = false;
+        Debug.Log("reactivated");
     }
 
     
