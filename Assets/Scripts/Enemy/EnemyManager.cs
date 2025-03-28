@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -12,6 +13,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     private SpriteRenderer _spriteRenderer;
 
+    private readonly UnityEvent _OnDeath = new();
     private void Start()
     {
         //Sprite
@@ -47,7 +49,11 @@ public class EnemyManager : MonoBehaviour, IDamageable
     private void IfDead()
     {
         if (_health <= _minHealth)
+        {
+            _OnDeath.Invoke();
             Destroy(gameObject);
+        }
     }
 
+    public UnityEvent OnDeath => _OnDeath;
 }
