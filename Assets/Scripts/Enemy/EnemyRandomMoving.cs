@@ -9,7 +9,8 @@ public class EnemyRandomMoving : MonoBehaviour
     private Vector2 _size;
 
     [Header("Moving")]
-    [SerializeField] private Transform _transform;
+    [SerializeField] private Transform _transformBody;
+    [SerializeField] private Transform _transformController;
     private Vector2 _position;
     private Vector2 _destination;
     private Vector2 _direction;
@@ -46,16 +47,16 @@ public class EnemyRandomMoving : MonoBehaviour
 
     private void MoveToDestination()
     {
-        _direction = _destination - (Vector2)_transform.position;
+        _direction = _destination - (Vector2)_transformBody.position;
         _direction.Normalize();
-        _transform.position += (Vector3)_direction * _enemyManager.creatureData.speed * Time.deltaTime;
-        _enemyRadar.LookAtTarget(_destination, _transform);
+        _transformBody.position += (Vector3)_direction * _enemyManager.creatureData.speed * Time.deltaTime;
+        _enemyRadar.LookAtTarget(_destination, _transformController);
         CheckPosition();
     }
 
     private void CheckPosition()
     {
-        float distance = Vector3.Distance(_destination, _transform.position);
+        float distance = Vector3.Distance(_destination, _transformBody.position);
         if (distance <= 0.2)
         {
             _timer -= _timerMax;
