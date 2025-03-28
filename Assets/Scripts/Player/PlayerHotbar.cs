@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -15,6 +16,7 @@ public class PlayerHotbar : MonoBehaviour
     [SerializeField] private int _currentSlotSelected;
 
     PlayerInventory _inventory;
+    PlayerManager _playerManager;
 
     private void Start()
     {
@@ -45,28 +47,32 @@ public class PlayerHotbar : MonoBehaviour
         {
             foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
             {
-                if (entry.Key == _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem)
+                if (entry.Key == _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem && entry.Key.canBeUse)
                 {
-                    if (entry.Value - 1 <= 0)
+                    PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+                    hotbar[entry.Key] = entry.Value - 1;
+                    Debug.Log("Used");
+
+                    if (hotbar[entry.Key] <= 0)
                     {
                         PlayerInventory.inventory.Remove(entry.Key);
                         hotbar.Remove(entry.Key);
                         _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem = null;
                         Debug.Log("All objects used");
                     }
-                    else
-                    {
-                        PlayerInventory.inventory[entry.Key] = entry.Value - 1;
-                        hotbar[entry.Key] = entry.Value - 1;
-                        Debug.Log("Used");
-                    }
+
+                    if (entry.Key.isPotion)
+                        _playerManager.ActivateBoost(entry.Key);
+
                     _hotbarUi.slots[_currentSlotSelected].UpdateInformation();
                     //SaveHotbar();
                     _inventory.SaveInventory();
+                    break;
                 }
             }
         }
     }
+
 
     //Scrolling system
     public void OnScroll(InputAction.CallbackContext context)
@@ -85,7 +91,8 @@ public class PlayerHotbar : MonoBehaviour
         _hotbarSlotSelected.localPosition = Vector3.zero;
     }
 
-    //SaveLoadSystem
+    //SaveLoadSystem for the HotBar, an little inventory seperated from the main one
+    //In case I want to change the current inventory system
 
     //public void SaveHotbar()
     //{

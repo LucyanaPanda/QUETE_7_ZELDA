@@ -17,6 +17,8 @@ MonoBehaviour:
   description: This potion will give you temporarely an attack boost.If you have
     already used this potion, only the time will be extended
   image: {fileID: 1916707963, guid: bb81cdd62428adf4d94ffc11ee9057e9, type: 3}
+  canBeUse: 0
+  isPotion: 0
   price: 5
   healthBoost: 0
   speedBoost: 0

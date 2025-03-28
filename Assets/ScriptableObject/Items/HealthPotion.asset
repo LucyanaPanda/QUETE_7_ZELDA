@@ -16,6 +16,8 @@ MonoBehaviour:
   nameItem: Health Potion
   description: This potion can heal you 3 health points.
   image: {fileID: 1772875074, guid: bb81cdd62428adf4d94ffc11ee9057e9, type: 3}
+  canBeUse: 0
+  isPotion: 0
   price: 5
   healthBoost: 3
   speedBoost: 0

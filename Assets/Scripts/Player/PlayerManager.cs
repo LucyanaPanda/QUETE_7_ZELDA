@@ -18,6 +18,24 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public Vector3 _spawnpoint;
     public readonly static string playerDataSaveKey = "PlayerData";
 
+    [Header("Potion Effect")]
+    public bool _attackBoostOn;
+    public bool _speedBoostOn;
+    public bool _defenseBoostOn;
+
+    public float _attackBoostDuration;
+    public float _attackBoostTimer;
+    public float _attackBoost;
+
+    public float _speedBoostDuration;
+    public float _speedBoostTimer;
+    public float _speedBoost;
+
+    public float _defenseBoostDuration;
+    public float _defenseBoostTimer;
+    public float _defenseBoost;
+
+
     [Header("FadeInOut")]
     [SerializeField] private Image image;
     [SerializeField] private Animator _animatorImage;
@@ -68,6 +86,16 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
         transform.position = _spawnpoint;
         _onHealthChanged.Invoke();
+    }
+
+    private void Update()
+    {
+        if (_attackBoostOn)
+            Boost(ref _attackBoostOn, ref _attackBoostDuration, ref _attackBoostTimer, ref _attackBoost, ref attack);
+        if (_defenseBoostOn)
+            Boost(ref _defenseBoostOn, ref _defenseBoostDuration, ref _defenseBoostTimer, ref _defenseBoost, ref defense);
+        if (_speedBoostOn)
+            Boost(ref _speedBoostOn, ref _speedBoostDuration, ref _speedBoostTimer, ref _speedBoost, ref speed);
     }
 
     public void TakeDamage(float damage)
@@ -204,6 +232,53 @@ public class PlayerManager : MonoBehaviour, IDamageable
         }
 
         return false;
+    }
+
+    private void Boost(ref bool boostOn, ref float boostDuration, ref float boostTimer, ref float boost, ref float stat)
+    {
+        boostTimer += Time.deltaTime;
+        if (boostTimer >= boostDuration)
+        {
+            boostTimer = 0;
+            boostOn = false;
+            stat -= boost;
+            boost = 0;
+            boostDuration = 0;
+
+        }
+    }
+
+    public void ActivateBoost(Item potion)
+    {
+        switch (potion.name)
+        {
+            case "Attack Potion":
+                OnActivateBoost(ref _attackBoostOn, ref _attackBoostDuration, ref _attackBoost, ref attack, potion.attackBoost, potion.duration);
+                break;
+            case "Defense Potion":
+                OnActivateBoost(ref _defenseBoostOn, ref _defenseBoostDuration, ref _defenseBoost, ref defense, potion.defBoost, potion.duration);
+                break;
+            case "Speed Potion":
+                OnActivateBoost(ref _speedBoostOn, ref _speedBoostDuration, ref _speedBoost, ref speed, potion.speedBoost, potion.duration);
+                break;
+            case "Health potion":
+                health = Mathf.Min(health+potion.healthBoost, maxHealth);
+                break;
+        }
+    }
+
+    private void OnActivateBoost(ref bool boostOn, ref float boostDuration, ref float boost, ref float stat, float boostValue, float boostItemDuration)
+    {
+        if (boostOn)
+        {
+            boostDuration += boostItemDuration;
+            return;
+        }
+
+        boostOn = true;
+        boostDuration = boostItemDuration;
+        boost = boostValue;
+        stat += boost;
     }
 
     public UnityEvent OnHealthChanged => _onHealthChanged;
