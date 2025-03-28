@@ -5,7 +5,7 @@ using UnityEngine;
 public class Chest : InteractableScript, IInteractable
 {
     [SerializeField] private List<GameObject> _items;
-    [SerializeField] private CircleCollider2D _circleCollider;
+    [SerializeField] private float _rad;
     [SerializeField] private bool _isInFront;
     [SerializeField] private GameObject _chest;
     public string name => "Chest";
@@ -13,7 +13,6 @@ public class Chest : InteractableScript, IInteractable
     public void Interact()
     {
         Debug.Log("Open chest");
-        float rad = _circleCollider.radius;
         foreach (GameObject item in _items)
         {
             int quantity;
@@ -24,7 +23,7 @@ public class Chest : InteractableScript, IInteractable
             Debug.Log("Quantity:" + quantity);
             for (int i = 0; i < quantity; i++)
             {
-                float x = Random.Range(-rad, rad);
+                float x = Random.Range(-_rad, _rad);
                 float y;
                 if (_isInFront)
                     y = Random.Range(-2, 0f);
