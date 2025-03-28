@@ -586,10 +586,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1917914611}
-    - target: {fileID: 6938605895938184687, guid: a311fb968a45b194bb6df96217ff19ce, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8107937319504680520, guid: a311fb968a45b194bb6df96217ff19ce, type: 3}
       propertyPath: _playerManager
       value: 
@@ -728,14 +724,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy2.0
       objectReference: {fileID: 0}
-    - target: {fileID: 6912186095710479773, guid: c42034849508b9642824bd23b65a8686, type: 3}
-      propertyPath: _enemy
-      value: 
-      objectReference: {fileID: 1889594786}
-    - target: {fileID: 6912186095710479773, guid: c42034849508b9642824bd23b65a8686, type: 3}
-      propertyPath: _spriteRenderer
-      value: 
-      objectReference: {fileID: 2025473148}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -789,11 +777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f83ff346dc93d47a733f825582f4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1889594786 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6211111231118559765, guid: c42034849508b9642824bd23b65a8686, type: 3}
-  m_PrefabInstance: {fileID: 1101011335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1917914611 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6115601308462047733, guid: 023c48b553082d04097f83fda1487a06, type: 3}
@@ -816,11 +799,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7acf386d5a42d6419fbbd4e9feba5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!212 &2025473148 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 8825520327758133190, guid: c42034849508b9642824bd23b65a8686, type: 3}
-  m_PrefabInstance: {fileID: 1101011335}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2071361336 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3774570988063713390, guid: a311fb968a45b194bb6df96217ff19ce, type: 3}
@@ -879,10 +857,6 @@ PrefabInstance:
     - target: {fileID: 4372749405708780430, guid: 3295f3d5685e15147b2cc5895cc86c7b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4417567987300740769, guid: 3295f3d5685e15147b2cc5895cc86c7b, type: 3}
-      propertyPath: _rad
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5652894271158424416, guid: 3295f3d5685e15147b2cc5895cc86c7b, type: 3}
       propertyPath: m_Name
@@ -958,10 +932,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4204028904217649076, guid: a13f338357c67784aaea859e9664c927, type: 3}
-      propertyPath: _rad
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5840007660373695339, guid: a13f338357c67784aaea859e9664c927, type: 3}
       propertyPath: m_Name
       value: ChestInFront
