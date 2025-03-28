@@ -3,22 +3,20 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class EnemyManager : MonoBehaviour, IDamageable
 {
     [Header("Data")]
     public Creature creatureData;
     public float health, minHealth, maxHealth;
     public float defense, minDefense, maxDefense;
-
-    private SpriteRenderer _spriteRenderer;
+    public SpriteRenderer _spriteRenderer;
+    public GameObject _enemy;
 
     private readonly UnityEvent _OnDeath = new();
     private readonly UnityEvent _onHealthChanged = new();
     private void Start()
     {
         //Sprite
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = creatureData.image;
 
         //Health
@@ -50,10 +48,10 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     private void IfDead()
     {
-        if (_health <= _minHealth)
+        if (health <= minHealth)
         {
             _OnDeath.Invoke();
-            Destroy(gameObject);
+            Destroy(_enemy);
         }
     }
 

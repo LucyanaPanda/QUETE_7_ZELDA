@@ -32,6 +32,7 @@ public class PlayerInventory : MonoBehaviour
             }
         }
         SaveInventory();
+        DisplayInventory();
         return true;
     }
 

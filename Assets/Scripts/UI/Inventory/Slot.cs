@@ -26,6 +26,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("OnDrop");
         SwipeItem(eventData.pointerDrag);
 
         if (_isSlotHotbar)

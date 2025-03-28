@@ -552,7 +552,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.5849056, g: 0.51041293, b: 0.51041293, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -691,10 +691,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _items:
+  - {fileID: 11400000, guid: 6faa25c15be54ad409002ed331312bc6, type: 2}
   - {fileID: 11400000, guid: 838ec51fc8d1c5f40a7b97a2173da1ba, type: 2}
+  - {fileID: 11400000, guid: 814314521748f094386543f9dfc303ff, type: 2}
+  - {fileID: 11400000, guid: cd5c3a7ac2b8c954eb72c762abda32a5, type: 2}
+  - {fileID: 11400000, guid: 58521f46acd89cd40ace26dc0b0f6741, type: 2}
+  - {fileID: 11400000, guid: 3d94c61c0fc37b14ab92640024f2e67e, type: 2}
+  - {fileID: 11400000, guid: 762aeab7966144440b2475c1235a1ae4, type: 2}
+  - {fileID: 11400000, guid: f2459ad994005e740bf4b5bc0a79fe6e, type: 2}
+  - {fileID: 11400000, guid: 313ddbdcefbbd8e45b522a9269315689, type: 2}
+  - {fileID: 11400000, guid: 56bdd5f7bf696bf4296bccd6a4b296d7, type: 2}
+  - {fileID: 11400000, guid: 86cea9530873acf439093e9a09707eea, type: 2}
+  - {fileID: 11400000, guid: b8689c48da0c87f428f9e67ee76ee1cc, type: 2}
+  - {fileID: 11400000, guid: 59b82181eb4172d42939c45aa4d71495, type: 2}
+  - {fileID: 11400000, guid: ee1ead91e5acd784080d21f23c333d8f, type: 2}
+  - {fileID: 11400000, guid: 7b5eab58aa0cf4e4b9d57977b774c3e1, type: 2}
+  - {fileID: 11400000, guid: d5dcd497b16a00e4ea19ad37cfd1eb44, type: 2}
+  - {fileID: 11400000, guid: 083da36daf3d1394b8e0254fbfd331e0, type: 2}
   _hotbarUi: {fileID: 0}
   _hotbarSlotSelected: {fileID: 0}
   _currentSlotSelected: 0
+  _inventory: {fileID: 6115601308462047733}
+  _playerManager: {fileID: 8223113858120323366}
+  _upgradeStat: {fileID: 7892386367629836766}
 --- !u!114 &2282065761009075035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -754,8 +773,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: d99ea573-4872-4f74-bc12-4a267906907c
-    m_ActionName: 'UseItem/UseItem[/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]'
+    m_ActionId: e924abeb-f05b-47df-8c43-d708817408e8
+    m_ActionName: 'Player/UseItem[/Mouse/rightButton]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7062051365608700860}
@@ -770,8 +789,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: a4ee9617-f966-4566-977b-b717a8364592
-    m_ActionName: 'UseItem/ScollItem[/Mouse/scroll/up,/Mouse/scroll/down]'
+    m_ActionId: d4803041-1914-4cc2-a472-362a24029434
+    m_ActionName: 'Player/ScollItem[/Mouse/scroll/down,/Mouse/scroll/up]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -792,6 +811,7 @@ GameObject:
   - component: {fileID: 6115601308462047733}
   - component: {fileID: 2591870801811355247}
   - component: {fileID: 9035160161475601802}
+  - component: {fileID: 7892386367629836766}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -919,6 +939,22 @@ MonoBehaviour:
   minSpeed: 0
   maxSpeed: 0
   _spawnpoint: {x: 0, y: 0, z: 0}
+  _attackBoostOn: 0
+  _speedBoostOn: 0
+  _defenseBoostOn: 0
+  _attackBoostDuration: 0
+  _attackBoostTimer: 0
+  _attackBoost: 0
+  _speedBoostDuration: 0
+  _speedBoostTimer: 0
+  _speedBoost: 0
+  _defenseBoostDuration: 0
+  _defenseBoostTimer: 0
+  _defenseBoost: 0
+  image: {fileID: 0}
+  _animatorImage: {fileID: 0}
+  _mapsOutsides: []
+  _mapsHidden: []
   _spriteRenderer: {fileID: 2838555883696699467}
 --- !u!114 &6115601308462047733
 MonoBehaviour:
@@ -933,7 +969,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _items:
+  - {fileID: 11400000, guid: 6faa25c15be54ad409002ed331312bc6, type: 2}
   - {fileID: 11400000, guid: 838ec51fc8d1c5f40a7b97a2173da1ba, type: 2}
+  - {fileID: 11400000, guid: 814314521748f094386543f9dfc303ff, type: 2}
+  - {fileID: 11400000, guid: cd5c3a7ac2b8c954eb72c762abda32a5, type: 2}
+  - {fileID: 11400000, guid: 58521f46acd89cd40ace26dc0b0f6741, type: 2}
+  - {fileID: 11400000, guid: 3d94c61c0fc37b14ab92640024f2e67e, type: 2}
+  - {fileID: 11400000, guid: 762aeab7966144440b2475c1235a1ae4, type: 2}
+  - {fileID: 11400000, guid: f2459ad994005e740bf4b5bc0a79fe6e, type: 2}
+  - {fileID: 11400000, guid: 313ddbdcefbbd8e45b522a9269315689, type: 2}
+  - {fileID: 11400000, guid: 56bdd5f7bf696bf4296bccd6a4b296d7, type: 2}
+  - {fileID: 11400000, guid: 86cea9530873acf439093e9a09707eea, type: 2}
+  - {fileID: 11400000, guid: b8689c48da0c87f428f9e67ee76ee1cc, type: 2}
+  - {fileID: 11400000, guid: 59b82181eb4172d42939c45aa4d71495, type: 2}
+  - {fileID: 11400000, guid: ee1ead91e5acd784080d21f23c333d8f, type: 2}
+  - {fileID: 11400000, guid: 7b5eab58aa0cf4e4b9d57977b774c3e1, type: 2}
+  - {fileID: 11400000, guid: d5dcd497b16a00e4ea19ad37cfd1eb44, type: 2}
+  - {fileID: 11400000, guid: 083da36daf3d1394b8e0254fbfd331e0, type: 2}
   _inventoryUi: {fileID: 0}
 --- !u!61 &2591870801811355247
 BoxCollider2D:
@@ -994,3 +1046,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactionCanvas: {fileID: 0}
+--- !u!114 &7892386367629836766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041970845336116040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610902d5828aeb04f816d6e368f3ffee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 8223113858120323366}

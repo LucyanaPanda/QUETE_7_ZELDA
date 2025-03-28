@@ -8,6 +8,8 @@ public class Item : ScriptableObject
     public string nameItem;
     public string description;
     public Sprite image;
+    public bool canBeUse;
+    public bool isPotion;
 
     [Header("Price")]
     public int price;
@@ -27,4 +29,5 @@ public class Item : ScriptableObject
     [Header("Duration")]
     public float duration;
     public bool hasDuration;
+
 }
