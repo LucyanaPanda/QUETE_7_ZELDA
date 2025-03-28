@@ -8,6 +8,7 @@ public class EnemyRadar : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private Transform _transformBody;
+    [SerializeField] private Transform _transformController;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private float _minDist;
     private float _speed;
@@ -64,8 +65,9 @@ public class EnemyRadar : MonoBehaviour
         if (distance > _minDist)
         {
             Vector3 pos = Vector3.MoveTowards(_transformBody.position, _target.position, _speed * Time.deltaTime);
+            Debug.Log(pos);
             _rb.MovePosition(pos);
-            LookAtTarget(_target.position, _transformBody);
+            LookAtTarget(_target.position, _transformController);
             CanAttackPlayer = false;
         }
         else
@@ -75,10 +77,11 @@ public class EnemyRadar : MonoBehaviour
     private void ReturnToInitPos()
     {
         Vector3 pos = Vector3.MoveTowards(_transformBody.position, _initPos, _speed * Time.deltaTime);
+        Debug.Log(pos);
         if (pos == Vector3.zero)
             isReturning = false;
         _rb.MovePosition(pos);
-        LookAtTarget(_initPos, _transformBody);
+        LookAtTarget(_initPos, _transformController);
         CanAttackPlayer = false;
         isFollowingPlayer = false;
     }

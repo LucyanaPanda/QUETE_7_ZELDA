@@ -8,12 +8,13 @@ public class EnemyManager : MonoBehaviour, IDamageable
 {
     [Header("Data")]
     public Creature creatureData;
-    public float _health, _minHealth, _maxHealth;
-    public float _defense, _minDefense, _maxDefense;
+    public float health, minHealth, maxHealth;
+    public float defense, minDefense, maxDefense;
 
     private SpriteRenderer _spriteRenderer;
 
     private readonly UnityEvent _OnDeath = new();
+    private readonly UnityEvent _onHealthChanged = new();
     private void Start()
     {
         //Sprite
@@ -21,14 +22,14 @@ public class EnemyManager : MonoBehaviour, IDamageable
         _spriteRenderer.sprite = creatureData.image;
 
         //Health
-        _health = creatureData.health;
-        _minHealth = creatureData.minHealth;
-        _maxHealth = creatureData.maxHealth;
+        health = creatureData.health;
+        minHealth = creatureData.minHealth;
+        maxHealth = creatureData.maxHealth;
 
         //Defense
-        _defense = creatureData.defense;
-        _minDefense = creatureData.minDefense;
-        _maxDefense = creatureData.maxDefense;
+        defense = creatureData.defense;
+        minDefense = creatureData.minDefense;
+        maxDefense = creatureData.maxDefense;
     }
 
     public void TakeDamage(float damage)
@@ -38,11 +39,12 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     public IEnumerator Damage(float damage)
     {
-        Debug.Log(damage - _defense);
-        _health -= damage - _defense;
+        Debug.Log(damage - defense);
+        health -= damage - defense;
         _spriteRenderer.color = Color.red;
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;
+        _onHealthChanged.Invoke();
         IfDead();
     } 
 
@@ -56,4 +58,6 @@ public class EnemyManager : MonoBehaviour, IDamageable
     }
 
     public UnityEvent OnDeath => _OnDeath;
+    public UnityEvent OnHealthChanged => _onHealthChanged;
+
 }
