@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6912186095710479773}
   - component: {fileID: 5377767897653604613}
   - component: {fileID: 4565441301222651287}
+  - component: {fileID: 6561935906538942601}
   m_Layer: 7
   m_Name: EnemyBody
   m_TagString: Untagged
@@ -203,6 +204,21 @@ MonoBehaviour:
   _transform: {fileID: 9049458104621501024}
   _timerMax: 5
   _timerMaxReachingDestination: 8
+--- !u!114 &6561935906538942601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4124900211582052029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94fd2ffbb5d05524b9accc81eec89851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _items:
+  - {fileID: 1376527885318895211, guid: 8c91a88ccc04a194b814c4a909062837, type: 3}
+  _enemyManager: {fileID: 6912186095710479773}
 --- !u!1 &6211111231118559765
 GameObject:
   m_ObjectHideFlags: 0
