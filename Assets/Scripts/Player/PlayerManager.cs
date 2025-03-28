@@ -98,6 +98,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
             Boost(ref _speedBoostOn, ref _speedBoostDuration, ref _speedBoostTimer, ref _speedBoost, ref speed);
     }
 
+    //Damage
     public void TakeDamage(float damage)
     {
         StartCoroutine(Damage(damage));
@@ -149,12 +150,14 @@ public class PlayerManager : MonoBehaviour, IDamageable
         }
     }
 
+    //Savepoint
     public void UseSpawnpoint(Vector3 pos)
     {
         _spawnpoint = pos;
         SavePlayerData();
     }
 
+    //System Data Save/Load
     public void SavePlayerData()
     {
         PlayerData playerData = new PlayerData();
@@ -233,7 +236,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
         return false;
     }
-
+    //Systeme de boost
     private void Boost(ref bool boostOn, ref float boostDuration, ref float boostTimer, ref float boost, ref float stat)
     {
         boostTimer += Time.deltaTime;
@@ -247,6 +250,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
         }
     }
+
 
     public void ActivateBoost(Item potion)
     {

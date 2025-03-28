@@ -16,8 +16,10 @@ public class PlayerHotbar : MonoBehaviour
     [SerializeField] private Transform _hotbarSlotSelected;
     [SerializeField] private int _currentSlotSelected;
 
-    PlayerInventory _inventory;
+    [Header("Player")]
+    [SerializeField] private PlayerInventory _inventory;
     [SerializeField] private PlayerManager _playerManager;
+    [SerializeField] private PlayerUpgradeStat _upgradeStat;
 
     private void Start()
     {
@@ -59,16 +61,15 @@ public class PlayerHotbar : MonoBehaviour
                         PlayerInventory.inventory.Remove(entry.Key);
                         hotbar.Remove(entry.Key);
                         _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem = null;
-                        _hotbarUi.slots[_currentSlotSelected].UpdateInformation();
-                        _inventory.SaveInventory();
-                        Debug.Log("All objects used");
-                        return;
+                        Debug.Log("All Objects have been used");
                     }
 
                     if (entry.Key.isPotion)
                         _playerManager.ActivateBoost(entry.Key);
+                    else
+                        _upgradeStat.UseSpecialItem(entry.Key);
 
-                    _hotbarUi.slots[_currentSlotSelected].UpdateInformation();
+                        _hotbarUi.slots[_currentSlotSelected].UpdateInformation();
                     //SaveHotbar();
                     _inventory.SaveInventory();
                     break;

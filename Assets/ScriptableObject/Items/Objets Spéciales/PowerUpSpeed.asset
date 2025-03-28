@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1c5d7480aa5be54b867be09035f708c, type: 3}
-  m_Name: Speed Potion
+  m_Name: PowerUpSpeed
   m_EditorClassIdentifier: 
-  id: 10
-  nameItem: Speed Potion
-  description: This potion will give you temporarely a speed boost. If you have already
-    used this potion, only the time will be extended
-  image: {fileID: -575587109, guid: bb81cdd62428adf4d94ffc11ee9057e9, type: 3}
-  canBeUse: 0
+  id: 16
+  nameItem: PowerUp Speed
+  description: Can increse the speed maximum permanently
+  image: {fileID: 21300000, guid: c89110d4870d8f043a959c20990bba3a, type: 3}
+  canBeUse: 1
   isPotion: 0
-  price: 5
+  price: 0
   healthBoost: 0
-  speedBoost: 2
+  speedBoost: 0.5
   defBoost: 0
   attackBoost: 0
   healthMalus: 0
   speedMalus: 0
   defMalus: 0
   attackMalus: 0
-  duration: 8
-  hasDuration: 1
+  duration: 0
+  hasDuration: 0
