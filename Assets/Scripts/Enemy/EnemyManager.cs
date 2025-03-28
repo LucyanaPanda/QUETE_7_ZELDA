@@ -50,7 +50,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     private void IfDead()
     {
-        if (_health <= _minHealth)
+        if (health <= minHealth)
         {
             _OnDeath.Invoke();
             Destroy(gameObject);
