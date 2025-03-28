@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class PlayerHotbar : MonoBehaviour
     [SerializeField] private int _currentSlotSelected;
 
     PlayerInventory _inventory;
-    PlayerManager _playerManager;
+    [SerializeField] private PlayerManager _playerManager;
 
     private void Start()
     {
@@ -58,7 +59,10 @@ public class PlayerHotbar : MonoBehaviour
                         PlayerInventory.inventory.Remove(entry.Key);
                         hotbar.Remove(entry.Key);
                         _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem = null;
+                        _hotbarUi.slots[_currentSlotSelected].UpdateInformation();
+                        _inventory.SaveInventory();
                         Debug.Log("All objects used");
+                        return;
                     }
 
                     if (entry.Key.isPotion)

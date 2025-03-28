@@ -65,7 +65,6 @@ public class EnemyRadar : MonoBehaviour
         if (distance > _minDist)
         {
             Vector3 pos = Vector3.MoveTowards(_transformBody.position, _target.position, _speed * Time.deltaTime);
-            Debug.Log(pos);
             _rb.MovePosition(pos);
             LookAtTarget(_target.position, _transformController);
             CanAttackPlayer = false;
@@ -77,7 +76,6 @@ public class EnemyRadar : MonoBehaviour
     private void ReturnToInitPos()
     {
         Vector3 pos = Vector3.MoveTowards(_transformBody.position, _initPos, _speed * Time.deltaTime);
-        Debug.Log(pos);
         if (pos == Vector3.zero)
             isReturning = false;
         _rb.MovePosition(pos);

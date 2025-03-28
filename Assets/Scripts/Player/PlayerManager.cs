@@ -252,17 +252,18 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         switch (potion.name)
         {
-            case "Attack Potion":
+            case "AttackPotion":
                 OnActivateBoost(ref _attackBoostOn, ref _attackBoostDuration, ref _attackBoost, ref attack, potion.attackBoost, potion.duration);
                 break;
-            case "Defense Potion":
+            case "DefensePotion":
                 OnActivateBoost(ref _defenseBoostOn, ref _defenseBoostDuration, ref _defenseBoost, ref defense, potion.defBoost, potion.duration);
                 break;
             case "Speed Potion":
                 OnActivateBoost(ref _speedBoostOn, ref _speedBoostDuration, ref _speedBoost, ref speed, potion.speedBoost, potion.duration);
                 break;
-            case "Health potion":
+            case "HealthPotion":
                 health = Mathf.Min(health+potion.healthBoost, maxHealth);
+                _onHealthChanged.Invoke();
                 break;
         }
     }
