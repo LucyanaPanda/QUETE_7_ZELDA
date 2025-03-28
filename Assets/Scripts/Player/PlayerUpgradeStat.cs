@@ -9,13 +9,13 @@ public class PlayerUpgradeStat : MonoBehaviour
         switch (item.name)
         {
             case "PowerUpAttack":
-                OnUseSpecialItem(ref _player.maxAttack, item.attackBoost);
+                OnUseSpecialItem(ref _player.attack, item.attackBoost);
                 break;
             case "PowerUpDefense":
-                OnUseSpecialItem(ref _player.maxDefense, item.defBoost);
+                OnUseSpecialItem(ref _player.defense, item.defBoost);
                 break;
             case "PowerUpSpeed":
-                OnUseSpecialItem(ref _player.maxSpeed, item.speedBoost);
+                OnUseSpecialItem(ref _player.speed, item.speedBoost);
                 break;
             case "PowerUpHealth":
                 OnUseSpecialItem(ref _player.maxHealth, item.healthBoost);
