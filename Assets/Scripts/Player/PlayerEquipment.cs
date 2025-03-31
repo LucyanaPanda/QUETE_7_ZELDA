@@ -10,8 +10,9 @@ public class PlayerEquipment : MonoBehaviour
     private Item _currentArmor;
     private Item _currentAccesorie;
 
-    [Header("PlayerManager")]
-    [SerializeField] private PlayerManager playerManager;
+    [Header("Player")]
+    [SerializeField] private PlayerManager _playerManager;
+    [SerializeField] private InventoryPlayerStats _playerStats;
 
     private void Start()
     {
@@ -25,51 +26,106 @@ public class PlayerEquipment : MonoBehaviour
 
     public void Equipement()
     {
-       for(int i = 0;  i < slots.Count; i++)
+       //for(int i = 0;  i < slots.Count; i++)
+       // {
+       //     if (slots[i].dragableItem.currentItem != null)
+       //     {
+       //         switch (i)
+       //         {
+       //             case 0: //weapon
+       //                 {
+       //                     if (_currentWeapon != null)
+       //                         _playerManager.attack -= _currentWeapon.attackBoost;
+       //                     _currentWeapon = slots[i].dragableItem.currentItem;
+       //                     _playerManager.attack += _currentWeapon.attackBoost;
+       //                     break;
+       //                 }
+       //             case 1: //armor
+       //                 {
+       //                     if (_currentArmor != null)
+       //                         _playerManager.defense -= _currentArmor.defBoost;
+       //                     _currentArmor = slots[i].dragableItem.currentItem;
+       //                     _playerManager.defense += _currentArmor.defBoost;
+       //                     break;
+       //                 }
+       //             case 2: //accesorie
+       //                 {
+       //                     if (_currentAccesorie != null)
+       //                     {
+       //                         _playerManager.maxHealth -= _currentAccesorie.healthBoost;
+       //                         _playerManager.attack -= _currentAccesorie.attackBoost;
+       //                         _playerManager.defense -= _currentAccesorie.defBoost;
+       //                         _playerManager.speed -= _currentAccesorie.speedBoost;
+       //                     }
+
+        //                     _currentAccesorie = slots[i].dragableItem.currentItem;
+
+        //                     _playerManager.attack += _currentAccesorie.attackBoost;
+        //                     _playerManager.defense += _currentAccesorie.defBoost;
+        //                     _playerManager.speed += _currentAccesorie.speedBoost;
+        //                     _playerManager.maxHealth += _currentAccesorie.healthBoost;
+        //                     break;
+        //                 }
+        //         }
+        //     }
+        //}
+
+        // _playerStats.UpdateStatsUI();
+
+        for (int i = 0; i < slots.Count; i++)
         {
-            if (slots[i].dragableItem.currentItem != null)
+            Item newItem = slots[i].dragableItem.currentItem;
+
+            switch (i)
             {
-                switch (i)
-                {
-                    case 0: //weapon
-                        {
-                            if (_currentWeapon != null)
-                                playerManager.attack -= _currentWeapon.attackBoost;
-                            _currentWeapon = slots[i].dragableItem.currentItem;
-                            playerManager.attack += _currentWeapon.attackBoost;
-                            Debug.Log("Hello");
-                            break;
-                        }
-                    case 1: //armor
-                        {
-                            if (_currentArmor != null)
-                                playerManager.defense -= _currentArmor.defBoost;
-                            _currentArmor = slots[i].dragableItem.currentItem;
-                            playerManager.defense += _currentArmor.defBoost;
-                            Debug.Log("Hello1");
-                            break;
-                        }
-                    case 2: //accesorie
-                        {
-                            if (_currentAccesorie != null)
-                            {
-                                playerManager.maxHealth -= _currentAccesorie.healthBoost;
-                                playerManager.attack -= _currentAccesorie.attackBoost;
-                                playerManager.defense -= _currentAccesorie.defBoost;
-                                playerManager.speed -= _currentAccesorie.speedBoost;
-                            }
+                case 0: // Weapon
+                    if (_currentWeapon != null)
+                    {
+                        _playerManager.attack -= _currentWeapon.attackBoost;
+                    }
+                    _currentWeapon = newItem;
+                    if (_currentWeapon != null)
+                    {
+                        _playerManager.attack += _currentWeapon.attackBoost;
+                    }
+                    break;
 
-                            _currentAccesorie = slots[i].dragableItem.currentItem;
+                case 1: // Armor
+                    if (_currentArmor != null)
+                    {
+                        _playerManager.defense -= _currentArmor.defBoost;
+                    }
+                    _currentArmor = newItem;
+                    if (_currentArmor != null)
+                    {
+                        _playerManager.defense += _currentArmor.defBoost;
+                    }
+                    break;
 
-                            playerManager.attack += _currentAccesorie.attackBoost;
-                            playerManager.defense += _currentAccesorie.defBoost;
-                            playerManager.speed += _currentAccesorie.speedBoost;
-                            playerManager.maxHealth += _currentAccesorie.healthBoost;
-                            Debug.Log("Hello2");
-                            break;
-                        }
-                }
+                case 2: // Accessory
+                    if (_currentAccesorie != null)
+                    {
+                        _playerManager.maxHealth -= _currentAccesorie.healthBoost;
+                        _playerManager.attack -= _currentAccesorie.attackBoost;
+                        _playerManager.defense -= _currentAccesorie.defBoost;
+                        _playerManager.speed -= _currentAccesorie.speedBoost;
+                    }
+                    _currentAccesorie = newItem;
+                    if (_currentAccesorie != null)
+                    {
+                        _playerManager.maxHealth += _currentAccesorie.healthBoost;
+                        _playerManager.attack += _currentAccesorie.attackBoost;
+                        _playerManager.defense += _currentAccesorie.defBoost;
+                        _playerManager.speed += _currentAccesorie.speedBoost;
+
+                        _playerManager.HealthChanged();
+                    }
+                    break;
             }
         }
+
+        _playerStats.UpdateStatsUI();
     }
+
 }
+

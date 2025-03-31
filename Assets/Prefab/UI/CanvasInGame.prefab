@@ -4035,7 +4035,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 5900647942635037634}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: ShowHideSave
         m_Mode: 6
@@ -4995,8 +4995,11 @@ MonoBehaviour:
   - {fileID: 4560978074440824328}
   - {fileID: 1224635139541373068}
   - {fileID: 91858464461703421}
+  - {fileID: 6532390102791838441}
+  - {fileID: 7798959051526768951}
+  - {fileID: 5143537375476094325}
   inventoryVisible: 0
-  _playerHotbar: {fileID: 5455534443477159997}
+  _playerHotbar: {fileID: 0}
   _playerHpBar: {fileID: 5800353342761823698}
   _pauseManager: {fileID: 5900647942635037634}
 --- !u!114 &6962598031285344608
@@ -6147,6 +6150,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.000032037
       objectReference: {fileID: 0}
+    - target: {fileID: 9215129908611016795, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
+      propertyPath: _isSlotEquipment
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6157,6 +6164,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8115613933151859723, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
   m_PrefabInstance: {fileID: 1430385721499476332}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7798959051526768951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9215129908611016795, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
+  m_PrefabInstance: {fileID: 1430385721499476332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a4e8cd988213346a07a7d1bc8dfba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1630577379681651826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6955,6 +6973,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.000032037
       objectReference: {fileID: 0}
+    - target: {fileID: 9215129908611016795, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
+      propertyPath: _isSlotEquipment
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6965,6 +6987,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8115613933151859723, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
   m_PrefabInstance: {fileID: 2685554830536684210}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6532390102791838441 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9215129908611016795, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
+  m_PrefabInstance: {fileID: 2685554830536684210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a4e8cd988213346a07a7d1bc8dfba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2917978120900824806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7763,11 +7796,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.000032037
       objectReference: {fileID: 0}
+    - target: {fileID: 9215129908611016795, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
+      propertyPath: _isSlotEquipment
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
+--- !u!114 &5143537375476094325 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9215129908611016795, guid: 388dd48be57969240a9d31cb5122d497, type: 3}
+  m_PrefabInstance: {fileID: 4072155861116845358}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a4e8cd988213346a07a7d1bc8dfba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5198077497482070309 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8115613933151859723, guid: 388dd48be57969240a9d31cb5122d497, type: 3}

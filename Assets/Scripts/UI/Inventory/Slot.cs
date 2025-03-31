@@ -62,6 +62,9 @@ public class Slot : MonoBehaviour, IDropHandler
 
         slot.GetNecessaryComponents();
         GetNecessaryComponents();
+
+        if (_isSlotEquipment || slot._isSlotEquipment)
+            _playerEquipment.Equipement();
     }
 
     public void MoveItems()
