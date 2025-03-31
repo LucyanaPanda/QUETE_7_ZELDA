@@ -24,8 +24,8 @@ public class PlayerHotbar : MonoBehaviour
     private void Start()
     {
         _inventory = GetComponentInParent<PlayerInventory>();
-        _inventory.LoadInventory();
-        _inventory._inventoryUi.LoadAndDisplayInventory();
+        //_inventory.LoadInventory();
+        //_inventory._inventoryUi.LoadAndDisplayInventory();
         //LoadHotbar();
     }
 

@@ -13,9 +13,16 @@ public class Slot : MonoBehaviour, IDropHandler
     public TMP_Text quantityText;
     public int position;
     public bool _isSlotHotbar;
+    public bool _isSlotWeapon;
+    public bool _isSlotArmor;
+    public bool _isSlotAccesorie;
 
     [Header("Item")]
     public DrageableItem dragableItem;
+
+    [Header("PlayerEquipment")]
+    [SerializeField] private PlayerEquipment _playerEquipment;
+
 
     private void Awake()
     {
@@ -27,18 +34,34 @@ public class Slot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
-        SwipeItem(eventData.pointerDrag);
+        DrageableItem droppedItem = eventData.pointerDrag.GetComponent<DrageableItem>(); // Get the item dropped
+        if (_isSlotWeapon  && !droppedItem.currentItem.isWeapon)
+        {
+            return;
+        }
+        if (_isSlotArmor && !droppedItem.currentItem.isArmor)
+        {
+            return;
+        }
+        if (_isSlotAccesorie && !droppedItem.currentItem.isAccesorie)
+        {
+            return;
+        }
+
+        SwipeItem(droppedItem);
 
         if (_isSlotHotbar)
         {
             MoveItems();
         }
+        if (_isSlotWeapon || _isSlotArmor ||_isSlotAccesorie)
+        {
+            _playerEquipment.Equipement();
+        }
     }
 
-    public void SwipeItem(GameObject droppedItem)
+    public void SwipeItem(DrageableItem item)
     {
-
-        DrageableItem item = droppedItem.GetComponent<DrageableItem>(); // Get the item dropped
         Slot slot = item._transformParent.gameObject.GetComponent<Slot>(); // Get the slot of the item dropped
         DrageableItem copyCurrentItem = dragableItem; // make a copy of the current item of this slot
         Transform transformParentOtherItem = item._transformParent; // make a copy of the transform's item dropped
@@ -50,6 +73,9 @@ public class Slot : MonoBehaviour, IDropHandler
 
         slot.GetNecessaryComponents();
         GetNecessaryComponents();
+
+        if ((_isSlotWeapon || _isSlotArmor || _isSlotAccesorie) || (slot._isSlotWeapon || slot._isSlotArmor || slot._isSlotAccesorie))
+            _playerEquipment.Equipement();
     }
 
     public void MoveItems()

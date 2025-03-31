@@ -24,6 +24,19 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         InitializeSlotsPositions();
+        _inventoryPanel.SetActive(true);
+        _playerHpBar.SetActive(false);
+        _playerHpBar.SetActive(false);
+        inventoryVisible = true;
+        _pauseManager.PauseGame();
+        _playerInventory.LoadInventory();
+        LoadAndDisplayInventory();
+        _inventoryPanel.SetActive(false);
+        _playerHpBar.SetActive(true);
+        _playerHpBar.SetActive(true);
+        inventoryVisible = false;
+        _playerInventory.SaveInventory();
+        _pauseManager.ResumeGame();
     }
 
     public void ShowHideInventory(InputAction.CallbackContext context)

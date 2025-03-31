@@ -98,6 +98,11 @@ public class PlayerManager : MonoBehaviour, IDamageable
             Boost(ref _speedBoostOn, ref _speedBoostDuration, ref _speedBoostTimer, ref _speedBoost, ref speed);
     }
 
+    public void HealthChanged()
+    {
+        _onHealthChanged?.Invoke();
+    }
+
     //Damage
     public void TakeDamage(float damage)
     {
@@ -106,13 +111,15 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     public IEnumerator Damage(float damage)
     {
-        Debug.Log(damage - defense);
-        health -= damage - defense;
-        _onHealthChanged.Invoke();
-        _spriteRenderer.color = Color.red;
-        yield return new WaitForSecondsRealtime(0.5f);
-        _spriteRenderer.color = Color.white;
-        StartCoroutine(IfDead());
+        if (damage - defense >= 0)
+        {
+            health -= damage - defense;
+            _onHealthChanged.Invoke();
+            _spriteRenderer.color = Color.red;
+            yield return new WaitForSecondsRealtime(0.5f);
+            _spriteRenderer.color = Color.white;
+            StartCoroutine(IfDead());
+        }
     }
 
     public IEnumerator  IfDead()

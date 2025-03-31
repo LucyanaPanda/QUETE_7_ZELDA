@@ -17,6 +17,11 @@ MonoBehaviour:
   description: This necklace has been blessed by a priestess. Will give a defense
     bonus
   image: {fileID: 830021032, guid: 15f9deb0979fba547ac144ce67b3142c, type: 3}
+  canBeUse: 0
+  isPotion: 0
+  isWeapon: 0
+  isArmor: 0
+  isAccesorie: 1
   price: 5
   healthBoost: 0
   speedBoost: 0

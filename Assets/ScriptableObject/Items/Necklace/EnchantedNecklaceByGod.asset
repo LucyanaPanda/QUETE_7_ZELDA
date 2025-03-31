@@ -16,6 +16,11 @@ MonoBehaviour:
   nameItem: Enchanted Necklace By God
   description: This necklace has been blessed by god. Will give a health bonus
   image: {fileID: -250978939, guid: 15f9deb0979fba547ac144ce67b3142c, type: 3}
+  canBeUse: 0
+  isPotion: 0
+  isWeapon: 0
+  isArmor: 0
+  isAccesorie: 1
   price: 5
   healthBoost: 2
   speedBoost: 0
