@@ -13,7 +13,9 @@ public class Slot : MonoBehaviour, IDropHandler
     public TMP_Text quantityText;
     public int position;
     public bool _isSlotHotbar;
-    public bool _isSlotEquipment;
+    public bool _isSlotWeapon;
+    public bool _isSlotArmor;
+    public bool _isSlotAccesorie;
 
     [Header("Item")]
     public DrageableItem dragableItem;
@@ -33,17 +35,26 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         Debug.Log("OnDrop");
         DrageableItem droppedItem = eventData.pointerDrag.GetComponent<DrageableItem>(); // Get the item dropped
-        if (_isSlotEquipment && !droppedItem.currentItem.equipment)
+        if (_isSlotWeapon  && !droppedItem.currentItem.isWeapon)
         {
             return;
         }
+        if (_isSlotArmor && !droppedItem.currentItem.isArmor)
+        {
+            return;
+        }
+        if (_isSlotAccesorie && !droppedItem.currentItem.isAccesorie)
+        {
+            return;
+        }
+
         SwipeItem(droppedItem);
 
         if (_isSlotHotbar)
         {
             MoveItems();
         }
-        if (_isSlotEquipment)
+        if (_isSlotWeapon || _isSlotArmor ||_isSlotAccesorie)
         {
             _playerEquipment.Equipement();
         }
@@ -63,7 +74,7 @@ public class Slot : MonoBehaviour, IDropHandler
         slot.GetNecessaryComponents();
         GetNecessaryComponents();
 
-        if (_isSlotEquipment || slot._isSlotEquipment)
+        if ((_isSlotWeapon || _isSlotArmor || _isSlotAccesorie) || (slot._isSlotWeapon || slot._isSlotArmor || slot._isSlotAccesorie))
             _playerEquipment.Equipement();
     }
 

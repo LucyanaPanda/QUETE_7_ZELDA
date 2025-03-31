@@ -18,7 +18,9 @@ MonoBehaviour:
   image: {fileID: 622998732, guid: f68595a147cd42345945c041355c27f5, type: 3}
   canBeUse: 0
   isPotion: 0
-  equipment: 1
+  isWeapon: 0
+  isArmor: 1
+  isAccesorie: 0
   price: 5
   healthBoost: 0
   speedBoost: 0
