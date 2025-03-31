@@ -16,6 +16,9 @@ MonoBehaviour:
   nameItem: Iron Sword
   description: Iron sword crafted by one the best black-smith. Deals a lot of damage.
   image: {fileID: -1478256979, guid: 15f9deb0979fba547ac144ce67b3142c, type: 3}
+  canBeUse: 0
+  isPotion: 0
+  equipment: 1
   price: 5
   healthBoost: 0
   speedBoost: 0

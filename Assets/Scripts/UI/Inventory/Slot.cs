@@ -13,9 +13,14 @@ public class Slot : MonoBehaviour, IDropHandler
     public TMP_Text quantityText;
     public int position;
     public bool _isSlotHotbar;
+    public bool _isSlotEquipment;
 
     [Header("Item")]
     public DrageableItem dragableItem;
+
+    [Header("PlayerEquipment")]
+    [SerializeField] private PlayerEquipment _playerEquipment;
+
 
     private void Awake()
     {
@@ -27,18 +32,25 @@ public class Slot : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
-        SwipeItem(eventData.pointerDrag);
+        DrageableItem droppedItem = eventData.pointerDrag.GetComponent<DrageableItem>(); // Get the item dropped
+        if (_isSlotEquipment && !droppedItem.currentItem.equipment)
+        {
+            return;
+        }
+        SwipeItem(droppedItem);
 
         if (_isSlotHotbar)
         {
             MoveItems();
         }
+        if (_isSlotEquipment)
+        {
+            _playerEquipment.Equipement();
+        }
     }
 
-    public void SwipeItem(GameObject droppedItem)
+    public void SwipeItem(DrageableItem item)
     {
-
-        DrageableItem item = droppedItem.GetComponent<DrageableItem>(); // Get the item dropped
         Slot slot = item._transformParent.gameObject.GetComponent<Slot>(); // Get the slot of the item dropped
         DrageableItem copyCurrentItem = dragableItem; // make a copy of the current item of this slot
         Transform transformParentOtherItem = item._transformParent; // make a copy of the transform's item dropped

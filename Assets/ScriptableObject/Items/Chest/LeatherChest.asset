@@ -17,6 +17,9 @@ MonoBehaviour:
   description: Simple leather chest, can be used as a cloth or a armor. There is
     no much difference between them.
   image: {fileID: 21300000, guid: ea533f68128fef34e9b31e65186a2499, type: 3}
+  canBeUse: 0
+  isPotion: 0
+  equipment: 1
   price: 5
   healthBoost: 0
   speedBoost: 0

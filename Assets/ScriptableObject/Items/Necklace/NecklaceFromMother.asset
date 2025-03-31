@@ -16,6 +16,9 @@ MonoBehaviour:
   nameItem: Mother necklace
   description: This necklace given by mom. Will give a will (attaque boost) bonus
   image: {fileID: -80408959, guid: 15f9deb0979fba547ac144ce67b3142c, type: 3}
+  canBeUse: 0
+  isPotion: 0
+  equipment: 1
   price: 5
   healthBoost: 0
   speedBoost: 0

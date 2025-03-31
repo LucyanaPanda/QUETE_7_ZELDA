@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     public Sprite image;
     public bool canBeUse;
     public bool isPotion;
+    public bool equipment;
 
     [Header("Price")]
     public int price;
