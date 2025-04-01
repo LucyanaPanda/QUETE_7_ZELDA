@@ -780,65 +780,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8379863916711127572}
     m_Modifications:
-    - target: {fileID: 1323570719343814560, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 0.5625
-      objectReference: {fileID: 0}
-    - target: {fileID: 1323570719343814560, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1323570719343814560, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.5625
-      objectReference: {fileID: 0}
     - target: {fileID: 4303715835960440933, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
       propertyPath: m_Name
       value: NPC
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
-      value: 75a1a5db-1e95-45c6-a511-7f97bd5e6678
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
-      value: fbadde01-5da0-4fd1-934c-0c5a1a181296
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
-      value: e924abeb-f05b-47df-8c43-d708817408e8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
-      value: d4803041-1914-4cc2-a472-362a24029434
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
-      value: 'Player/PauseGame[/Keyboard/escape]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
-      value: 'Player/Inventory[/Keyboard/b]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
-      value: 'Player/UseItem[/Mouse/rightButton]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4484509962616959879, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
-      value: 'Player/ScollItem[/Mouse/scroll/down,/Mouse/scroll/up]'
-      objectReference: {fileID: 0}
-    - target: {fileID: 5708049931644479377, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: _quest
-      value: 
-      objectReference: {fileID: 1731515881}
-    - target: {fileID: 5708049931644479377, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: _hasQuest
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5708049931644479377, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
       propertyPath: _nameText
@@ -856,6 +800,18 @@ PrefabInstance:
       propertyPath: _dialoguePanel
       value: 
       objectReference: {fileID: 211056625}
+    - target: {fileID: 6071641243366850594, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
+      propertyPath: '_questEnemies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 874771794}
+    - target: {fileID: 6071641243366850594, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
+      propertyPath: '_questEnemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1095962564}
+    - target: {fileID: 6071641243366850594, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
+      propertyPath: '_questEnemies.Array.data[2]'
+      value: 
+      objectReference: {fileID: 7073403}
     - target: {fileID: 7933365851120163439, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
       propertyPath: _dialoguePanel
       value: 
@@ -864,46 +820,6 @@ PrefabInstance:
       propertyPath: _interactionPanel
       value: 
       objectReference: {fileID: 1311959238}
-    - target: {fileID: 7944778749991392409, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_Size.x
-      value: 0.5625
-      objectReference: {fileID: 0}
-    - target: {fileID: 7944778749991392409, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_Size.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7944778749991392409, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -7838356227777195048, guid: 970781748b2baab4baaf44b5577f0ff3, type: 3}
-    - target: {fileID: 7944778749991392409, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7944778749991392409, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8315943408459316322, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_Size.x
-      value: 0.5625
-      objectReference: {fileID: 0}
-    - target: {fileID: 8315943408459316322, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_Size.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8315943408459316322, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 7685206120247198685, guid: 970781748b2baab4baaf44b5577f0ff3, type: 3}
-    - target: {fileID: 8315943408459316322, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8315943408459316322, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9162621769873679772, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.85
@@ -947,10 +863,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4303715835960440933, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1731515881}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
 --- !u!4 &210182391 stripped
 Transform:
@@ -3041,11 +2954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f407caf71070f9a41999f6f8ef9a7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &836548571 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4303715835960440933, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-  m_PrefabInstance: {fileID: 201223255}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &874771794 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6211111231118559765, guid: c42034849508b9642824bd23b65a8686, type: 3}
@@ -11558,47 +11466,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9162621769873679772, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
   m_PrefabInstance: {fileID: 201223255}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1731515878 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5708049931644479377, guid: fb868a769ee77ec48b051ecba062e680, type: 3}
-  m_PrefabInstance: {fileID: 201223255}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836548571}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39cbdec121737b94f9aa87e387fe260b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1731515881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 836548571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4861c1c3bdeb354ca90ab064ee785e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _questGiver: {fileID: 1731515878}
-  _objectToGive: 0
-  _monstersToKill: 1
-  _questResolved: 0
-  _dialogueBeginning:
-  - Do me a favor while you're here.
-  - In the cave behind my house, there is a treasure my late grand father left me.
-  - This treasure is a necklace from my mother, the very last thing my grand father
-    held dear too.
-  - Could you get it for me please ?
-  _dialogueEnd:
-  - 'Thank you... Trank you very much. '
-  _questObject: {fileID: 11400000, guid: cd5c3a7ac2b8c954eb72c762abda32a5, type: 2}
-  _questEnemies:
-  - {fileID: 874771794}
-  - {fileID: 1095962564}
-  - {fileID: 7073403}
-  _playerInventory: {fileID: 0}
 --- !u!4 &1743467504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5773501227658677588, guid: c42034849508b9642824bd23b65a8686, type: 3}
