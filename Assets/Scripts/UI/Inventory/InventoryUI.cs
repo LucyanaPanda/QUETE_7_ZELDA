@@ -90,6 +90,16 @@ public class InventoryUI : MonoBehaviour
             slots[slotIndex].quantityText.text = entry.Value.ToString();
             slots[slotIndex].dragableItem.currentItem = entry.Key;
         }
+
+        for(int i = 0;i < slots.Count;i++)
+        {
+            if (!occupiedSlots.Contains(i))
+            {
+                slots[i].image.sprite = null;
+                slots[i].quantityText.text = "";
+                slots[i].dragableItem.currentItem = null;
+            }
+        }
     }
 
     private int GetSavedSlotIndex(Item item)

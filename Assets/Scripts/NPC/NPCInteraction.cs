@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class NPCInteraction : MonoBehaviour
+public class NPCInteraction : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject _interactionPanel;
     [SerializeField] private GameObject _dialoguePanel;
@@ -34,14 +34,17 @@ public class NPCInteraction : MonoBehaviour
         }
     }
 
-    public void InteractionStarted(InputAction.CallbackContext context)
+    public void Interact()
     {
-        if (context.started && !_dialoguePanel.activeInHierarchy) 
+        if (!_dialoguePanel.activeInHierarchy) 
         { 
             _dialoguePanel.SetActive(true); 
             _dialogueScript.enabled = true;
             _interactionPanel.SetActive(false);
-            Debug.Log("bouya");
+        } 
+        else
+        {
+            _dialogueScript.Boom();
         }
     }
 }

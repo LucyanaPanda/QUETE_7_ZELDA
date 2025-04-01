@@ -7,40 +7,61 @@ using UnityEngine.UI;
 
 public class NPCDialogue : MonoBehaviour
 {
+    [Header("NPC has quest")]
+    [SerializeField] private Quest _quest;
+    [SerializeField] private bool _hasQuest;
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private Image _profilImage;
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private TMP_Text _dialogueBox;
-    [SerializeField] private List<string> _dialogueLines;
+    public List<string> dialogueLines;
 
     private int _currentIndexLine;
 
     private void OnEnable()
     {
         ResetDialogue();
+        if (_hasQuest)
+            _quest.IfQuestResolved();
+        Boom();
     }
 
     public void OnTextChanged(InputAction.CallbackContext context)
     {
-        if (context.started)
+        //if (context.started)
+        //{
+        //    if (_currentIndexLine < dialogueLines.Count)
+        //    {
+        //        DisplayDialogueLine();
+        //    }
+        //    else
+        //    {
+        //        ResetDialogue();
+        //        _dialoguePanel.SetActive(false);
+        //        this.enabled = false;
+        //    }
+        //    _currentIndexLine += 1;
+        //}
+    }
+
+    public void Boom()
+    {
+        if (_currentIndexLine < dialogueLines.Count)
         {
-            if (_currentIndexLine < _dialogueLines.Count)
-            {
-                DisplayDialogueLine();
-            }
-            else
-            {
-                ResetDialogue();
-                _dialoguePanel.SetActive(false);
-                this.enabled = false;
-            }
-            _currentIndexLine += 1;
+            DisplayDialogueLine();
         }
+        else
+        {
+            ResetDialogue();
+            _dialoguePanel.SetActive(false);
+            this.enabled = false;
+        }
+        _currentIndexLine += 1;
     }
 
     private void DisplayDialogueLine()
     {
-        _dialogueBox.text = _dialogueLines[_currentIndexLine];
+        _dialogueBox.text = dialogueLines[_currentIndexLine];
     }
 
     private void ResetDialogue()

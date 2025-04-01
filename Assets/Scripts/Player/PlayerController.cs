@@ -60,7 +60,9 @@ public class PlayerController : MonoBehaviour
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.started)
-            _playerInteractions.TryInteract();
+
+            { _playerInteractions.TryInteract(); Debug.Log("Interacted"); }
+
     }
 }
 
