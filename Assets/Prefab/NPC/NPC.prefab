@@ -76,13 +76,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: -1514727235, guid: f5588bd50736bc64da6c9ce323d43012, type: 3}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: -7838356227777195048, guid: 970781748b2baab4baaf44b5577f0ff3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5625, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -126,8 +126,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.5}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.5625, y: 0.5}
+    newSize: {x: 0.5625, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 7933365851120163439}
   - component: {fileID: 5708049931644479377}
   - component: {fileID: 4484509962616959879}
+  - component: {fileID: 6071641243366850594}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -231,7 +232,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionPanel: {fileID: 0}
   _dialoguePanel: {fileID: 0}
-  _dialogueScript: {fileID: 0}
 --- !u!114 &5708049931644479377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,15 +244,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39cbdec121737b94f9aa87e387fe260b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _quest: {fileID: 6071641243366850594}
+  _hasQuest: 0
   _dialoguePanel: {fileID: 0}
   _profilImage: {fileID: 0}
   _nameText: {fileID: 0}
   _dialogueBox: {fileID: 0}
-  _dialogueLines:
-  - Mon fils, il est temps de partir ?
-  - Je vois...
-  - "Fais bien attention \xE0 toi, mange bien, repose toi bien. Reviens ici quand
-    tu auras fini Kael."
+  dialogueLines: []
 --- !u!114 &4484509962616959879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,11 +312,57 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 66db40a6-98b0-4809-bb5c-c18256e1babc
     m_ActionName: 'Player/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 75a1a5db-1e95-45c6-a511-7f97bd5e6678
+    m_ActionName: 'Player/PauseGame[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fbadde01-5da0-4fd1-934c-0c5a1a181296
+    m_ActionName: 'Player/Inventory[/Keyboard/b]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e924abeb-f05b-47df-8c43-d708817408e8
+    m_ActionName: 'Player/UseItem[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d4803041-1914-4cc2-a472-362a24029434
+    m_ActionName: 'Player/ScollItem[/Mouse/scroll/down,/Mouse/scroll/up]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6071641243366850594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4303715835960440933}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4861c1c3bdeb354ca90ab064ee785e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _questGiver: {fileID: 5708049931644479377}
+  _objectToGive: 0
+  _monstersToKill: 0
+  _questResolved: 0
+  _dialogueBeginning:
+  - Do me a favor while you're here.
+  - In the cave behind my house, there is a treasure my late grand father left me.
+  - This treasure is a necklace from my mother, the very last thing my grand father
+    held dear too.
+  - Could you get it for me please ?
+  _dialogueEnd:
+  - 'Thank you... Trank you very much. '
+  _questObject: {fileID: 11400000, guid: cd5c3a7ac2b8c954eb72c762abda32a5, type: 2}
+  _questEnemies:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerInventory: {fileID: 0}
 --- !u!1 &7399984602713998754
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,13 +438,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
-  m_Sprite: {fileID: 504676613, guid: f5588bd50736bc64da6c9ce323d43012, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 7685206120247198685, guid: 970781748b2baab4baaf44b5577f0ff3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5625, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
