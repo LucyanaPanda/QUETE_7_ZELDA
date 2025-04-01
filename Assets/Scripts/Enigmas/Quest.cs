@@ -58,6 +58,7 @@ public class Quest : MonoBehaviour
                     return false;
                 }
             }
+            _questGiver.dialogueLines = _dialogueEnd;
             _questResolved = true;
             return true;
         }
