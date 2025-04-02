@@ -1,7 +1,5 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class Quest : MonoBehaviour
 {
@@ -24,6 +22,10 @@ public class Quest : MonoBehaviour
 
     [SerializeField] private PlayerInventory _playerInventory;
 
+    [Header("Path To Block")]
+    [SerializeField] private GameObject _pathToblock;
+    [SerializeField] private bool _hasAPathBlocked;
+
     private void Start()
     {
         _questGiver.dialogueLines = _dialogueBeginning;
@@ -43,6 +45,8 @@ public class Quest : MonoBehaviour
                     _playerInventory.DisplayInventory();
                     _playerInventory.SaveInventory();
                     _playerInventory.LoadInventory();
+                    if (_hasAPathBlocked)
+                        _pathToblock.SetActive(false);
                     return true;
                 }
             }
@@ -54,12 +58,13 @@ public class Quest : MonoBehaviour
             {
                 if (_questEnemies[i] != null)
                 {
-                    Debug.Log("_questEnemies[i] != null");
                     return false;
                 }
             }
             _questGiver.dialogueLines = _dialogueEnd;
             _questResolved = true;
+            if (_hasAPathBlocked)
+                _pathToblock.SetActive(false);
             return true;
         }
         return true;

@@ -37,7 +37,6 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     public IEnumerator Damage(float damage)
     {
-        Debug.Log(damage - defense);
         health -= damage - defense;
         _spriteRenderer.color = Color.red;
         yield return new WaitForSecondsRealtime(0.5f);

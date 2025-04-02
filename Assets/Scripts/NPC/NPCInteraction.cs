@@ -38,7 +38,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
     {
         if (!_dialoguePanel.activeInHierarchy) 
         { 
-            _dialoguePanel.SetActive(true); 
+            _dialoguePanel.SetActive(true);
             _dialogueScript.enabled = true;
             _interactionPanel.SetActive(false);
         } 

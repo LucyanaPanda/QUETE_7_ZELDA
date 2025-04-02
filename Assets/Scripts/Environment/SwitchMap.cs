@@ -41,7 +41,6 @@ public class SwitchMap : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1f);
         _once = false;
-        Debug.Log("reactivated");
     }
 
     
