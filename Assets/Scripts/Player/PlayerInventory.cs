@@ -106,14 +106,17 @@ public class PlayerInventory : MonoBehaviour
             InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(json);
 
             inventory.Clear();
+            if (inventoryData == null)
+            {
+                 SaveInventory();
+                 return;
+            }
 
             foreach (SlotData slotData in inventoryData.slots)
             {
                 Item item = FindItemByName(slotData.itemName);
                 if (item != null)
-                {
                     inventory[item] = slotData.quantity;
-                }
             }
         }
     }

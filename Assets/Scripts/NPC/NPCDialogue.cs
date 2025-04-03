@@ -17,31 +17,15 @@ public class NPCDialogue : MonoBehaviour
     public List<string> dialogueLines;
 
     private int _currentIndexLine;
+    private bool _hasBennTalkedOnce;
 
     private void OnEnable()
     {
         ResetDialogue();
-        if (_hasQuest)
+        if (_hasQuest & _hasBennTalkedOnce)
             _quest.IfQuestResolved();
         Boom();
-    }
-
-    public void OnTextChanged(InputAction.CallbackContext context)
-    {
-        //if (context.started)
-        //{
-        //    if (_currentIndexLine < dialogueLines.Count)
-        //    {
-        //        DisplayDialogueLine();
-        //    }
-        //    else
-        //    {
-        //        ResetDialogue();
-        //        _dialoguePanel.SetActive(false);
-        //        this.enabled = false;
-        //    }
-        //    _currentIndexLine += 1;
-        //}
+        _hasBennTalkedOnce = true;
     }
 
     public void Boom()
@@ -67,5 +51,6 @@ public class NPCDialogue : MonoBehaviour
     private void ResetDialogue()
     {
         _currentIndexLine = 0;
+        _dialogueBox.text = "";
     }
 }

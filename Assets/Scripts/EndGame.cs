@@ -31,6 +31,7 @@ public class EndGame : MonoBehaviour, IInteractable
                 _inventory.LoadInventory();
                 OnEndOfGame();
                 Destroy(this);
+                break;
             }
         }
     }

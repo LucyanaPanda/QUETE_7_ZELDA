@@ -12,7 +12,6 @@ public class SwitchMap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Player");
         if(!_once)
         {
             SwitchingMap();

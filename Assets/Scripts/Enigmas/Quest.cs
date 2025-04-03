@@ -31,9 +31,43 @@ public class Quest : MonoBehaviour
         _questGiver.dialogueLines = _dialogueBeginning;
     }
 
-    public bool IfQuestResolved()
+    public void IfQuestResolved()
     {
-        if (_objectToGive && !_monstersToKill && !_questResolved)
+        /*if (_objectToGive && _monstersToKill && !_questResolved)
+        {
+            foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+            {
+                if (entry.Key == _questObject)
+                {
+                    if (entry.Key.isPotion || entry.Key.isWeapon || entry.Key.isAccesorie || entry.Key.isArmor)
+                    {
+                        PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+                        if (PlayerInventory.inventory[entry.Key] <= 0)
+                            PlayerInventory.inventory.Remove(entry.Key);
+                    }
+
+                    else
+                        PlayerInventory.inventory.Remove(entry.Key);
+                    _playerInventory.DisplayInventory();
+                    _playerInventory.SaveInventory();
+                    _playerInventory.LoadInventory();
+                }
+            }
+
+            for (int i = 0; i < _questEnemies.Count; i++)
+            {
+                if (_questEnemies[i] != null)
+                {
+                    return;
+                }
+            }
+
+            _questGiver.dialogueLines = _dialogueEnd;
+            _questResolved = true;
+            if (_hasAPathBlocked)
+                _pathToblock.SetActive(false);
+        }
+        else*/ if (_objectToGive && !_monstersToKill && !_questResolved)
         {
             foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
             {
@@ -41,16 +75,22 @@ public class Quest : MonoBehaviour
                 {
                     _questGiver.dialogueLines = _dialogueEnd;
                     _questResolved = true;
-                    PlayerInventory.inventory.Remove(entry.Key);
-                    _playerInventory.DisplayInventory();
+                    if (entry.Key.isPotion || entry.Key.isWeapon || entry.Key.isAccesorie || entry.Key.isArmor)
+                    {
+                        PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+                        if (PlayerInventory.inventory[entry.Key] <= 0)
+                            PlayerInventory.inventory.Remove(entry.Key);
+                    }
+                    else
+                        PlayerInventory.inventory.Remove(entry.Key);
+
                     _playerInventory.SaveInventory();
                     _playerInventory.LoadInventory();
                     if (_hasAPathBlocked)
                         _pathToblock.SetActive(false);
-                    return true;
+                    break;
                 }
             }
-            return false;
         }
         else if (!_objectToGive && _monstersToKill && !_questResolved)
         {
@@ -58,16 +98,14 @@ public class Quest : MonoBehaviour
             {
                 if (_questEnemies[i] != null)
                 {
-                    return false;
+                    return;
                 }
             }
             _questGiver.dialogueLines = _dialogueEnd;
             _questResolved = true;
             if (_hasAPathBlocked)
                 _pathToblock.SetActive(false);
-            return true;
         }
-        return true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -26,6 +26,7 @@ public class EntryEnigma : MonoBehaviour, IInteractable
                 _door.SetActive(false);
                 _entry.SetActive(true);
                 Destroy(this);
+                break;
             }
         }
     }

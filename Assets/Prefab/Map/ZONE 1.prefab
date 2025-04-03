@@ -10440,6 +10440,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4417567987300740769, guid: 3295f3d5685e15147b2cc5895cc86c7b, type: 3}
+      propertyPath: _items.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4417567987300740769, guid: 3295f3d5685e15147b2cc5895cc86c7b, type: 3}
+      propertyPath: '_items.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8533290384571293711, guid: 5b552d72f14a7de46b3a59060810bf38, type: 3}
+    - target: {fileID: 4417567987300740769, guid: 3295f3d5685e15147b2cc5895cc86c7b, type: 3}
+      propertyPath: '_items.Array.data[1]'
+      value: 
+      objectReference: {fileID: 4215508577599817639, guid: 833040b01133191448fac2f0f662ea01, type: 3}
     - target: {fileID: 5652894271158424416, guid: 3295f3d5685e15147b2cc5895cc86c7b, type: 3}
       propertyPath: m_Name
       value: ChestBehind
