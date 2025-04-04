@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783396c44c923044bbc35a10f2a48121, type: 3}
   m_Name: ReinforcedEnemy
   m_EditorClassIdentifier: 
-  id: 2
+  id: 11
   nameCreature: Reinforced Enemy
   description: Fellow soldier of the "NOM" people, it is destinated to fight any
     humans he encounters
   image: {fileID: -1362583856912145195, guid: 2fdf668f2d5ee2144b170116514e689a, type: 3}
-  health: 5
+  health: 10
   minHealth: 0
-  maxHealth: 5
-  defense: 1
-  minDefense: 1
-  maxDefense: 1
-  attack: 1.5
-  minAttack: 1.5
-  maxAttack: 5
+  maxHealth: 10
+  defense: 2
+  minDefense: 1.5
+  maxDefense: 1.5
+  attack: 2
+  minAttack: 2
+  maxAttack: 2
   speed: 1
   minSpeed: 1
   maxSpeed: 1
-  attackTimer: 3
-  attackMaxTimer: 3
+  attackTimer: 2
+  attackMaxTimer: 2

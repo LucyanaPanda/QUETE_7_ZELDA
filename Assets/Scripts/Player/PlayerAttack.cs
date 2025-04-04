@@ -24,8 +24,8 @@ public class PlayerAttack : MonoBehaviour
         if (_player.attackTimer >= _player.attackMaxTimer)
         {
             _player.attackTimer -= _player.attackMaxTimer;
-            //_audioSource.clip = _audioClip;
-            //_audioSource.Play();
+            _audioSource.clip = _audioClip;
+            _audioSource.Play();
             _sword.gameObject.SetActive(true);
             _sword.damage = _player.attack;
         }

@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDamageable
@@ -34,6 +32,10 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public float _defenseBoostDuration;
     public float _defenseBoostTimer;
     public float _defenseBoost;
+
+    [Header("Sounds effect")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _deathClip;
 
 
     [Header("FadeInOut")]
@@ -127,6 +129,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
         if (health <= minHealth)
         {
             _animatorImage.Play("FadeIn");
+            _audioSource.clip = _deathClip;
+            _audioSource.Play();
             yield return new WaitForSecondsRealtime(1f);
             ResetMap();
             transform.position = _spawnpoint;
@@ -167,6 +171,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     //System Data Save/Load
     public void SavePlayerData()
     {
+        
         PlayerData playerData = new PlayerData();
 
         //CreatureData
@@ -207,6 +212,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         if (PlayerPrefs.HasKey(playerDataSaveKey))
         {
+            RemoveBoost(ref _attackBoostOn, ref _attackBoost, ref attack);
+            RemoveBoost(ref _defenseBoostOn, ref _defenseBoost, ref defense);
+            RemoveBoost(ref _speedBoostOn, ref _speedBoost, ref speed);
             string json = PlayerPrefs.GetString(playerDataSaveKey);
             PlayerData playerData = JsonUtility.FromJson<PlayerData>(json);
 
@@ -250,12 +258,16 @@ public class PlayerManager : MonoBehaviour, IDamageable
         if (boostTimer >= boostDuration)
         {
             boostTimer = 0;
-            boostOn = false;
-            stat -= boost;
-            boost = 0;
+            RemoveBoost(ref boostOn, ref boost, ref stat);
             boostDuration = 0;
-
         }
+    }
+
+    private void RemoveBoost( ref bool boostOn, ref float boost, ref float stat)
+    {
+        boostOn = false;
+        stat -= boost;
+        boost = 0;
     }
 
 

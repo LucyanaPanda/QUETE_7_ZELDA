@@ -44,7 +44,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
         } 
         else
         {
-            _dialogueScript.Boom();
+            _dialogueScript.OnDialogue();
         }
     }
 }

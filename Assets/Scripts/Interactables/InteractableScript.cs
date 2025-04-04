@@ -1,15 +1,21 @@
 using UnityEngine;
 
-public class InteractableScript : MonoBehaviour
+public class InteractableScript : MonoBehaviour, IInteractable
 {
     [Header("Player")]
     protected bool _playerInZone;
     protected PlayerManager _playerManager;
+    protected PlayerInventory _playerInventory;
+
+    [Header("SFX")]
+    [SerializeField] protected AudioSource _audioSource;
+    [SerializeField] protected AudioClip _audioclip;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _playerManager = collision.GetComponent<PlayerManager>();
-        if (!_playerInZone && _playerManager != null)
+        _playerInventory = collision.GetComponent<PlayerInventory>();
+        if (!_playerInZone && _playerInventory!= null && _playerManager != null)
             _playerInZone = true;
     }
 

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783396c44c923044bbc35a10f2a48121, type: 3}
+  m_Name: Maiden
+  m_EditorClassIdentifier: 
+  id: 8
+  nameCreature: Maiden
+  description: Ex maiden of the ancient temple. Help many secrets
+  image: {fileID: -397671669, guid: 99d7e288ae6962049a9857b4cb38ecab, type: 3}
+  health: 5
+  minHealth: 0
+  maxHealth: 5
+  defense: 2
+  minDefense: 1
+  maxDefense: 1
+  attack: 1.5
+  minAttack: 1.5
+  maxAttack: 1.5
+  speed: 1
+  minSpeed: 1
+  maxSpeed: 1
+  attackTimer: 3
+  attackMaxTimer: 3
