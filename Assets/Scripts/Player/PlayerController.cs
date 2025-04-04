@@ -17,10 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 _lookRight;
     [SerializeField] private Vector3 _lookLeft;
 
-    [Header("SFX")]
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _jumpClip;
-
     private void Start()
     {
         _parentTransform.position = _player._spawnpoint;
@@ -60,8 +56,7 @@ public class PlayerController : MonoBehaviour
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.started)
-
-            { _playerInteractions.TryInteract(); Debug.Log("Interacted"); }
+            _playerInteractions.TryInteract();
 
     }
 }

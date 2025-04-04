@@ -3,49 +3,59 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static UnityEngine.EventSystems.EventTrigger;
 
-public class EndGame : MonoBehaviour, IInteractable
+public class BeginningGame : InteractableScript
 {
-    [SerializeField] private PlayerInventory _inventory;
     [SerializeField] private Item _questObject;
 
     [SerializeField] private GameObject _blackScreen;
     [SerializeField] private TMP_Text _text;
+    [SerializeField] private List<string> _lines;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    [SerializeField] private bool _hasOffered = false;
+
+    private int _currentIndex = 0;
+
+    public void OnEndGame(InputAction.CallbackContext context)
     {
-        _inventory = collision.GetComponent<PlayerInventory>();
+        if (_hasOffered && context.started)
+            OnEndMonologue();
     }
 
-    public void Interact()
+    public override void Interact()
     {
         foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
         {
             if (entry.Key == _questObject)
             {
                 PlayerInventory.inventory.Remove(entry.Key);
-                _inventory.DisplayInventory();
-                _inventory.SaveInventory();
-                _inventory.LoadInventory();
-                OnEndOfGame();
-                Destroy(this);
+                PlayerInventory.inventory.Clear();
+                _playerInventory.SaveInventory();
+
+                _blackScreen.SetActive(true);
+                _hasOffered=true;
                 break;
             }
         }
     }
-
-     private void OnEndOfGame()
+    private void DisplayMonologueLine()
     {
-        _blackScreen.SetActive(true);
-        _text.text = "Fin du jeu";
-        float timer = 0;
-        while (timer > 3f)
-        {
-            timer += Time.deltaTime;
-        }
-        SceneManager.LoadScene(0);
-        PlayerPrefs.DeleteAll();
+        _text.text = _lines[_currentIndex];
     }
+    public void OnEndMonologue()
+    {
+        if (_currentIndex < _lines.Count)
+            DisplayMonologueLine();
+        else
+        {
+            PlayerPrefs.DeleteAll();
+            SceneManager.LoadScene(0);
+            Destroy(this);
+        }
+        _currentIndex += 1;
+    }
+
 }

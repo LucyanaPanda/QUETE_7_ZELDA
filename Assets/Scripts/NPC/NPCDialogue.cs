@@ -10,11 +10,14 @@ public class NPCDialogue : MonoBehaviour
     [Header("NPC has quest")]
     [SerializeField] private Quest _quest;
     [SerializeField] private bool _hasQuest;
+
+    [SerializeField] private Creature npcData;
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private Image _profilImage;
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private TMP_Text _dialogueBox;
     public List<string> dialogueLines;
+
 
     private int _currentIndexLine;
     private bool _hasBennTalkedOnce;
@@ -24,11 +27,13 @@ public class NPCDialogue : MonoBehaviour
         ResetDialogue();
         if (_hasQuest & _hasBennTalkedOnce)
             _quest.IfQuestResolved();
-        Boom();
+        OnDialogue();
         _hasBennTalkedOnce = true;
+        _nameText.text = npcData.nameCreature;
+        _profilImage.sprite = npcData.image;
     }
 
-    public void Boom()
+    public void OnDialogue()
     {
         if (_currentIndexLine < dialogueLines.Count)
         {
