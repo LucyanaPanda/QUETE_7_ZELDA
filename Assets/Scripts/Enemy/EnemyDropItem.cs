@@ -17,15 +17,9 @@ public class EnemyDropItem : MonoBehaviour
 
     private void DropItem()
     {
-        foreach (GameObject item in _items)
+        if (_items.Count > 0)
         {
-            int quantity;
-            if (_items.Count > 1)
-                quantity = Random.Range(0, _items.Count);
-            else
-                quantity = Random.Range(0, _items.Count + 2);
-            Debug.Log("Quantity:" + quantity);
-            for (int i = 0; i < quantity; i++)
+            foreach (GameObject item in _items)
             {
                 float x = Random.Range(0f, 2f);
                 float y = Random.Range(0f, 2f);
@@ -35,6 +29,4 @@ public class EnemyDropItem : MonoBehaviour
             }
         }
     }
-
-
 }

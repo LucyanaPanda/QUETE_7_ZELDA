@@ -10,7 +10,7 @@ public class Chest : InteractableScript, IInteractable
     [SerializeField] private GameObject _chest;
     public string name => "Chest";
 
-    public void Interact()
+    public override void Interact()
     {
         Debug.Log("Open chest");
         foreach (GameObject item in _items)

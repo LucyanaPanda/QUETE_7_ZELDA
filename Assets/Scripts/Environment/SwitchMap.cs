@@ -12,7 +12,6 @@ public class SwitchMap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Player");
         if(!_once)
         {
             SwitchingMap();
@@ -41,7 +40,6 @@ public class SwitchMap : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1f);
         _once = false;
-        Debug.Log("reactivated");
     }
 
     
