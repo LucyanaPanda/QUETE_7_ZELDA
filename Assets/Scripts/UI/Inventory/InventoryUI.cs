@@ -15,6 +15,8 @@ public class InventoryUI : MonoBehaviour
     public bool inventoryVisible = false;
 
     [Header("Player Interface")]
+    [SerializeField] private PlayerManager _playerManager;
+    [SerializeField] private Image _image;
     [SerializeField] private GameObject _playerHotbar;
     [SerializeField] private GameObject _playerHpBar;
 
@@ -23,14 +25,16 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
+        _image.sprite = _playerManager.creatureData.image;
         InitializeSlotsPositions();
         _inventoryPanel.SetActive(true);
         _playerHpBar.SetActive(false);
         _playerHpBar.SetActive(false);
         inventoryVisible = true;
         _pauseManager.PauseGame();
-        _playerInventory.LoadInventory();
+
         LoadAndDisplayInventory();
+
         _inventoryPanel.SetActive(false);
         _playerHpBar.SetActive(true);
         _playerHpBar.SetActive(true);
