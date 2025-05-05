@@ -7,9 +7,12 @@ public class InteractableScript : MonoBehaviour, IInteractable
     protected PlayerManager _playerManager;
     protected PlayerInventory _playerInventory;
 
-    [Header("SFX")]
-    [SerializeField] protected AudioSource _audioSource;
-    [SerializeField] protected AudioClip _audioclip;
+    protected AudioManager _audioManager;
+
+    private void Start()
+    {
+        _audioManager = AudioManager.Instance;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

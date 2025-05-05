@@ -10,9 +10,12 @@ public class PlayerAttack : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private Sword _sword;
 
-    [Header("Sounds effect")]
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _audioClip;
+    private AudioManager _audioManager;
+
+    private void Start()
+    {
+        _audioManager = AudioManager.Instance;
+    }
 
     private void Update()
     {
@@ -24,10 +27,9 @@ public class PlayerAttack : MonoBehaviour
         if (_player.attackTimer >= _player.attackMaxTimer)
         {
             _player.attackTimer -= _player.attackMaxTimer;
-            _audioSource.clip = _audioClip;
-            _audioSource.Play();
             _sword.gameObject.SetActive(true);
             _sword.damage = _player.attack;
+            _audioManager.PlaySound(AudioManager.AudioType.Attack);
         }
     }
     private void AttackDelay()

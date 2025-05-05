@@ -14,8 +14,7 @@ public class Chest : InteractableScript
 
     public override void Interact()
     {
-        _audioSource.clip = _audioclip;
-        _audioSource.Play();
+        _audioManager.PlaySound(AudioManager.AudioType.Chest);
         foreach (GameObject item in _items)
         {
             float x = Random.Range(-_rad, _rad);
