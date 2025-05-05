@@ -8,11 +8,22 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private MenuButton _creditsButton;
     [SerializeField] private MenuButton _quitCredits;
 
+    private AudioManager _audioManager;
 
     private void Start()
     {
         _creditsButton.OnButtonPressed.AddListener(() => ShowHideCredits(true));
         _quitCredits.OnButtonPressed.AddListener(() => ShowHideCredits(false));
+
+        _audioManager = AudioManager.Instance;
+        _audioManager.PlaySound(AudioManager.AudioType.MenuMusic);
+        _audioManager.PlaySound(AudioManager.AudioType.MenuAmbiant);
+    }
+
+    private void OnDestroy()
+    {
+        _audioManager.StopSound(AudioManager.AudioType.MenuMusic);
+        _audioManager.StopSound(AudioManager.AudioType.MenuAmbiant);
     }
 
     public void PlayGame()

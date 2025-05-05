@@ -12,8 +12,7 @@ public class Spawnpoint : InteractableScript
             _playerManager.SavePlayerData();
             _playerInventory.SaveInventory();
 
-            _audioSource.clip = _audioclip;
-            _audioSource.Play();
+            _audioManager.PlaySound(AudioManager.AudioType.SavePoint);
         }
     }
 }

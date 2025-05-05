@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,11 +34,6 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public float _defenseBoostTimer;
     public float _defenseBoost;
 
-    [Header("Sounds effect")]
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _deathClip;
-
-
     [Header("FadeInOut")]
     [SerializeField] private Image image;
     [SerializeField] private Animator _animatorImage;
@@ -50,44 +46,18 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     private readonly UnityEvent _onHealthChanged = new();
 
+    private AudioManager _audioManager;
+
     private void Start()
     {
         if (!LoadPlayerData())
         {
-            //Sprite
-            _spriteRenderer.sprite = creatureData.image;
-
-            //Health
-            health = creatureData.health;
-            minHealth = creatureData.minHealth;
-            maxHealth = creatureData.maxHealth;
-
-            //Attack
-            attack = creatureData.attack;
-            minAttack = creatureData.minAttack;
-            maxAttack = creatureData.maxAttack;
-
-            attackTimer = creatureData.attackTimer;
-            attackMaxTimer = creatureData.attackMaxTimer;
-
-            //Defense
-            defense = creatureData.defense;
-            minDefense = creatureData.minDefense;
-            maxDefense = creatureData.maxDefense;
-
-            //Speed
-            speed = creatureData.speed;
-            minSpeed = creatureData.minSpeed;
-            maxSpeed = creatureData.maxSpeed;
-
-            //Spawnpoint
-            _spawnpoint = transform.position;
-
-            _onHealthChanged.Invoke();
+            InitializePlayer();
         }
 
         transform.position = _spawnpoint;
         _onHealthChanged.Invoke();
+        _audioManager = AudioManager.Instance;
     }
 
     private void Update()
@@ -100,6 +70,39 @@ public class PlayerManager : MonoBehaviour, IDamageable
             Boost(ref _speedBoostOn, ref _speedBoostDuration, ref _speedBoostTimer, ref _speedBoost, ref speed);
     }
 
+    private void InitializePlayer()
+    {
+        //Sprite
+        _spriteRenderer.sprite = creatureData.image;
+
+        //Health
+        health = creatureData.health;
+        minHealth = creatureData.minHealth;
+        maxHealth = creatureData.maxHealth;
+
+        //Attack
+        attack = creatureData.attack;
+        minAttack = creatureData.minAttack;
+        maxAttack = creatureData.maxAttack;
+
+        attackTimer = creatureData.attackTimer;
+        attackMaxTimer = creatureData.attackMaxTimer;
+
+        //Defense
+        defense = creatureData.defense;
+        minDefense = creatureData.minDefense;
+        maxDefense = creatureData.maxDefense;
+
+        //Speed
+        speed = creatureData.speed;
+        minSpeed = creatureData.minSpeed;
+        maxSpeed = creatureData.maxSpeed;
+
+        //Spawnpoint
+        _spawnpoint = transform.position;
+    }
+
+    #region Health/Damage
     public void HealthChanged()
     {
         _onHealthChanged?.Invoke();
@@ -129,8 +132,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
         if (health <= minHealth)
         {
             _animatorImage.Play("FadeIn");
-            _audioSource.clip = _deathClip;
-            _audioSource.Play();
+            _audioManager.PlaySound(AudioManager.AudioType.Death);
             yield return new WaitForSecondsRealtime(1f);
             ResetMap();
             transform.position = _spawnpoint;
@@ -141,6 +143,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
         yield return null;
     }
 
+    #endregion
+
+    #region FadeInOut
     public IEnumerator OnFade()
     {
         _animatorImage.Play("FadeIn");
@@ -160,15 +165,17 @@ public class PlayerManager : MonoBehaviour, IDamageable
             map.SetActive(false);
         }
     }
+    #endregion
 
-    //Savepoint
+    #region SavePoint
     public void UseSpawnpoint(Vector3 pos)
     {
         _spawnpoint = pos;
         SavePlayerData();
     }
+    #endregion
 
-    //System Data Save/Load
+    #region System Data Save/Load
     public void SavePlayerData()
     {
         
@@ -251,7 +258,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
         return false;
     }
-    //Systeme de boost
+    #endregion
+
+    #region Systeme de boost
     private void Boost(ref bool boostOn, ref float boostDuration, ref float boostTimer, ref float boost, ref float stat)
     {
         boostTimer += Time.deltaTime;
@@ -289,6 +298,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
                 _onHealthChanged.Invoke();
                 break;
         }
+        _audioManager.PlaySound(AudioManager.AudioType.Potion);
     }
 
     private void OnActivateBoost(ref bool boostOn, ref float boostDuration, ref float boost, ref float stat, float boostValue, float boostItemDuration)
@@ -304,6 +314,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
         boost = boostValue;
         stat += boost;
     }
+    #endregion
 
     public UnityEvent OnHealthChanged => _onHealthChanged;
 }
