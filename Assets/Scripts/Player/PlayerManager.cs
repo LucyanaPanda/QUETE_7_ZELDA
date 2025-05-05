@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
+    public PlayerManager Instance => this;
+
     [Header("Data")]
     public Creature creatureData;
     public float health, minHealth, maxHealth;
