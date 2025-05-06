@@ -50,8 +50,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
         if (health <= minHealth)
         {
             _OnDeath.Invoke();
-            int moneyToGive = Random.Range(0, 11);
-            PlayerInventory.money += moneyToGive;
+            int moneyToGive = Random.Range(creatureData.minMoney, creatureData.maxMoney);
+            PlayerInventory.Instance.AddMoney(moneyToGive);
             Destroy(_enemy);
         }
     }

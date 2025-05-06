@@ -25,5 +25,9 @@ public class Creature : ScriptableObject
     public float attackTimer;
     public float attackMaxTimer;
 
+    [Header("Money to earn")]
+    public int minMoney;
+    public int maxMoney;
+
 
 }

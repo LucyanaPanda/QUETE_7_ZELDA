@@ -26,6 +26,9 @@ public class Quest : MonoBehaviour
     [SerializeField] private GameObject _pathToblock;
     [SerializeField] private bool _hasAPathBlocked;
 
+    [Header("Money to earn")]
+    [SerializeField] private int rewardMoney;
+
     private void Start()
     {
         _questGiver.dialogueLines = _dialogueBeginning;
@@ -33,6 +36,7 @@ public class Quest : MonoBehaviour
 
     public void IfQuestResolved()
     {
+        PlayerInventory playerInventory = PlayerInventory.Instance;
         /*if (_objectToGive && _monstersToKill && !_questResolved)
         {
             foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
@@ -67,7 +71,8 @@ public class Quest : MonoBehaviour
             if (_hasAPathBlocked)
                 _pathToblock.SetActive(false);
         }
-        else*/ if (_objectToGive && !_monstersToKill && !_questResolved)
+        else*/
+        if (_objectToGive && !_monstersToKill && !_questResolved)
         {
             foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
             {
@@ -75,17 +80,23 @@ public class Quest : MonoBehaviour
                 {
                     _questGiver.dialogueLines = _dialogueEnd;
                     _questResolved = true;
-                    if (entry.Key.isPotion || entry.Key.isWeapon || entry.Key.isAccesorie || entry.Key.isArmor)
-                    {
-                        PlayerInventory.inventory[entry.Key] = entry.Value - 1;
-                        if (PlayerInventory.inventory[entry.Key] <= 0)
-                            PlayerInventory.inventory.Remove(entry.Key);
-                    }
-                    else
-                        PlayerInventory.inventory.Remove(entry.Key);
 
-                    _playerInventory.SaveInventory();
-                    _playerInventory.LoadInventory();
+                    //if (entry.Key.isPotion || entry.Key.isWeapon || entry.Key.isAccesorie || entry.Key.isArmor)
+                    //{
+                    //    PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+                    //    if (PlayerInventory.inventory[entry.Key] <= 0)
+                    //        PlayerInventory.inventory.Remove(entry.Key);
+                    //}
+                    //else
+                    //PlayerInventory.inventory.Remove(entry.Key);
+                    PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+                    if (PlayerInventory.inventory[entry.Key] <= 0)
+                        PlayerInventory.inventory.Remove(entry.Key);
+                    playerInventory.SaveInventory();
+                    playerInventory.LoadInventory();
+
+                    playerInventory.AddMoney(rewardMoney);
+
                     if (_hasAPathBlocked)
                         _pathToblock.SetActive(false);
                     break;
@@ -105,6 +116,8 @@ public class Quest : MonoBehaviour
             _questResolved = true;
             if (_hasAPathBlocked)
                 _pathToblock.SetActive(false);
+
+            playerInventory.AddMoney(rewardMoney);
         }
     }
 

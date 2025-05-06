@@ -9,6 +9,10 @@ public class NPCDialogue : MonoBehaviour
     [SerializeField] private Quest _quest;
     [SerializeField] private bool _hasQuest;
 
+    [Header("NPC is a merchand")]
+    [SerializeField] private bool _isAMerchand;
+    [SerializeField] private NPCShop _shop;
+
     [SerializeField] private Creature npcData;
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private Image _profilImage;
@@ -16,14 +20,13 @@ public class NPCDialogue : MonoBehaviour
     [SerializeField] private TMP_Text _dialogueBox;
     public List<string> dialogueLines;
 
-
     private int _currentIndexLine;
     private bool _hasBennTalkedOnce;
 
     private void OnEnable()
     {
         ResetDialogue();
-        if (_hasQuest & _hasBennTalkedOnce)
+        if (_hasQuest && _hasBennTalkedOnce && !_isAMerchand)
             _quest.IfQuestResolved();
         OnDialogue();
         _hasBennTalkedOnce = true;
@@ -43,7 +46,7 @@ public class NPCDialogue : MonoBehaviour
             _dialoguePanel.SetActive(false);
             this.enabled = false;
         }
-        _currentIndexLine += 1;
+        _currentIndexLine += 1; 
     }
 
     private void DisplayDialogueLine()

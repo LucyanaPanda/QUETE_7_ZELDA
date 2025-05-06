@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -56,7 +57,10 @@ public class AudioManager : MonoBehaviour
     public void StopSound(AudioType type)
     {
         AudioData data = GetAudioData(type);
-        data.source.Stop();
+        try
+        {
+            data.source.Stop();
+        } catch (Exception e) {  Debug.LogException(e); }
     }
 
     public void StopAllSound()
