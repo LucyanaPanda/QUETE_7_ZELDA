@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Resources;
 using TMPro;
@@ -11,6 +12,7 @@ public class InventoryUI : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private PlayerInventory _playerInventory;
     [SerializeField] private GameObject _inventoryPanel;
+    [SerializeField] private TMP_Text _moneyText;
     public List<Slot> slots;
     public bool inventoryVisible = false;
 
@@ -53,7 +55,6 @@ public class InventoryUI : MonoBehaviour
             inventoryVisible = false;
             _playerInventory.SaveInventory();
             _pauseManager.ResumeGame();
-            
         }
         else
         {
@@ -64,6 +65,7 @@ public class InventoryUI : MonoBehaviour
             _pauseManager.PauseGame();
             _playerInventory.LoadInventory();
             LoadAndDisplayInventory();
+            _moneyText.text = "Money:" + PlayerInventory.money;
         }
     }
 

@@ -1,20 +1,30 @@
-using JetBrains.Annotations;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class PlayerInventory : MonoBehaviour
 {
+    public static PlayerInventory Instance;
+
     [Header("Inventory")]
+    public static readonly string inventorySaveKey = "player_inventory";
     public static Dictionary<Item, int> inventory = new Dictionary<Item, int>();
     public List<Item> _items = new List<Item>();
-    public static readonly string inventorySaveKey = "player_inventory";
     public InventoryUI _inventoryUi;
 
     [Header("Money")]
+    public static readonly string moneySaveKey = "player_money";
     public static int money;
+
+    private void Awake()
+    {
+        if (Instance != null) { Destroy(this); }
+        else { Instance = this; }
+    }
+
+    private void Start()
+    {
+        money = LoadMoney();
+    }
 
     public bool AddToInventory(ItemScript item)
     {
@@ -37,34 +47,7 @@ public class PlayerInventory : MonoBehaviour
         return true;
     }
 
-    //public void BuyItem(ItemScript item)
-    //{
-    //    if (item.ItemData.price < PlayerInventory.money)
-    //    {
-    //        Debug.Log("Cannot buy this item");
-    //        return;
-    //    }
-    //    PlayerInventory.money -= item.ItemData.price;
-    //    AddToInventory(item);
-    //    //Add a sound clip
-    //}
-
-    //public static void RemoveAnItem(ItemScript item)
-    //{
-    //    if (ItemInInventory(item))
-    //    {
-    //        if (inventory[item.ItemData] > 0)
-    //        {
-    //            inventory[item.ItemData]--;
-    //            if (inventory[item.ItemData] == 0)
-    //            {
-    //                inventory.Remove(item.ItemData);
-    //            }
-    //        }
-    //    }
-    //}
-
-    public static bool ItemInInventory(ItemScript item)
+    public bool ItemInInventory(ItemScript item)
     {
         return inventory.ContainsKey(item.ItemData);
     }
@@ -77,6 +60,27 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    #region Save Money
+    public void AddMoney(int value)
+    {
+        money += value;
+        SaveMoney();
+    }
+
+    public void SaveMoney()
+    {
+        PlayerPrefs.SetInt(moneySaveKey, PlayerInventory.money);
+    }
+
+    public int LoadMoney()
+    {
+        if (!PlayerPrefs.HasKey(moneySaveKey)) return 0;
+        money = PlayerPrefs.GetInt(moneySaveKey);
+        return money;
+    }
+    #endregion
+
+    #region Save Inventory
     public void SaveInventory()
     {
         InventoryData inventoryData = new InventoryData();
@@ -94,6 +98,7 @@ public class PlayerInventory : MonoBehaviour
         }
 
         string json = JsonUtility.ToJson(inventoryData);
+        DisplayInventory();
         PlayerPrefs.SetString(inventorySaveKey, json);
         PlayerPrefs.Save();
     }
@@ -144,4 +149,6 @@ public class PlayerInventory : MonoBehaviour
         }
         return -1;
     }
+    #endregion
 }
+

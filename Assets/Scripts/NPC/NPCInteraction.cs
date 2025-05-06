@@ -1,7 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
-using UnityEngine.InputSystem;
 
 public class NPCInteraction : MonoBehaviour, IInteractable
 {
