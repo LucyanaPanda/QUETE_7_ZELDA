@@ -4,13 +4,13 @@ public class NPCInteraction : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject _interactionPanel;
     [SerializeField] private GameObject _dialoguePanel;
+    
     private NPCDialogue _dialogueScript;
-    private BoxCollider2D _collider;
-
-    private void Start()
+    private DialogueManager _dialogueManager;
+    private void Awake()
     {
-        _collider = GetComponent<BoxCollider2D>();
         _dialogueScript = GetComponent<NPCDialogue>();
+        _dialogueManager = DialogueManager.Instance;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,7 +41,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
         } 
         else
         {
-            _dialogueScript.OnDialogue();
+            _dialogueManager.NextLine();
         }
     }
 }

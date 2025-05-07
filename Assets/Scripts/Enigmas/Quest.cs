@@ -9,7 +9,7 @@ public class Quest : MonoBehaviour
     [Header("TypeOfQuest")]
     [SerializeField] private bool _objectToGive;
     [SerializeField] private bool _monstersToKill;
-    [SerializeField] private bool _questResolved;
+    public bool resolved;
 
     [SerializeField] private List<string> _dialogueBeginning;
     [SerializeField] private List<string> _dialogueEnd;
@@ -29,72 +29,22 @@ public class Quest : MonoBehaviour
     [Header("Money to earn")]
     [SerializeField] private int rewardMoney;
 
-    private void Start()
-    {
-        _questGiver.dialogueLines = _dialogueBeginning;
-    }
-
     public void IfQuestResolved()
     {
         PlayerInventory playerInventory = PlayerInventory.Instance;
-        /*if (_objectToGive && _monstersToKill && !_questResolved)
+        if (_objectToGive && !_monstersToKill && !resolved)
         {
             foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
             {
                 if (entry.Key == _questObject)
                 {
-                    if (entry.Key.isPotion || entry.Key.isWeapon || entry.Key.isAccesorie || entry.Key.isArmor)
-                    {
-                        PlayerInventory.inventory[entry.Key] = entry.Value - 1;
-                        if (PlayerInventory.inventory[entry.Key] <= 0)
-                            PlayerInventory.inventory.Remove(entry.Key);
-                    }
+                    resolved = true;
 
-                    else
-                        PlayerInventory.inventory.Remove(entry.Key);
-                    _playerInventory.DisplayInventory();
-                    _playerInventory.SaveInventory();
-                    _playerInventory.LoadInventory();
-                }
-            }
-
-            for (int i = 0; i < _questEnemies.Count; i++)
-            {
-                if (_questEnemies[i] != null)
-                {
-                    return;
-                }
-            }
-
-            _questGiver.dialogueLines = _dialogueEnd;
-            _questResolved = true;
-            if (_hasAPathBlocked)
-                _pathToblock.SetActive(false);
-        }
-        else*/
-        if (_objectToGive && !_monstersToKill && !_questResolved)
-        {
-            foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
-            {
-                if (entry.Key == _questObject)
-                {
-                    _questGiver.dialogueLines = _dialogueEnd;
-                    _questResolved = true;
-
-                    //if (entry.Key.isPotion || entry.Key.isWeapon || entry.Key.isAccesorie || entry.Key.isArmor)
-                    //{
-                    //    PlayerInventory.inventory[entry.Key] = entry.Value - 1;
-                    //    if (PlayerInventory.inventory[entry.Key] <= 0)
-                    //        PlayerInventory.inventory.Remove(entry.Key);
-                    //}
-                    //else
-                    //PlayerInventory.inventory.Remove(entry.Key);
                     PlayerInventory.inventory[entry.Key] = entry.Value - 1;
                     if (PlayerInventory.inventory[entry.Key] <= 0)
                         PlayerInventory.inventory.Remove(entry.Key);
                     playerInventory.SaveInventory();
                     playerInventory.LoadInventory();
-
                     playerInventory.AddMoney(rewardMoney);
 
                     if (_hasAPathBlocked)
@@ -103,7 +53,7 @@ public class Quest : MonoBehaviour
                 }
             }
         }
-        else if (!_objectToGive && _monstersToKill && !_questResolved)
+        else if (!_objectToGive && _monstersToKill && !resolved)
         {
             for (int i = 0; i < _questEnemies.Count; i++)
             {
@@ -112,12 +62,13 @@ public class Quest : MonoBehaviour
                     return;
                 }
             }
-            _questGiver.dialogueLines = _dialogueEnd;
-            _questResolved = true;
+            resolved = true;
             if (_hasAPathBlocked)
                 _pathToblock.SetActive(false);
 
             playerInventory.AddMoney(rewardMoney);
+
+            //story.variablesState[variableName] = variableValue;
         }
     }
 
