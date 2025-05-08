@@ -31,6 +31,6 @@ public class Creature : ScriptableObject
 
     [Header("GlobalVariables in Globals.ink")]
     public string questCompletedName;
-
+    public string hasBeenTalkOnceName;
 
 }

@@ -21,7 +21,7 @@ public class NPCDialogue : MonoBehaviour
     private void OnEnable()
     {
         if (_hasQuest && !_isAMerchand)
-            _quest.IfQuestResolved();
+            _quest.IfQuestResolved(npcData);
 
         DialogueManager.Instance.StartDialogue(inkFile, npcData, this);
     }

@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager Instance;
     public NPCDialogue currentNPC;
     public bool dialoguePlayed = false;
+    public bool hasChoices = false;
 
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private Image _profilImage;
@@ -17,23 +18,26 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject choicesParent;
     [SerializeField] private GameObject choicePrefab;
 
+    private GlobalsVariables _variables;
     private Story currentStory;
 
     private void Awake()
     {
         if (Instance != null) { Destroy(Instance); }
         Instance = this;
+        _variables = GlobalsVariables.Instance;
     }
 
     public void StartDialogue( TextAsset inkFile, Creature npcData, NPCDialogue npc)
     {
-         currentStory = new Story(inkFile.text);
+        currentStory = new Story(inkFile.text);
+        _variables.BindToStory(currentStory);
         currentNPC = npc;
-         ResetDialogue();
-         NextLine();
-         _nameText.text = npcData.nameCreature;
-         _profilImage.sprite = npcData.image;
-         dialoguePlayed = true;
+        ResetDialogue();
+        NextLine();
+        _nameText.text = npcData.nameCreature;
+        _profilImage.sprite = npcData.image;
+        dialoguePlayed = true;
     }
 
     public void NextLine()
@@ -72,6 +76,7 @@ public class DialogueManager : MonoBehaviour
             choice.GetComponent<Button>().onClick.AddListener(() => MakeChoice(indexChoice));
             choice.GetComponent<Button>().onClick.AddListener(() => ResetChoices(choicesParent));
             choice.GetComponentInChildren<TMP_Text>().text = choices[i].text;
+            hasChoices = true;
         }
     }
 
@@ -81,6 +86,7 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        hasChoices = false;
     }
 
     private void MakeChoice(int index)

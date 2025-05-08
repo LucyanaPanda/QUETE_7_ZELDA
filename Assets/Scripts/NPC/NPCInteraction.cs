@@ -7,7 +7,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
     
     private NPCDialogue _dialogueScript;
     private DialogueManager _dialogueManager;
-    private void Awake()
+    private void Start()
     {
         _dialogueScript = GetComponent<NPCDialogue>();
         _dialogueManager = DialogueManager.Instance;
@@ -39,8 +39,9 @@ public class NPCInteraction : MonoBehaviour, IInteractable
             _dialogueScript.enabled = true;
             _interactionPanel.SetActive(false);
         } 
-        else
+        else if (_dialoguePanel.activeInHierarchy && !_dialogueManager.hasChoices) 
         {
+
             _dialogueManager.NextLine();
         }
     }

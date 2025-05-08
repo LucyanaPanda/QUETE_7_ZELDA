@@ -1,3 +1,4 @@
+using Ink.Parsed;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,9 +30,13 @@ public class Quest : MonoBehaviour
     [Header("Money to earn")]
     [SerializeField] private int rewardMoney;
 
-    public void IfQuestResolved()
+    private GlobalsVariables _variables;
+    private PlayerInventory playerInventory;
+
+    public void IfQuestResolved(Creature npcData)
     {
-        PlayerInventory playerInventory = PlayerInventory.Instance;
+        playerInventory = PlayerInventory.Instance;
+        _variables = GlobalsVariables.Instance;
         if (_objectToGive && !_monstersToKill && !resolved)
         {
             foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
@@ -49,6 +54,7 @@ public class Quest : MonoBehaviour
 
                     if (_hasAPathBlocked)
                         _pathToblock.SetActive(false);
+                    _variables.SetVariable(npcData.questCompletedName, true);
                     break;
                 }
             }
@@ -68,7 +74,8 @@ public class Quest : MonoBehaviour
 
             playerInventory.AddMoney(rewardMoney);
 
-            //story.variablesState[variableName] = variableValue;
+            _variables.SetVariable(npcData.questCompletedName, true);
+
         }
     }
 
