@@ -55,6 +55,7 @@ public class Quest : MonoBehaviour
                     if (_hasAPathBlocked)
                         _pathToblock.SetActive(false);
                     _variables.SetVariable(npcData.questCompletedName, true);
+                    SaveGlobalsVariables.Instance.SaveGlobalsData();
                     break;
                 }
             }
@@ -75,6 +76,7 @@ public class Quest : MonoBehaviour
             playerInventory.AddMoney(rewardMoney);
 
             _variables.SetVariable(npcData.questCompletedName, true);
+            SaveGlobalsVariables.Instance.SaveGlobalsData();
 
         }
     }

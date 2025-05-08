@@ -11,6 +11,7 @@ public class Spawnpoint : InteractableScript
             _playerManager.UseSpawnpoint(transform.position);
             _playerManager.SavePlayerData();
             _playerInventory.SaveInventory();
+            SaveGlobalsVariables.Instance.SaveGlobalsData();
 
             _audioManager.PlaySound(AudioManager.AudioType.SavePoint);
         }
