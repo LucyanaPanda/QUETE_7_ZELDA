@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,49 +15,14 @@ public class NPCDialogue : MonoBehaviour
     [SerializeField] private NPCShop _shop;
 
     [SerializeField] private Creature npcData;
-    [SerializeField] private GameObject _dialoguePanel;
-    [SerializeField] private Image _profilImage;
-    [SerializeField] private TMP_Text _nameText;
-    [SerializeField] private TMP_Text _dialogueBox;
-    public List<string> dialogueLines;
 
-    private int _currentIndexLine;
-    private bool _hasBennTalkedOnce;
+    public TextAsset inkFile;
 
     private void OnEnable()
     {
-        ResetDialogue();
-        if (_hasQuest && _hasBennTalkedOnce && !_isAMerchand)
-            _quest.IfQuestResolved();
-        OnDialogue();
-        _hasBennTalkedOnce = true;
-        _nameText.text = npcData.nameCreature;
-        _profilImage.sprite = npcData.image;
-    }
+        if (_hasQuest && !_isAMerchand)
+            _quest.IfQuestResolved(npcData);
 
-    public void OnDialogue()
-    {
-        if (_currentIndexLine < dialogueLines.Count)
-        {
-            DisplayDialogueLine();
-        }
-        else
-        {
-            ResetDialogue();
-            _dialoguePanel.SetActive(false);
-            this.enabled = false;
-        }
-        _currentIndexLine += 1; 
-    }
-
-    private void DisplayDialogueLine()
-    {
-        _dialogueBox.text = dialogueLines[_currentIndexLine];
-    }
-
-    private void ResetDialogue()
-    {
-        _currentIndexLine = 0;
-        _dialogueBox.text = "";
+        DialogueManager.Instance.StartDialogue(inkFile, npcData, this);
     }
 }

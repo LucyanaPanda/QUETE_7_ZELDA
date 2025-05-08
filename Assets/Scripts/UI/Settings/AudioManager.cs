@@ -60,7 +60,7 @@ public class AudioManager : MonoBehaviour
         try
         {
             data.source.Stop();
-        } catch (Exception e) {  Debug.LogException(e); }
+        } catch (Exception e) {  Debug.Log(e); }
     }
 
     public void StopAllSound()

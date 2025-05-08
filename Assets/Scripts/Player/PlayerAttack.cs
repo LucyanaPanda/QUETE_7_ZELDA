@@ -24,7 +24,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (_player.attackTimer >= _player.attackMaxTimer)
+        if (_player.attackTimer >= _player.attackMaxTimer && !DialogueManager.Instance.dialoguePlayed)
         {
             _player.attackTimer -= _player.attackMaxTimer;
             _sword.gameObject.SetActive(true);
