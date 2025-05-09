@@ -13,6 +13,7 @@ public class SaveGlobalsVariables : MonoBehaviour
         if (Instance != null) { Destroy(this); }
         else { Instance = this; }
         _variables = GlobalsVariables.Instance;
+        LoadGlobalsData();
     }
 
     public void SaveGlobalsData()

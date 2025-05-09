@@ -1,31 +1,49 @@
+using Ink.Runtime;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SkikapbleLore : MonoBehaviour
+public class SkippableLore : MonoBehaviour
 {
-    [SerializeField] private GameObject IntroductionPanel;
+    public static SkippableLore Instance;
+    public TextAsset lore;
+    public string keyLore;
+    public GameObject IntroductionPanel;
     [SerializeField] private TMP_Text textBox;
-    [SerializeField] private List<string> texts;
     [SerializeField] private Button skipButton;
     [SerializeField] private Button nextButton;
+
+    private Story loreStory;
+    private bool done;
+    public bool ending;
+
     [Header("FadeInOut")]
     [SerializeField] private float fadeSpeed = 0.05f;
 
-    private int currentIndex;
     private float maxTimeParagraph = 10f;
     private float timer = 0f;
-    private void Start()
+
+    private void Awake()
     {
-        skipButton.onClick.RemoveAllListeners();
-        nextButton.onClick.RemoveAllListeners();
+        if (Instance != null) { Destroy(this); }
+        else { Instance = this; }
 
         skipButton.onClick.AddListener(() => SkipIntroduction());
         nextButton.onClick.AddListener(() => NextText());
 
-        NextText();
+        IntroductionPanel.SetActive(false);
+        done = true;
+    }
+
+    private void OnEnable()
+    {
+        if (done)
+        {
+            loreStory = new Story(lore.text);
+            NextText();
+        }
     }
 
     private void Update()
@@ -40,7 +58,7 @@ public class SkikapbleLore : MonoBehaviour
 
     private void NextText()
     {
-        if (currentIndex != texts.Count) 
+        if (loreStory.canContinue) 
         {
             timer = 0;
             StartCoroutine(FadeInOut());
@@ -66,11 +84,11 @@ public class SkikapbleLore : MonoBehaviour
             currentColor = textBox.color;
             yield return new WaitForSecondsRealtime(0.02f);
         }
-        if (currentIndex == texts.Count)
+        if (!loreStory.canContinue)
         {
             IntroductionPanel.SetActive(false);
         }
-        textBox.text = texts[currentIndex];
+        textBox.text = loreStory.Continue();
         StartCoroutine(FadeOut());
     }
 
@@ -85,6 +103,8 @@ public class SkikapbleLore : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.02f);
         }
         IntroductionPanel.SetActive(false);
+        GlobalsVariables.Instance.SetVariable(keyLore, true);
+        if (ending) { SceneManager.LoadScene(0); }
     }
 
     IEnumerator FadeOut()
@@ -97,6 +117,5 @@ public class SkikapbleLore : MonoBehaviour
             currentColor = textBox.color;
             yield return new WaitForSecondsRealtime(0.05f);
         }
-        currentIndex++;
     }
 }

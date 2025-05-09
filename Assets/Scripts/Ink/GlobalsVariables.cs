@@ -18,7 +18,7 @@ public class GlobalsVariables : MonoBehaviour
 
     private void Start()
     {
-        SaveGlobalsVariables.Instance.LoadGlobalsData();
+        //SaveGlobalsVariables.Instance.LoadGlobalsData();
     }
 
     public void SetVariable(string name, object value)
@@ -28,6 +28,7 @@ public class GlobalsVariables : MonoBehaviour
         {
             globalsStory.variablesState[name] = value;
             Debug.Log("name: " + name + " value: " + globalsStory.variablesState[name]);
+            SaveGlobalsVariables.Instance.SaveGlobalsData();
         }
         else
         {
