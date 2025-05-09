@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public class BeginGame : MonoBehaviour
 {
-
     [SerializeField] private GameObject _blackScreen;
     [SerializeField] private TMP_Text _text;
     [SerializeField] private List<string> _lines;

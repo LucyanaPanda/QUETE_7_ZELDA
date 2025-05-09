@@ -9,7 +9,7 @@ public class InventoryData
 [System.Serializable]
 public class SlotData
 {
-    public string itemName;  // Use unique identifiers for items
+    public string itemName;  
     public int quantity;
-    public int slotIndex;  // Position in the inventory UI
+    public int slotIndex; 
 }

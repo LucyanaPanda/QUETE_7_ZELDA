@@ -251,8 +251,6 @@ public class PlayerManager : MonoBehaviour, IDamageable
             //Spawnpoint
             _spawnpoint = playerData.spawnpoint;
 
-            Debug.Log(_spawnpoint);
-            Debug.Log("Loaded data successful");
             return true;
         }
 

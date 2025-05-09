@@ -1,10 +1,14 @@
 
-// Global variables for Main Quests
+//Globals variables for Lore
+VAR loreBeginning = false
+VAR loreEnding = false
+
+// Globals variables for Main Quests
 VAR eloiseQuestCompleted = false
 VAR maidenQuestCompleted = false
 VAR jimmyQuestCompleted = false
 
-// Global variables for Side Quests
+// Globals variables for Side Quests
 
 //The Seperated Brothers
 VAR brothersQuestCompleted = false

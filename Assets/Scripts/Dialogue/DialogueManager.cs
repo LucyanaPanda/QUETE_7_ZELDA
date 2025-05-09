@@ -74,15 +74,15 @@ public class DialogueManager : MonoBehaviour
             int indexChoice = i;
             GameObject choice = Instantiate(choicePrefab, choicesParent.transform, false);
             choice.GetComponent<Button>().onClick.AddListener(() => MakeChoice(indexChoice));
-            choice.GetComponent<Button>().onClick.AddListener(() => ResetChoices(choicesParent));
+            choice.GetComponent<Button>().onClick.AddListener(() => ResetChoices());
             choice.GetComponentInChildren<TMP_Text>().text = choices[i].text;
             hasChoices = true;
         }
     }
 
-    private void ResetChoices(GameObject parent)
+    public void ResetChoices()
     {
-        foreach (Transform child in parent.transform)
+        foreach (Transform child in choicesParent.transform)
         {
             Destroy(child.gameObject);
         }

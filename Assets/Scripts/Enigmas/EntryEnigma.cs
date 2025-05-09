@@ -3,26 +3,26 @@ using UnityEngine;
 
 public class EntryEnigma : MonoBehaviour, IInteractable
 {
-    [SerializeField] private PlayerInventory _inventory;
+    private PlayerInventory _inventory;
     [SerializeField] private Item _questObject;
     [SerializeField] private GameObject _door;
     [SerializeField] private GameObject _entry;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        _inventory = collision.GetComponent<PlayerInventory>();
+        _inventory = PlayerInventory.Instance;
     }
 
     public void Interact()
     {
-        foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+        foreach (KeyValuePair<Item, int> entry in _inventory.inventory)
         {
             if (entry.Key == _questObject)
             {
-                PlayerInventory.inventory.Remove(entry.Key);
+                _inventory.inventory.Remove(entry.Key);
                 _inventory.DisplayInventory();
-                _inventory.SaveInventory();
-                _inventory.LoadInventory();
+                _inventory.saveInventory.SaveTheInventory();
+                _inventory.saveInventory.LoadInventory();
                 _door.SetActive(false);
                 _entry.SetActive(true);
                 Destroy(this);

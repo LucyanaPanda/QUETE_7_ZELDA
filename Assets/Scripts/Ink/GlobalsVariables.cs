@@ -5,10 +5,9 @@ using UnityEngine;
 public class GlobalsVariables : MonoBehaviour
 {
     public static GlobalsVariables Instance;
+    public Story globalsStory;
 
     [SerializeField] private TextAsset globalsInk;
-
-    private Story globalsStory;
 
     private void Awake()
     {
@@ -17,12 +16,19 @@ public class GlobalsVariables : MonoBehaviour
         globalsStory = new Story(globalsInk.text);
     }
 
+    private void Start()
+    {
+        //SaveGlobalsVariables.Instance.LoadGlobalsData();
+    }
+
     public void SetVariable(string name, object value)
     {
 
         if (globalsStory.variablesState.Contains(name))
         {
             globalsStory.variablesState[name] = value;
+            Debug.Log("name: " + name + " value: " + globalsStory.variablesState[name]);
+            SaveGlobalsVariables.Instance.SaveGlobalsData();
         }
         else
         {
@@ -55,4 +61,8 @@ public class GlobalsVariables : MonoBehaviour
         }
     }
 
+    public ref Story GetStory()
+    {
+        return ref globalsStory;
+    }
 }

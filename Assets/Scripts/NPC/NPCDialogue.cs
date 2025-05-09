@@ -1,8 +1,4 @@
-using Ink.Runtime;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class NPCDialogue : MonoBehaviour
 {
@@ -17,9 +13,21 @@ public class NPCDialogue : MonoBehaviour
     [SerializeField] private Creature npcData;
 
     public TextAsset inkFile;
+    private bool checkGlobalsVariables = false;
 
+    private void Start()
+    {
+        if (npcData.questCompletedName != "" && GlobalsVariables.Instance.GetVariable(npcData.questCompletedName).ToString() != "false")
+        {
+            _quest.OnCompletedQuest();
+        }
+        enabled = false;
+        checkGlobalsVariables = true;
+    }
     private void OnEnable()
     {
+        if (!checkGlobalsVariables) { return; }
+
         if (_hasQuest && !_isAMerchand)
             _quest.IfQuestResolved(npcData);
 

@@ -1,7 +1,4 @@
-using NUnit.Framework;
-using System;
 using System.Collections.Generic;
-using System.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -25,8 +22,14 @@ public class InventoryUI : MonoBehaviour
     [Header("PauseManager")]
     [SerializeField] private PauseManager _pauseManager;
 
+    [Header("SaveInventory")]
+    private SaveInventory _saveInventory;
+
     private void Start()
     {
+        _playerInventory = PlayerInventory.Instance;
+        _saveInventory = SaveInventory.Instance;
+
         _image.sprite = _playerManager.creatureData.image;
         InitializeSlotsPositions();
         _inventoryPanel.SetActive(true);
@@ -41,7 +44,7 @@ public class InventoryUI : MonoBehaviour
         _playerHpBar.SetActive(true);
         _playerHpBar.SetActive(true);
         inventoryVisible = false;
-        _playerInventory.SaveInventory();
+        _saveInventory.SaveTheInventory();
         _pauseManager.ResumeGame();
     }
 
@@ -53,7 +56,7 @@ public class InventoryUI : MonoBehaviour
             _playerHpBar.SetActive(true);
             _playerHpBar.SetActive(true);
             inventoryVisible = false;
-            _playerInventory.SaveInventory();
+            _saveInventory.SaveTheInventory();
             _pauseManager.ResumeGame();
         }
         else
@@ -63,9 +66,9 @@ public class InventoryUI : MonoBehaviour
             _playerHpBar.SetActive(false);
             inventoryVisible = true;
             _pauseManager.PauseGame();
-            _playerInventory.LoadInventory();
+            _saveInventory.LoadInventory();
             LoadAndDisplayInventory();
-            _moneyText.text = "Money:" + PlayerInventory.money;
+            _moneyText.text = "Money:" + _playerInventory.money;
         }
     }
 
@@ -79,9 +82,10 @@ public class InventoryUI : MonoBehaviour
 
     public void LoadAndDisplayInventory()
     {
+        _saveInventory.LoadInventory();
         List<int> occupiedSlots = new List<int>();
 
-        foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+        foreach (KeyValuePair<Item, int> entry in _playerInventory.inventory)
         {
             int slotIndex = GetSavedSlotIndex(entry.Key);
 
@@ -97,7 +101,9 @@ public class InventoryUI : MonoBehaviour
             slots[slotIndex].dragableItem.currentItem = entry.Key;
         }
 
-        for(int i = 0;i < slots.Count;i++)
+        if (_playerInventory.inventory.Count <= 0) { return; }
+
+        for(int i = 0; i < slots.Count; i++)
         {
             if (!occupiedSlots.Contains(i))
             {
@@ -110,7 +116,7 @@ public class InventoryUI : MonoBehaviour
 
     private int GetSavedSlotIndex(Item item)
     {
-        string json = PlayerPrefs.GetString(PlayerInventory.inventorySaveKey);
+        string json = PlayerPrefs.GetString(_saveInventory.inventorySaveKey);
         InventoryData inventoryData = JsonUtility.FromJson<InventoryData>(json);
 
         if (inventoryData != null )

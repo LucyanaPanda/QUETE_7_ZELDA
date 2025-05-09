@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerHotbar : MonoBehaviour
 {
@@ -27,7 +24,7 @@ public class PlayerHotbar : MonoBehaviour
 
     private void Start()
     {
-        _inventory = GetComponentInParent<PlayerInventory>();
+        _inventory = PlayerInventory.Instance;
     }
 
 
@@ -41,16 +38,16 @@ public class PlayerHotbar : MonoBehaviour
     {
         if (context.started)
         {
-            foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+            foreach (KeyValuePair<Item, int> entry in _inventory.inventory)
             {
                 if (entry.Key == _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem && entry.Key.canBeUse)
                 {
-                    PlayerInventory.inventory[entry.Key] = entry.Value - 1;
+                    _inventory.inventory[entry.Key] = entry.Value - 1;
                     hotbar[entry.Key] = entry.Value - 1;
 
                     if (hotbar[entry.Key] <= 0)
                     {
-                        PlayerInventory.inventory.Remove(entry.Key);
+                        _inventory.inventory.Remove(entry.Key);
                         hotbar.Remove(entry.Key);
                         _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem = null;
                     }
@@ -64,7 +61,7 @@ public class PlayerHotbar : MonoBehaviour
                     _audioSource.Play();
 
                     _hotbarUi.slots[_currentSlotSelected].UpdateInformation();
-                    _inventory.SaveInventory();
+                    SaveInventory.Instance.SaveTheInventory();
                     break;
                 }
             }

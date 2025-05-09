@@ -1,5 +1,6 @@
 using Ink.Parsed;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class Quest : MonoBehaviour
@@ -21,8 +22,6 @@ public class Quest : MonoBehaviour
     [Header("Monsters To Kill")]
     [SerializeField] private List<GameObject> _questEnemies;
 
-    [SerializeField] private PlayerInventory _playerInventory;
-
     [Header("Path To Block")]
     [SerializeField] private GameObject _pathToblock;
     [SerializeField] private bool _hasAPathBlocked;
@@ -33,33 +32,37 @@ public class Quest : MonoBehaviour
     private GlobalsVariables _variables;
     private PlayerInventory playerInventory;
 
+    private void Start()
+    {
+        _variables = GlobalsVariables.Instance;
+        playerInventory = PlayerInventory.Instance;
+    }
+
     public void IfQuestResolved(Creature npcData)
     {
-        playerInventory = PlayerInventory.Instance;
-        _variables = GlobalsVariables.Instance;
-        if (_objectToGive && !_monstersToKill && !resolved)
+        if (_objectToGive && !_monstersToKill && !resolved && _variables.GetVariable(npcData.questCompletedName).ToString() == "false")
         {
-            foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+            foreach (KeyValuePair<Item, int> entry in playerInventory.inventory)
             {
                 if (entry.Key == _questObject)
                 {
                     resolved = true;
 
-                    PlayerInventory.inventory[entry.Key] = entry.Value - 1;
-                    if (PlayerInventory.inventory[entry.Key] <= 0)
-                        PlayerInventory.inventory.Remove(entry.Key);
-                    playerInventory.SaveInventory();
-                    playerInventory.LoadInventory();
+                    playerInventory.inventory[entry.Key] = entry.Value - 1;
+                    if (playerInventory.inventory[entry.Key] <= 0)
+                        playerInventory.inventory.Remove(entry.Key);
+                    playerInventory.saveInventory.SaveTheInventory();
+                    playerInventory.saveInventory.LoadInventory();
                     playerInventory.AddMoney(rewardMoney);
+                    OnCompletedQuest();
 
-                    if (_hasAPathBlocked)
-                        _pathToblock.SetActive(false);
                     _variables.SetVariable(npcData.questCompletedName, true);
+                    SaveGlobalsVariables.Instance.SaveGlobalsData();
                     break;
                 }
             }
         }
-        else if (!_objectToGive && _monstersToKill && !resolved)
+        else if (!_objectToGive && _monstersToKill && !resolved && !(bool)_variables.GetVariable(npcData.questCompletedName))
         {
             for (int i = 0; i < _questEnemies.Count; i++)
             {
@@ -68,20 +71,20 @@ public class Quest : MonoBehaviour
                     return;
                 }
             }
-            resolved = true;
-            if (_hasAPathBlocked)
-                _pathToblock.SetActive(false);
 
+            OnCompletedQuest();
             playerInventory.AddMoney(rewardMoney);
 
             _variables.SetVariable(npcData.questCompletedName, true);
+            SaveGlobalsVariables.Instance.SaveGlobalsData();
 
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnCompletedQuest()
     {
-        _playerInventory = collision.GetComponent<PlayerInventory>();
+        resolved = true;
+        if (_hasAPathBlocked)
+            _pathToblock.SetActive(false);
     }
-
 }
