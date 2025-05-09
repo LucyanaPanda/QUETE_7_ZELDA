@@ -12,10 +12,6 @@ public class SaveGlobalsVariables : MonoBehaviour
     {
         if (Instance != null) { Destroy(this); }
         else { Instance = this; }
-    }
-
-    private void Start()
-    {
         _variables = GlobalsVariables.Instance;
     }
 
@@ -25,18 +21,17 @@ public class SaveGlobalsVariables : MonoBehaviour
         GlobalsVariablesData save = new GlobalsVariablesData();
         foreach (string name in globalsStory.variablesState)
         {
-            GlobalVariable variable = new GlobalVariable();
-            
-            variable.name = name;
-            variable.value = globalsStory.variablesState.GetVariableWithName(name).ToString();
-
+            GlobalVariable variable = new GlobalVariable
+            {
+                name = name,
+                value = globalsStory.variablesState.GetVariableWithName(name).ToString()
+            };
             save.states.Add(variable);
         }
 
         string json = JsonUtility.ToJson(save);
         PlayerPrefs.SetString(saveGlobalsVariablesKey, json);
         PlayerPrefs.Save();
-        Debug.Log(json);
     }
 
     public void LoadGlobalsData()

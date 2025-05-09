@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,7 +54,7 @@ public class NPCShop : MonoBehaviour
 
     private void DisplayMoney()
     {
-        _moneyText.text = PlayerInventory.money.ToString();
+        _moneyText.text = PlayerInventory.Instance.money.ToString();
     }
 
     public void ShowHideShop(bool show)

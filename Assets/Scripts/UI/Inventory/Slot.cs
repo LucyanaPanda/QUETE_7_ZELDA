@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IDropHandler
@@ -23,6 +21,9 @@ public class Slot : MonoBehaviour, IDropHandler
     [Header("PlayerEquipment")]
     [SerializeField] private PlayerEquipment _playerEquipment;
 
+    [Header("PlayerInventory")]
+    private PlayerInventory _playerInventory;
+
 
     private void Awake()
     {
@@ -30,10 +31,13 @@ public class Slot : MonoBehaviour, IDropHandler
         GetNecessaryComponents();
     }
 
+    private void Start()
+    {
+        _playerInventory = PlayerInventory.Instance;
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop");
         DrageableItem droppedItem = eventData.pointerDrag.GetComponent<DrageableItem>(); // Get the item dropped
         if (_isSlotWeapon  && !droppedItem.currentItem.isWeapon)
         {
@@ -80,7 +84,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void MoveItems()
     {
-        foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+        foreach (KeyValuePair<Item, int> entry in _playerInventory.inventory)
         {
             if (entry.Key == dragableItem.currentItem)
             {
@@ -99,9 +103,9 @@ public class Slot : MonoBehaviour, IDropHandler
     {
         if (dragableItem.currentItem != null)
         {
-            if (PlayerInventory.inventory.ContainsKey(dragableItem.currentItem))
+            if (_playerInventory.inventory.ContainsKey(dragableItem.currentItem))
             {
-                quantityText.text = PlayerInventory.inventory[dragableItem.currentItem].ToString();
+                quantityText.text = _playerInventory.inventory[dragableItem.currentItem].ToString();
                 return;
             }
 

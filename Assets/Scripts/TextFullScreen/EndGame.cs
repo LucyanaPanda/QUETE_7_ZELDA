@@ -1,13 +1,10 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using static UnityEngine.EventSystems.EventTrigger;
 
-public class BeginningGame : InteractableScript
+public class EndGame : InteractableScript
 {
     [SerializeField] private Item _questObject;
 
@@ -27,13 +24,13 @@ public class BeginningGame : InteractableScript
 
     public override void Interact()
     {
-        foreach (KeyValuePair<Item, int> entry in PlayerInventory.inventory)
+        foreach (KeyValuePair<Item, int> entry in _playerInventory.inventory)
         {
             if (entry.Key == _questObject)
             {
-                PlayerInventory.inventory.Remove(entry.Key);
-                PlayerInventory.inventory.Clear();
-                _playerInventory.SaveInventory();
+                _playerInventory.inventory.Remove(entry.Key);
+                _playerInventory.inventory.Clear();
+                _playerInventory.saveInventory.SaveTheInventory();
 
                 _blackScreen.SetActive(true);
                 _hasOffered=true;

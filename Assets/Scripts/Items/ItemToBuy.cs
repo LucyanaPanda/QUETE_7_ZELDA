@@ -19,7 +19,7 @@ public class ItemToBuy : MonoBehaviour
 
     public NPCShop shop;
 
-    private void Start()
+    private void Start()    
     {
         _playerInventory = PlayerInventory.Instance;
 
@@ -40,15 +40,14 @@ public class ItemToBuy : MonoBehaviour
 
     public bool BuyItem(ItemScript item)
     {
-        _playerInventory = PlayerInventory.Instance;
-        if (item.ItemData.price > PlayerInventory.money)
+        if (item.ItemData.price > _playerInventory.money)
         {
             Debug.Log("Cannot buy this item");
             _playerInventory.AddMoney(item.ItemData.price);
             return false;
         }
         _playerInventory.AddMoney(-item.ItemData.price);
-        _playerInventory.SaveMoney();
+        _playerInventory.saveInventory.SaveMoney();
         _playerInventory.AddToInventory(item);
         product.quantity--;
         UpdateQuantity();

@@ -9,8 +9,6 @@ public class GlobalsVariables : MonoBehaviour
 
     [SerializeField] private TextAsset globalsInk;
 
-    private bool once = false;
-
     private void Awake()
     {
         if (Instance != null) { Destroy(this); }
