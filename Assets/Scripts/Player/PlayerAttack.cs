@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private PlayerManager _player;
 
     [Header("Attack")]
-    [SerializeField] private Sword _sword;
+    [SerializeField] private Weapon _weapon;
 
     private AudioManager _audioManager;
 
@@ -26,17 +26,33 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_player.attackTimer >= _player.attackMaxTimer && !DialogueManager.Instance.dialoguePlayed)
         {
+            GetWeapon();
             _player.attackTimer -= _player.attackMaxTimer;
-            _sword.gameObject.SetActive(true);
-            _sword.damage = _player.attack;
+            _weapon.damage = _player.attack;
+            _weapon.Attack();
             _audioManager.PlaySound(AudioManager.AudioType.Attack);
         }
     }
+
     private void AttackDelay()
     {
         if (_player.attackTimer <= _player.attackMaxTimer)
         {
             _player.attackTimer += Time.deltaTime;
         }
+    }
+
+    private void GetWeapon()
+    {
+        _weapon = GetComponentInChildren<Weapon>();
+        Debug.Log(_weapon);
+    }
+
+    private bool IsSword()
+    {
+        Sword sword = _weapon.GetComponent<Sword>();
+        if (sword != null) { return true; }
+        return false;
+
     }
 }
