@@ -16,11 +16,6 @@ public class GlobalsVariables : MonoBehaviour
         globalsStory = new Story(globalsInk.text);
     }
 
-    private void Start()
-    {
-        //SaveGlobalsVariables.Instance.LoadGlobalsData();
-    }
-
     public void SetVariable(string name, object value)
     {
 
