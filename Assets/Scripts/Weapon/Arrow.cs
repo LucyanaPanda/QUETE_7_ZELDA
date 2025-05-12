@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Profiling;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -8,52 +9,30 @@ public class Arrow : MonoBehaviour
     [SerializeField] private float _speed;
 
     public float damage;
+    public float distance;
     public Vector3 dir;
+    public string tagParent;
 
-    private IDamageable notToTarget;
-    private bool hitOnce;
+    private Vector3 initPos;
 
-    private void Start()
+
+    private void Awake()
     {
-        StartCoroutine(DestroyHimself());
+        initPos = transform.position;
     }
 
     private void Update()
     {
         _transform.position += dir * _speed * Time.deltaTime;
+        if (Vector2.Distance(transform.position, initPos) >= distance) { Destroy(this.gameObject); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IDamageable iDamageable = collision.GetComponent<IDamageable>();
-        if (iDamageable != null && iDamageable != notToTarget && hitOnce)
+        if (iDamageable != null && tagParent != "" && collision.tag != tagParent)
         {
             iDamageable.TakeDamage(damage);
-        }
-        else
-        {
-            notToTarget = iDamageable;
-            hitOnce = true;
-        }
-    }
-
-    IEnumerator DestroyHimself()
-    {
-        yield return new WaitForSecondsRealtime(7);
-        Destroy(gameObject);
-    }
-
-    IEnumerator WaitForDirection()
-    {
-        if (dir ==  Vector3.zero)
-        {
-            yield return new WaitForSecondsRealtime(0.1f);
-            StartCoroutine(WaitForDirection());
-        }
-        else
-        {
-            Quaternion.LookRotation(dir);
-            Debug.Log("Bing Bong");
         }
     }
 }

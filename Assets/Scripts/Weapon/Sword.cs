@@ -5,8 +5,10 @@ public class Sword : Weapon
 
     public override void Attack()
     {
-        _animator = GetComponent<Animator>();
+        _spriteRenderer.enabled = true;
+        _boxCollider.enabled = true;
         _animator.SetTrigger("Attack");
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

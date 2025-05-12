@@ -33,4 +33,10 @@ public class Item : ScriptableObject
     public float duration;
     public bool hasDuration;
 
+    [Header("Is a sword or not")]
+    public bool isSword;
+
+    [Header("For bows")]
+    public float distance;
+
 }

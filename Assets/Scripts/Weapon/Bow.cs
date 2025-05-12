@@ -1,12 +1,12 @@
-using UnityEditor;
 using UnityEngine;
 
 public class Bow : Weapon
 {
     [SerializeField] private GameObject arrowPrefab;
+    public float distance;
+
     public override void Attack()
     {
-        _animator = GetComponent<Animator>();
         _animator.SetTrigger("Attack");
         ShootArrow();
     }
@@ -19,6 +19,8 @@ public class Bow : Weapon
         Vector3 dir = GetDirectionTowardsMouse();
         arrow.dir = dir.normalized;
         arrow.transform.Rotate(0, 0, GetAngle(dir));
+        arrow.tagParent = transform.parent.tag;
+        arrow.distance = distance;
     }
 
     private Vector3 GetDirectionTowardsMouse()

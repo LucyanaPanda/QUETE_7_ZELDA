@@ -1,4 +1,4 @@
-using System;
+
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -10,18 +10,21 @@ public class Weapon : MonoBehaviour
     [Header("Components")]
     protected SpriteRenderer _spriteRenderer;
     protected BoxCollider2D _boxCollider;
-    
+
+    private void OnEnable()
+    {
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+    }
+
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = false;
-
-        _boxCollider = GetComponent<BoxCollider2D>();
-        try
+        if (_boxCollider != null )
         {
             _boxCollider.enabled = false;
         }
-        catch (Exception e) { }
     }
 
     public virtual void Attack() 

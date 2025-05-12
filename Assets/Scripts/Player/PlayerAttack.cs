@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,8 +8,13 @@ public class PlayerAttack : MonoBehaviour
     [Header("PlayerManager")]
     [SerializeField] private PlayerManager _player;
 
+    [Header("Weapon Slot")]
+    [SerializeField] private Slot _weaponSlot;
+
     [Header("Attack")]
-    [SerializeField] private Weapon _weapon;
+    [SerializeField] private Weapon _swordPrefab;
+    [SerializeField] private Weapon _bowPrefab;
+    private Weapon _currentWeapon;
 
     private AudioManager _audioManager;
 
@@ -26,10 +32,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if (_player.attackTimer >= _player.attackMaxTimer && !DialogueManager.Instance.dialoguePlayed)
         {
+            GetWeaponFromSlot();
             GetWeapon();
             _player.attackTimer -= _player.attackMaxTimer;
-            _weapon.damage = _player.attack;
-            _weapon.Attack();
+            _currentWeapon.damage = _player.attack;
+            _currentWeapon.Attack();
             _audioManager.PlaySound(AudioManager.AudioType.Attack);
         }
     }
@@ -44,15 +51,67 @@ public class PlayerAttack : MonoBehaviour
 
     private void GetWeapon()
     {
-        _weapon = GetComponentInChildren<Weapon>();
-        Debug.Log(_weapon);
+        try
+        {
+            _currentWeapon = GetComponentInChildren<Weapon>();
+            Debug.Log(_currentWeapon);
+        } catch (Exception e ) { Debug.Log(e); }
+        
     }
 
-    private bool IsSword()
+    private void GetWeaponFromSlot()
     {
-        Sword sword = _weapon.GetComponent<Sword>();
-        if (sword != null) { return true; }
-        return false;
+        if (_currentWeapon == null)
+        {
+            if (_weaponSlot.dragableItem.currentItem == null)
+            {
+                Instantiate(_swordPrefab, transform, false);
+                Debug.Log("Test 1");
+                return;
+            } else
+            {
+                if (_weaponSlot.dragableItem.currentItem.isSword)
+                {
+                    Instantiate(_swordPrefab, transform, false);
+                    Debug.Log("Test 89");
+                    return;
+                }
+                else
+                {
+                    Weapon bow = Instantiate(_bowPrefab, transform, false);
+                    ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
+                    Debug.Log("Test 99");
+                    return;
+                }
+            }
+        }
+        else if (_currentWeapon != null && _weaponSlot.dragableItem.currentItem != null)
+        {
+            Sword sword = _currentWeapon.GetComponent<Sword>();
+            Bow bow = _currentWeapon.GetComponent<Bow>();
 
+            if (sword != null && _weaponSlot.dragableItem.currentItem.isSword) { return; }
+            else if (bow != null && !_weaponSlot.dragableItem.currentItem.isSword) { return; }
+
+            Debug.Log("Test 2, not found weapon syncro");
+        }
+
+        foreach (Transform child in transform) { Destroy(child.gameObject); }
+        Debug.Log("Destroyed");
+        if (_weaponSlot.dragableItem.currentItem.isSword)
+            {if (_weaponSlot.dragableItem.currentItem.isSword)
+            {
+                Instantiate(_swordPrefab, transform, false);
+                Debug.Log("Test 3");
+            }
+            else
+            {
+                Weapon bow = Instantiate(_bowPrefab, transform, false);
+                ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
+                Debug.Log("Test 4");
+            }
+        }
+        
     }
+
 }

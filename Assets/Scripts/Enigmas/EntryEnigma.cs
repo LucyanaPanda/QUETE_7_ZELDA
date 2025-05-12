@@ -20,7 +20,6 @@ public class EntryEnigma : MonoBehaviour, IInteractable
             if (entry.Key == _questObject)
             {
                 _inventory.inventory.Remove(entry.Key);
-                _inventory.DisplayInventory();
                 _inventory.saveInventory.SaveTheInventory();
                 _inventory.saveInventory.LoadInventory();
                 _door.SetActive(false);
