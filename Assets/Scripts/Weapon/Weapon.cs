@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -16,20 +17,15 @@ public class Weapon : MonoBehaviour
         _spriteRenderer.enabled = false;
 
         _boxCollider = GetComponent<BoxCollider2D>();
-        _boxCollider.enabled = false;
+        try
+        {
+            _boxCollider.enabled = false;
+        }
+        catch (Exception e) { }
     }
 
     public virtual void Attack() 
     {
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        IDamageable iDamageable = collision.GetComponent<IDamageable>();
-        if (iDamageable != null)
-        {
-            iDamageable.TakeDamage(damage);
-        }
     }
 }
