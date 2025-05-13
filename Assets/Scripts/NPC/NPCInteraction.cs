@@ -28,6 +28,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
             _interactionPanel.SetActive(false);
             _dialoguePanel.SetActive(false);
             _dialogueScript.enabled = false;
+            DialogueManager.Instance.dialoguePlayed = false;
         }
     }
 

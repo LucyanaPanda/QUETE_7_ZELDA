@@ -23,12 +23,14 @@ public class NPCShop : MonoBehaviour
         DisplayMoney();
         _quitShopButton.onClick.AddListener(() => ShowHideShop(false));
         _quitShopButton.onClick.AddListener(() => ClearShop());
+        Debug.Log("Bouya");
     }
 
     private void OnDisable()
     {
         ClearShop();
         _quitShopButton.onClick.RemoveAllListeners();
+        Debug.Log("...");
     }
 
     private void DispayProducts()
@@ -52,14 +54,17 @@ public class NPCShop : MonoBehaviour
         }
     }
 
-    private void DisplayMoney()
+    public void DisplayMoney()
     {
-        _moneyText.text = PlayerInventory.Instance.money.ToString();
+        _moneyText.text = "Money: " + PlayerInventory.Instance.money.ToString();
     }
 
     public void ShowHideShop(bool show)
     {
         _shopPanel.SetActive(show);
+        if (!show) { enabled = show; }
+        PlayerController.Instance.enabled = !show; 
+        GameManager.Instance.playerInGame = !show;
     }
 
     public void ReduceQuantity(Product productSearched, int newQuantity)

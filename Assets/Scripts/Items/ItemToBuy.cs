@@ -51,6 +51,7 @@ public class ItemToBuy : MonoBehaviour
         _playerInventory.AddToInventory(item);
         product.quantity--;
         UpdateQuantity();
+        shop.DisplayMoney();
         //Add a sound clip
         return true;
     }

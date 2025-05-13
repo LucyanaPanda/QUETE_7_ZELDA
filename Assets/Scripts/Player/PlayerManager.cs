@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
+    public static PlayerManager Instance;   
+
     [Header("Data")]
     public Creature creatureData;
     public float health, minHealth, maxHealth;
@@ -48,6 +50,11 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     private AudioManager _audioManager;
 
+    private void Awake()
+    {
+        if (Instance != null) { Destroy(this); }
+        else { Instance = this; }
+    }
     private void Start()
     {
         if (!LoadPlayerData())

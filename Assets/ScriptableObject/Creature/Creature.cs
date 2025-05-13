@@ -29,8 +29,11 @@ public class Creature : ScriptableObject
     public int minMoney;
     public int maxMoney;
 
-    [Header("GlobalVariables in Globals.ink")]
+    [Header("GlobalVariables in Globals.ink for quests")]
     public string questCompletedName;
     public string hasBeenTalkOnceName;
+
+    [Header("Merchand Key in Globals.ink")]
+    public string shopKey;
 
 }

@@ -58,9 +58,11 @@ public class InventoryUI : MonoBehaviour
             inventoryVisible = false;
             _saveInventory.SaveTheInventory();
             _pauseManager.ResumeGame();
+            GameManager.Instance.playerInGame = true;
         }
         else
         {
+            GameManager.Instance.playerInGame = false;
             _inventoryPanel.SetActive(true);
             _playerHpBar.SetActive(false);
             _playerHpBar.SetActive(false);

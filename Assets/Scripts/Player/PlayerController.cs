@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Transform))]
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
+
     [Header("Player")]
     [SerializeField] private PlayerManager _player;
     [SerializeField] private PlayerInteractions _playerInteractions;
@@ -16,6 +18,12 @@ public class PlayerController : MonoBehaviour
     [Header("LookAt")]
     [SerializeField] private Vector3 _lookRight;
     [SerializeField] private Vector3 _lookLeft;
+
+    private void Awake()
+    {
+        if (Instance != null) { Destroy(this); }
+        else {  Instance = this; }
+    }
 
     private void Start()
     {

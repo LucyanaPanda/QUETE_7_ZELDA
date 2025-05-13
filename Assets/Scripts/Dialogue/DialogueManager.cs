@@ -11,6 +11,10 @@ public class DialogueManager : MonoBehaviour
     public bool dialoguePlayed = false;
     public bool hasChoices = false;
 
+    [Header("MerchandStory")]
+    public bool isMerchandStory;
+    public NPCShop shop;
+
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private Image _profilImage;
     [SerializeField] private TMP_Text _nameText;
@@ -93,5 +97,6 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory.ChooseChoiceIndex(index);
         NextLine();
+        if (isMerchandStory && index == 0) { shop.enabled = true; isMerchandStory = false; NextLine(); }
     }
 }

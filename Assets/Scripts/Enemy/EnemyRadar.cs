@@ -5,6 +5,7 @@ public class EnemyRadar : MonoBehaviour
 {
     [Header("EnemyManager")]
     [SerializeField] private EnemyManager _manager;
+    [SerializeField] private bool isAnArcher;
 
     [Header("Movement")]
     [SerializeField] private Transform _transformBody;
@@ -62,15 +63,35 @@ public class EnemyRadar : MonoBehaviour
     private void FollowPlayer(Transform _target)
     {
         float distance = Vector3.Distance(_target.position, _transformBody.position);
-        if (distance > _minDist)
+        if (!isAnArcher)
         {
-            Vector3 pos = Vector3.MoveTowards(_transformBody.position, _target.position, _speed * Time.deltaTime);
-            _rb.MovePosition(pos);
-            LookAtTarget(_target.position, _transformController);
-            CanAttackPlayer = false;
+            if (distance > _minDist)
+            {
+                Vector3 pos = Vector3.MoveTowards(_transformBody.position, _target.position, _speed * Time.deltaTime);
+                _rb.MovePosition(pos);
+                LookAtTarget(_target.position, _transformController);
+                CanAttackPlayer = false;
+            }
+            else
+            {
+                CanAttackPlayer = true;
+            }
         }
         else
-            CanAttackPlayer = true;
+        {
+            if (distance > _minDist*4)
+            {
+                Vector3 pos = Vector3.MoveTowards(_transformBody.position, _target.position, _speed * Time.deltaTime);
+                _rb.MovePosition(pos);
+                LookAtTarget(_target.position, _transformController);
+                CanAttackPlayer = false;
+            }
+            else
+            {
+                CanAttackPlayer = true;
+            }
+        }
+
     }
 
     private void ReturnToInitPos()
