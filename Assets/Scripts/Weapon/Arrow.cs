@@ -15,7 +15,6 @@ public class Arrow : MonoBehaviour
 
     private Vector3 initPos;
 
-
     private void Awake()
     {
         initPos = transform.position;
@@ -35,4 +34,5 @@ public class Arrow : MonoBehaviour
             iDamageable.TakeDamage(damage);
         }
     }
+
 }

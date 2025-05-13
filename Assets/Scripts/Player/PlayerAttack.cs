@@ -66,21 +66,19 @@ public class PlayerAttack : MonoBehaviour
             if (_weaponSlot.dragableItem.currentItem == null)
             {
                 Instantiate(_swordPrefab, transform, false);
-                Debug.Log("Test 1");
                 return;
             } else
             {
                 if (_weaponSlot.dragableItem.currentItem.isSword)
                 {
                     Instantiate(_swordPrefab, transform, false);
-                    Debug.Log("Test 89");
                     return;
                 }
                 else
                 {
                     Weapon bow = Instantiate(_bowPrefab, transform, false);
                     ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
-                    Debug.Log("Test 99");
+                    ((Bow)bow).fromPlayer = true;
                     return;
                 }
             }
@@ -92,23 +90,20 @@ public class PlayerAttack : MonoBehaviour
 
             if (sword != null && _weaponSlot.dragableItem.currentItem.isSword) { return; }
             else if (bow != null && !_weaponSlot.dragableItem.currentItem.isSword) { return; }
-
-            Debug.Log("Test 2, not found weapon syncro");
         }
 
         foreach (Transform child in transform) { Destroy(child.gameObject); }
-        Debug.Log("Destroyed");
+
         if (_weaponSlot.dragableItem.currentItem.isSword)
             {if (_weaponSlot.dragableItem.currentItem.isSword)
             {
                 Instantiate(_swordPrefab, transform, false);
-                Debug.Log("Test 3");
             }
             else
             {
                 Weapon bow = Instantiate(_bowPrefab, transform, false);
                 ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
-                Debug.Log("Test 4");
+                ((Bow)bow).fromPlayer = true;
             }
         }
         

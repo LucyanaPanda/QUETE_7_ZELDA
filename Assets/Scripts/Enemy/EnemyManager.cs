@@ -13,6 +13,10 @@ public class EnemyManager : MonoBehaviour, IDamageable
 
     private readonly UnityEvent _OnDeath = new();
     private readonly UnityEvent _onHealthChanged = new();
+
+    [Header("Sounds effect")]
+    [SerializeField] private AudioManager _audioManager;
+
     private void Start()
     {
         //Sprite
@@ -27,6 +31,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
         defense = creatureData.defense;
         minDefense = creatureData.minDefense;
         maxDefense = creatureData.maxDefense;
+
+        _audioManager = AudioManager.Instance;
     }
 
     public void TakeDamage(float damage)
@@ -39,6 +45,7 @@ public class EnemyManager : MonoBehaviour, IDamageable
         Debug.Log("damage taken: " + damage + " defense: " + defense);
         health -= damage - defense;
         _spriteRenderer.color = Color.red;
+        _audioManager.PlaySound(AudioManager.AudioType.Death);
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;
         _onHealthChanged.Invoke();
