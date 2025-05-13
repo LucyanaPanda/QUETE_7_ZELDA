@@ -2,11 +2,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private AudioManager _audioManager;
+    public static GameManager Instance;
+
+    [Header("PlayerInGame")]
+    public bool playerInGame;
 
     [Header("Lore")]
     public TextAsset loreBeginning;
     public string keyLoreBeginning;
+
+    private AudioManager _audioManager;
+
+    private void Awake()
+    {
+        if (Instance != null ) { Destroy(this); }
+        else { Instance = this; }
+    }
 
     void Start()
     {
@@ -22,10 +33,4 @@ public class GameManager : MonoBehaviour
             return; 
         }
     }
-
-    //private void OnDestroy()
-    //{
-    //    _audioManager.StopSound(AudioManager.AudioType.GameMusic);
-    //    _audioManager.StopSound(AudioManager.AudioType.GameAmbiant);
-    //}
 }

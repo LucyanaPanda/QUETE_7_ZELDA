@@ -29,8 +29,15 @@ public class NPCDialogue : MonoBehaviour
         if (!checkGlobalsVariables) { return; }
 
         if (_hasQuest && !_isAMerchand)
+        {
             _quest.IfQuestResolved(npcData);
-
-        DialogueManager.Instance.StartDialogue(inkFile, npcData, this);
+            DialogueManager.Instance.StartDialogue(inkFile, npcData, this);
+        }
+        else if (!_hasQuest && _isAMerchand)
+        {
+            DialogueManager.Instance.shop = _shop;
+            DialogueManager.Instance.isMerchandStory = true;
+            DialogueManager.Instance.StartDialogue(inkFile, npcData, this);
+        }
     }
 }

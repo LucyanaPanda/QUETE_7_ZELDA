@@ -1,7 +1,9 @@
+INCLUDE ../globals.ink
+
 Hi there !
 Want to take a loot at what I've got ?
 + [Yes]
-	-- openShop = true
+    -- -> END
 + [No]
 	-- Alright, see you around!
-	-- -> END
+    -- -> END

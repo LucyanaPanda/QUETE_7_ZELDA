@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (_player.attackTimer >= _player.attackMaxTimer && !DialogueManager.Instance.dialoguePlayed)
+        if (_player.attackTimer >= _player.attackMaxTimer && !DialogueManager.Instance.dialoguePlayed && GameManager.Instance.playerInGame)
         {
             GetWeaponFromSlot();
             GetWeapon();

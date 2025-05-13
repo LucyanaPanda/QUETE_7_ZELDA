@@ -19,3 +19,6 @@ VAR jimmyQuestCompleted = false
 //The Seperated Brothers
 VAR brothersQuestBegin = false
 VAR brothersQuestCompleted = false
+
+//Global variable for shops
+VAR shopOpen = false
