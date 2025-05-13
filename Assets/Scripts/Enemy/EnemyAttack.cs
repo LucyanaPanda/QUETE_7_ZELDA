@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -10,9 +8,13 @@ public class EnemyAttack : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private float _attack, _minAttack, _maxAttack;
     [SerializeField] private float _attackTimer, _attackMaxTimer;
+
+    [Header("Weapon")]
     [SerializeField] private Weapon _weapon;
     [SerializeField] private bool isSword;
     [SerializeField] private float distance;
+    [SerializeField] private float minAttackForArrows;
+
 
     [Header("Enemy Radar")]
     [SerializeField] private EnemyRadar _radar;
@@ -50,6 +52,7 @@ public class EnemyAttack : MonoBehaviour
 
             _attackTimer -= _attackMaxTimer;
             _audioManager.PlaySound(AudioManager.AudioType.Attack);
+            if (!isSword) { _weapon.damage = Mathf.Min(minAttackForArrows, _attack); }
             _weapon.damage = _attack;
             if(!isSword) { ((Bow)_weapon).distance = distance ; }
             _weapon.Attack();

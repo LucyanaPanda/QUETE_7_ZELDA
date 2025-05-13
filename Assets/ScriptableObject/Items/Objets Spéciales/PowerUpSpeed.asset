@@ -18,6 +18,10 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: c89110d4870d8f043a959c20990bba3a, type: 3}
   canBeUse: 1
   isPotion: 0
+  isWeapon: 0
+  isArmor: 0
+  isAccesorie: 0
+  isPowerUp: 1
   price: 0
   healthBoost: 0
   speedBoost: 0.5
@@ -29,3 +33,5 @@ MonoBehaviour:
   attackMalus: 0
   duration: 0
   hasDuration: 0
+  isSword: 0
+  distance: 0

@@ -9,8 +9,8 @@ public class PlayerHotbar : MonoBehaviour
     public List<Item> _items = new List<Item>();
     public static readonly string hotbarSaveKey = "player_hotbar";
     public static bool addedToHotbar;
+    public Transform _hotbarSlotSelected;
     [SerializeField] private HotbarUI _hotbarUi;
-    [SerializeField] private Transform _hotbarSlotSelected;
     [SerializeField] private int _currentSlotSelected;
 
     [Header("Player")]
@@ -42,6 +42,16 @@ public class PlayerHotbar : MonoBehaviour
             {
                 if (entry.Key == _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem && entry.Key.canBeUse)
                 {
+                    if (entry.Key.isPotion)
+                        _playerManager.ActivateBoost(entry.Key);
+                    else if (entry.Key.isPowerUp)
+                        _upgradeStat.UseSpecialItem(entry.Key);
+                    else
+                    {
+                        Debug.Log("This Object cannot be used");
+                        return;
+                    }
+
                     _inventory.inventory[entry.Key] = entry.Value - 1;
                     hotbar[entry.Key] = entry.Value - 1;
 
@@ -51,11 +61,6 @@ public class PlayerHotbar : MonoBehaviour
                         hotbar.Remove(entry.Key);
                         _hotbarUi.slots[_currentSlotSelected].dragableItem.currentItem = null;
                     }
-
-                    if (entry.Key.isPotion)
-                        _playerManager.ActivateBoost(entry.Key);
-                    else
-                        _upgradeStat.UseSpecialItem(entry.Key);
 
                     _audioSource.clip = _potionItemClip;
                     _audioSource.Play();
@@ -68,8 +73,7 @@ public class PlayerHotbar : MonoBehaviour
         }
     }
 
-
-    //Scrolling system
+    #region Scrolling system
     public void OnScroll(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -85,4 +89,5 @@ public class PlayerHotbar : MonoBehaviour
         _hotbarSlotSelected.SetParent(_hotbarUi.slots[_currentSlotSelected].transform);
         _hotbarSlotSelected.localPosition = Vector3.zero;
     }
+    #endregion
 }

@@ -55,7 +55,7 @@ public class PauseManager : MonoBehaviour
     public void PauseGame()
     {
         _gameIsPaused = true;
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
         _player.enabled = false;
         GameManager.Instance.playerInGame = false;
     }
@@ -63,7 +63,7 @@ public class PauseManager : MonoBehaviour
     public void ResumeGame()
     {
         _gameIsPaused = false;
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
         _player.enabled = true;
         GameManager.Instance.playerInGame = true;
     }

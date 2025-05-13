@@ -13,6 +13,7 @@ public class Item : ScriptableObject
     public bool isWeapon;
     public bool isArmor;
     public bool isAccesorie;
+    public bool isPowerUp;
 
     [Header("Price")]
     public int price;

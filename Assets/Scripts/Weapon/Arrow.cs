@@ -23,7 +23,7 @@ public class Arrow : MonoBehaviour
     private void Update()
     {
         _transform.position += dir * _speed * Time.deltaTime;
-        if (Vector2.Distance(transform.position, initPos) >= distance) { Destroy(this.gameObject); }
+        if (Vector2.Distance(transform.position, initPos) >= distance) { /*Destroy(this.gameObject);*/ }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,5 +34,4 @@ public class Arrow : MonoBehaviour
             iDamageable.TakeDamage(damage);
         }
     }
-
 }
