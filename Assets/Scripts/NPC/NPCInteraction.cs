@@ -1,16 +1,21 @@
+using System;
 using UnityEngine;
 
 public class NPCInteraction : MonoBehaviour, IInteractable
 {
+    [Header("DialogueManager")]
+    [SerializeField] private DialogueManager _dialogueManager;
+
+    [Header("UI Panel")]
     [SerializeField] private GameObject _interactionPanel;
     [SerializeField] private GameObject _dialoguePanel;
     
     private NPCDialogue _dialogueScript;
-    private DialogueManager _dialogueManager;
+
     private void Start()
     {
         _dialogueScript = GetComponent<NPCDialogue>();
-        _dialogueManager = DialogueManager.Instance;
+        _dialogueScript.dialogueManager = _dialogueManager;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,7 +33,7 @@ public class NPCInteraction : MonoBehaviour, IInteractable
             _interactionPanel.SetActive(false);
             _dialoguePanel.SetActive(false);
             _dialogueScript.enabled = false;
-            DialogueManager.Instance.dialoguePlayed = false;
+            _dialogueManager.dialoguePlayed = false;
         }
     }
 
@@ -43,7 +48,6 @@ public class NPCInteraction : MonoBehaviour, IInteractable
         } 
         else if (_dialoguePanel.activeInHierarchy && !_dialogueManager.hasChoices) 
         {
-
             _dialogueManager.NextLine();
         }
     }

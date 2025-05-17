@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c5d7480aa5be54b867be09035f708c, type: 3}
+  m_Name: YellowRainVest
+  m_EditorClassIdentifier: 
+  id: 4
+  nameItem: Yellow Rain Vest
+  description: A vest to protect yourself from rain.
+  image: {fileID: -5683813221471665051, guid: b64b709bc9d9fa446aab9d9e4f4149d7, type: 3}
+  canBeUse: 0
+  isPotion: 0
+  isWeapon: 0
+  isArmor: 1
+  isAccesorie: 0
+  price: 15
+  healthBoost: 0
+  speedBoost: 0
+  defBoost: 1
+  attackBoost: 0
+  healthMalus: 0
+  speedMalus: 0
+  defMalus: 0
+  attackMalus: 0
+  duration: 0
+  hasDuration: 0
+  isSword: 0
+  distance: 0

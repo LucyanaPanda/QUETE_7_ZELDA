@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -15,6 +16,11 @@ public class PlayerInventory : MonoBehaviour
 
     [Header("SaveInventory")]
     public SaveInventory saveInventory;
+
+    [Header("Special objects to unlock lore")]
+    [SerializeField] private GameManager _gameManager;
+    [SerializeField] private ItemScript _orb;
+    [SerializeField] private ItemScript _concertTicket;
 
     private void Awake()
     {
@@ -33,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
         saveInventory.SaveMoney();
     }
 
-    public bool AddToInventory(ItemScript item)
+    public bool AddToInventory(ItemScript item, int quantity)
     {
         if (ItemInInventory(item))
         {
@@ -49,6 +55,7 @@ public class PlayerInventory : MonoBehaviour
                 return false;
             }
         }
+        CheckIfLoreObject();
         saveInventory.SaveTheInventory();
         return true;
     }
@@ -64,6 +71,19 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log(entry.Key + " : " + entry.Value);
         }
+    }
+
+    public void CheckIfLoreObject()
+    {
+        if (ItemInInventory(_orb))
+        {
+            _gameManager.StartLore(_gameManager.loreOrb, _gameManager.keyLoreOrb);
+        }
+        else if (ItemInInventory(_concertTicket))
+        {
+            _gameManager.StartLore(_gameManager.loreEnding, _gameManager.keyLoreEnding);
+        }
+        return;
     }
 }
 

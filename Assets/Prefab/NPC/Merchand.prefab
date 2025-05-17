@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -316220809828748007, guid: 99d7e288ae6962049a9857b4cb38ecab, type: 3}
+  m_Sprite: {fileID: 5894393553017620563, guid: 5db99ede4aebc6f4fb6a4dcd8a91e416, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,7 +164,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -5251922016697317669, guid: 99d7e288ae6962049a9857b4cb38ecab, type: 3}
+  m_Sprite: {fileID: -402618849200031323, guid: 5db99ede4aebc6f4fb6a4dcd8a91e416, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -209,17 +209,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.008835256, y: 0.06405565}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6666667, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
     newSize: {x: 0.5625, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 0.33735526, y: 0.3718887}
   m_EdgeRadius: 0
 --- !u!1 &2749303965036791874
 GameObject:
@@ -251,7 +251,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.405, y: 1.41, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6023772745858379945}
@@ -331,6 +331,7 @@ MonoBehaviour:
   - item: {fileID: 8214825215314073368, guid: ae1cabcb3fe8d45499e10f867c18fc50, type: 3}
     quantity: 1
   items: []
+  _gameManager: {fileID: 0}
 --- !u!114 &1538947467705189453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e08e010d792cd04695123976b9d95a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogueManager: {fileID: 0}
   _interactionPanel: {fileID: 0}
   _dialoguePanel: {fileID: 0}
 --- !u!114 &8505367215701742342
@@ -361,5 +363,8 @@ MonoBehaviour:
   _hasQuest: 0
   _isAMerchand: 1
   _shop: {fileID: 3166583929137400198}
-  npcData: {fileID: 11400000, guid: 35ce31244fe8e34439c1ece412ecbb39, type: 2}
+  _npcData: {fileID: 0}
+  _variables: {fileID: 0}
   inkFile: {fileID: 4900000, guid: c24205ab7229fc3409a243976aead502, type: 3}
+  checkGlobalsVariables: 0
+  dialogueManager: {fileID: 0}

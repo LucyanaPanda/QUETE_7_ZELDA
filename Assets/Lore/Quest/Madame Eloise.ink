@@ -7,7 +7,8 @@ INCLUDE ../globals.ink
 - Have you been doing well since the beginning of your journey ?
 	+ [Yes]
 		-- Glad to hear sweetie.
-		-- { eloiseQuestCompleted == false : -> Quest | -> FinishQuest}
+		-- ->END
+// 		-- { eloiseQuestCompleted == false : -> Quest | -> FinishQuest}
     + [No]
         -- Oh i’m sorry. Must be because you’re not feeling like you belong to the world.
         -- You’ll get your memories back soon enough.

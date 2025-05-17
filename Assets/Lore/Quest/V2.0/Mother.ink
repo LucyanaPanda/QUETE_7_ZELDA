@@ -4,19 +4,15 @@ INCLUDE ../../globals.ink
 
 //First Quest
 === Mother ===
-From Mother:
-Hey Honey, how are ya ?
+Hey Honey!
+Are you doing fine ?
  + [I'm doing fine mom, looking for little jobs]
     -- Oh great ! you'll earn experience and some pockets money.
     -- That's a good initiative.
-    -- { motherQuestCompleted == true: -> FinishQuest | -> QuestMother }
-    -- -> QuestMother
+    -- { motherQuestCompleted == 1: -> FinishQuest | -> QuestMother }
 + [It's okay, normal day] 
-    -- -> Side
-        
-=== Side ===
-Okay, seems like your day is going tooooo smooth.
--> QuestMother
+    -- Okay, seems like your day is going tooooo smooth.
+    -- {motherQuestCompleted == 1: -> FinishQuest | -> QuestMother }
     
 === QuestMother === 
 Look, i need some help, can you collect all the carrots in the garden ?

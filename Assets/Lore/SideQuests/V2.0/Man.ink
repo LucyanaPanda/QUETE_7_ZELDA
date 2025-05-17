@@ -1,6 +1,6 @@
 INCLUDE ../../globals.ink
 
-{ manQuestCompleted == true: -> FinishQuest | -> Quest }
+{ manQuestCompleted == 1: -> FinishQuest | -> Quest }
 -> Quest
 
 === Quest ===

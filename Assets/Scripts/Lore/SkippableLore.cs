@@ -7,9 +7,11 @@ using UnityEngine.UI;
 
 public class SkippableLore : MonoBehaviour
 {
-    public static SkippableLore Instance;
     public TextAsset lore;
     public string keyLore;
+    public bool isEndGame;
+
+    [Header("UI elements")]
     public GameObject IntroductionPanel;
     [SerializeField] private TMP_Text textBox;
     [SerializeField] private Button skipButton;
@@ -22,14 +24,14 @@ public class SkippableLore : MonoBehaviour
     [Header("FadeInOut")]
     [SerializeField] private float fadeSpeed = 0.05f;
 
+    [Header("GlobalsVariables")]
+    [SerializeField] private GlobalsVariables _globalVariables;
+
     private float maxTimeParagraph = 10f;
     private float timer = 0f;
 
     private void Awake()
     {
-        if (Instance != null) { Destroy(this); }
-        else { Instance = this; }
-
         skipButton.onClick.AddListener(() => SkipIntroduction());
         nextButton.onClick.AddListener(() => NextText());
 
@@ -65,7 +67,9 @@ public class SkippableLore : MonoBehaviour
         }
         else
         {
+            if (isEndGame) { PlayerPrefs.DeleteAll(); SceneManager.LoadScene(0); return; }
             StartCoroutine(FadeInToMenu());
+
         }
     }
 
@@ -103,7 +107,7 @@ public class SkippableLore : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.02f);
         }
         IntroductionPanel.SetActive(false);
-        GlobalsVariables.Instance.SetVariable(keyLore, true);
+        _globalVariables.SetVariable(keyLore, 1);
         if (ending) { SceneManager.LoadScene(0); }
     }
 

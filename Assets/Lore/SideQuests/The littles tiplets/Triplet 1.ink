@@ -1,6 +1,6 @@
 INCLUDE ../../globals.ink
 
-{ tripletsQuestCompleted == true: -> FinishQuest | -> Quest }
+{ tripletsQuestCompleted == 1: -> FinishQuest | -> Quest }
 
 === Quest ===
 Veronica ! You can't just take my toy whenever you want !

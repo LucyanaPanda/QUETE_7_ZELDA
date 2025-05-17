@@ -12,7 +12,11 @@ public class SaveGlobalsVariables : MonoBehaviour
     {
         if (Instance != null) { Destroy(this); }
         else { Instance = this; }
-        _variables = GlobalsVariables.Instance;
+        _variables = GetComponent<GlobalsVariables>();
+    }
+
+    private void Start()
+    {
         LoadGlobalsData();
     }
 

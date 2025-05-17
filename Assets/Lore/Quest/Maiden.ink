@@ -1,6 +1,6 @@
 INCLUDE ../globals.ink
 
-{ maidenQuestCompleted == false : -> Main | -> FinishQuest }
+// { maidenQuestCompleted == false : -> Main | -> FinishQuest }
 
 === Main ===
 Hey you! 

@@ -1,5 +1,6 @@
 INCLUDE ../../globals.ink
-{ lostGirlQuestCompleted == true: -> FinishQuest | -> LostGirl}
+
+{ lostGirlQuestCompleted == 1: -> FinishQuest | -> LostGirl }
 
 === LostGirl ===
 Hello miss!
@@ -18,7 +19,7 @@ Would you mind telling me the way ?
         -> Choices
     * [Left then right then left until you find the bakery]
         -- Thank you miss !
-        -- ~ lostGirlQuestCompleted = true // Bind it to globals.ink
+        -- ~ lostGirlQuestCompleted = 1 // Bind it to globals.ink
         -- Here is something for you !
         --> END
     

@@ -1,6 +1,6 @@
 INCLUDE ../../globals.ink
 
-{ tripletsQuestCompleted == true: -> FinishQuest | -> Quest }
+{ tripletsQuestCompleted == 1: -> FinishQuest | -> Quest }
 
 === Quest ===
 But you told me I can take it !

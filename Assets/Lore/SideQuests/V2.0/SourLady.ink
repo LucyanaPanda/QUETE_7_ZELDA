@@ -1,14 +1,18 @@
 INCLUDE ../../globals.ink
 
-{ sourLadyQuestCompleted == true: -> FinishQuest | -> Main }
+{ sourLadyQuestCompleted == 1: -> FinishQuest | -> Main }
 -> Main
 
 === Main ===
 Don't bother me. I need to be alone.
-* What's wrong ?
+...
+You can leave now.
+* [What's wrong ?]
     -- I said don't bother me, i don't need you to coMfort me
-    -> END
-* I won't leave until you feel better
+    -- -> END
+* [I won't leave until you feel better]
+    -- Why so persisting ?
+    -- Fine, do whatever you want.
     -- -> Quest
 
 === Quest ===
