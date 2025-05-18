@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
@@ -58,7 +60,7 @@ public class PauseManager : MonoBehaviour
     public void PauseGame()
     {
         _gameIsPaused = true;
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
         _player.enabled = false;
         _gameManager.playerInGame = false;
     }
@@ -66,7 +68,7 @@ public class PauseManager : MonoBehaviour
     public void ResumeGame()
     {
         _gameIsPaused = false;
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
         _player.enabled = true;
         _gameManager.playerInGame = true;
     }
@@ -88,6 +90,12 @@ public class PauseManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Reset()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(0);
     }
 }
 

@@ -29,15 +29,18 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue( TextAsset inkFile, Creature npcData, NPCDialogue npc)
     {
+        if (_variables == null) { _variables = GetComponent<GlobalsVariables>(); }  
+        dialoguePlayed = true;
+        _nameText.text = npcData.nameCreature;
+        _profilImage.sprite = npcData.image;
+        currentNPC = npc;
+
         currentStory = new Story(inkFile.text);
         _variables.BindToStory(currentStory);
         _variables.StartListeningStory(currentStory);
-        currentNPC = npc;
+
         ResetDialogue();
         NextLine();
-        _nameText.text = npcData.nameCreature;
-        _profilImage.sprite = npcData.image;
-        dialoguePlayed = true;
     }
 
     public void NextLine()
@@ -60,6 +63,7 @@ public class DialogueManager : MonoBehaviour
     private void DisplayDialogueLine()
     {
         _dialogueBox.text = currentStory.Continue();
+        _dialogueBox.color = Color.white;
         DisplayChoices();
     }
 

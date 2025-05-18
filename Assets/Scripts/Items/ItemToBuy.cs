@@ -43,7 +43,6 @@ public class ItemToBuy : MonoBehaviour
         if (item.ItemData.price > _playerInventory.money)
         {
             Debug.Log("Cannot buy this item");
-            _playerInventory.AddMoney(item.ItemData.price);
             return false;
         }
         _playerInventory.AddMoney(-item.ItemData.price);
@@ -52,7 +51,6 @@ public class ItemToBuy : MonoBehaviour
         product.quantity--;
         UpdateQuantity();
         shop.DisplayMoney();
-        //Add a sound clip
         return true;
     }
 

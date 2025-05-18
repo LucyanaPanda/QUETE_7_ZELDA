@@ -14,7 +14,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private GameObject _weaponPosition;
     [SerializeField] private Weapon _swordPrefab;
-    [SerializeField] private Weapon _bowPrefab;
+    [SerializeField] private Weapon _slingshotPrefab;
     private Weapon _currentWeapon;
 
     [Header("DialogueManager")]
@@ -37,11 +37,13 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (_player.attackTimer >= _player.attackMaxTimer && !_dialogueManager.dialoguePlayed && _gameManager.playerInGame)
+        if (context.started && _player.attackTimer >= _player.attackMaxTimer && !_dialogueManager.dialoguePlayed && _gameManager.playerInGame)
         {
             GetWeaponFromSlot();
             _player.attackTimer -= _player.attackMaxTimer;
             _currentWeapon.damage = _player.attack;
+            Slingshot slingshot = _currentWeapon.GetComponent<Slingshot>();
+            if (slingshot != null) { slingshot.fromPlayer = true; }
             _currentWeapon.Attack();
             _audioManager.PlaySound(AudioManager.AudioType.Attack);
             Debug.Log("Attacking");
@@ -80,9 +82,9 @@ public class PlayerAttack : MonoBehaviour
                 }
                 else
                 {
-                    Weapon bow = Instantiate(_bowPrefab, _weaponPosition.transform, false);
-                    ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
-                    ((Bow)bow).fromPlayer = true;
+                    Weapon slingshot = Instantiate(_slingshotPrefab, _weaponPosition.transform, false);
+                    ((Slingshot)slingshot).distance = _weaponSlot.dragableItem.currentItem.distance;
+                    ((Slingshot)slingshot).fromPlayer = true;
                     GetWeapon();
                     return;
                 }
@@ -91,13 +93,18 @@ public class PlayerAttack : MonoBehaviour
         else if (_currentWeapon != null && _weaponSlot.dragableItem.currentItem != null)
         {
             Sword sword = _currentWeapon.GetComponent<Sword>();
-            Bow bow = _currentWeapon.GetComponent<Bow>();
+            Slingshot slingshot = _currentWeapon.GetComponent<Slingshot>();
 
             if (sword != null && _weaponSlot.dragableItem.currentItem.isSword) { GetWeapon(); return; }
-            else if (bow != null && !_weaponSlot.dragableItem.currentItem.isSword) { GetWeapon(); return; }
+            else if (slingshot != null && !_weaponSlot.dragableItem.currentItem.isSword) { GetWeapon(); return; }
+        }
+        else if (_currentWeapon != null && _weaponSlot.dragableItem.currentItem == null)
+        {
+            Sword sword = _currentWeapon.GetComponent<Sword>();
+            if(sword != null) { return; }
         }
 
-        foreach (Transform child in _weaponPosition.transform) { Destroy(child.gameObject); }
+            foreach (Transform child in _weaponPosition.transform) { Destroy(child.gameObject); }
 
         if (_weaponSlot.dragableItem.currentItem.isSword)
             {if (_weaponSlot.dragableItem.currentItem.isSword)
@@ -106,9 +113,9 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                Weapon bow = Instantiate(_bowPrefab, _weaponPosition.transform, false);
-                ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
-                ((Bow)bow).fromPlayer = true;
+                Weapon slingshot = Instantiate(_slingshotPrefab, _weaponPosition.transform, false);
+                ((Slingshot)slingshot).distance = _weaponSlot.dragableItem.currentItem.distance;
+                ((Slingshot)slingshot).fromPlayer = true;
             }
         }
     }

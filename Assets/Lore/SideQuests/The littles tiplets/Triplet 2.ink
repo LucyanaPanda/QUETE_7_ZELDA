@@ -11,9 +11,6 @@ How did you become so spoiled in just a few days, what happened to you !
 
 === FinishQuest ===
 No way, you're back.
-You are the Veronica I know!
 You're finally back.
+You're being normal again !
 -> END
-eed to scream at each other like that.
-...
-They are not listening to me...

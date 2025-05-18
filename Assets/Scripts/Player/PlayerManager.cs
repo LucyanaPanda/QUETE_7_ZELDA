@@ -115,7 +115,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         if (damage - defense >= 0)
         {
-            health -= damage - defense;
+            float damageTaken = Mathf.Max(0, damage - defense);
+            health -= damageTaken;
             _onHealthChanged.Invoke();
             _spriteRenderer.color = Color.red;
             yield return new WaitForSecondsRealtime(0.5f);

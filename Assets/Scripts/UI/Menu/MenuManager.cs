@@ -18,6 +18,8 @@ public class MenuManager : MonoBehaviour
         _audioManager = AudioManager.Instance;
         _audioManager.PlaySound(AudioManager.AudioType.MenuMusic);
         _audioManager.PlaySound(AudioManager.AudioType.MenuAmbiant);
+        _audioManager.StopSound(AudioManager.AudioType.GameMusic);
+        _audioManager.StopSound(AudioManager.AudioType.GameAmbiant);
     }
 
     private void OnDestroy()

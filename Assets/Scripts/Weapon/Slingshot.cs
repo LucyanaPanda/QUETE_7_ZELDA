@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bow : Weapon
+public class Slingshot : Weapon
 {
     [Header(" Arrow prefab")]
     [SerializeField] private GameObject _arrowPrefab;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 945193785010929922}
   - component: {fileID: 604158445876488033}
   m_Layer: 6
-  m_Name: Bow
+  m_Name: Slingshot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,8 +120,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6629312057767851066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67b732e357c204442b82dab79dfe2bc2, type: 3}
+  m_Script: {fileID: 11500000, guid: 55477a4182bf3a244af978b571006be8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  arrowPrefab: {fileID: 94819027857018861, guid: 9461d7c4c419a9c4ca9403df97188f33, type: 3}
+  _arrowPrefab: {fileID: 94819027857018861, guid: 9461d7c4c419a9c4ca9403df97188f33, type: 3}
+  distance: 0
+  fromPlayer: 0
+  _playerManager: {fileID: 0}

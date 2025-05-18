@@ -29,8 +29,16 @@ public class GameManager : MonoBehaviour
         _audioManager = AudioManager.Instance;
         _audioManager.PlaySound(AudioManager.AudioType.GameMusic);
         _audioManager.PlaySound(AudioManager.AudioType.GameAmbiant);
+        _audioManager.StopSound(AudioManager.AudioType.MenuMusic);
+        _audioManager.StopSound(AudioManager.AudioType.MenuAmbiant);
 
         _globalsVariables = GetComponent<GlobalsVariables>();
+    }
+
+    private void OnDestroy()
+    {
+        _audioManager.StopSound(AudioManager.AudioType.GameMusic);
+        _audioManager.StopSound(AudioManager.AudioType.GameAmbiant);
     }
 
     public void StartLore(TextAsset lore, string loreKey, bool isEndGame)

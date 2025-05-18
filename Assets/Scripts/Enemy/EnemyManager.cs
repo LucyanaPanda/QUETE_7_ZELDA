@@ -43,7 +43,8 @@ public class EnemyManager : MonoBehaviour, IDamageable
     public IEnumerator Damage(float damage)
     {
         Debug.Log("damage taken: " + damage + " defense: " + defense);
-        health -= damage - defense;
+        float damageTaken = Mathf.Max(0, damage - defense);
+        health -= damageTaken;
         _spriteRenderer.color = Color.red;
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;

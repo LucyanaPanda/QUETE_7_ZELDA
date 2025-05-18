@@ -51,7 +51,7 @@ public class EnemyAttack : MonoBehaviour
             _attackTimer -= _attackMaxTimer;
             _audioManager.PlaySound(AudioManager.AudioType.Attack);
             _weapon.damage = _attack;
-            if(!isSword) { ((Bow)_weapon).distance = distance ; }
+            if(!isSword) { ((Slingshot)_weapon).distance = distance ; }
             _weapon.Attack();
         }
     }

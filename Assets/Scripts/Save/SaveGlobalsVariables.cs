@@ -19,7 +19,6 @@ public class SaveGlobalsVariables : MonoBehaviour
     {
         LoadGlobalsData();
         GameManager manager = GetComponent<GameManager>();
-        Debug.Log(manager + " "+ manager.loreBeginning + " "+ manager.keyLoreBeginning);
         manager.StartLore(manager.loreBeginning, manager.keyLoreBeginning, false);
     }
 
