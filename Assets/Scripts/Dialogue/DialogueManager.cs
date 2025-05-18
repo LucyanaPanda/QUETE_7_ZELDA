@@ -55,6 +55,7 @@ public class DialogueManager : MonoBehaviour
         {
             ResetDialogue();
             _dialoguePanel.SetActive(false);
+            currentNPC.talkToOnce = true;
             currentNPC.enabled = false;
             dialoguePlayed = false;
             _variables.StopListeningStroy(currentStory);

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     private GlobalsVariables _globalsVariables;
     private AudioManager _audioManager;
 
-
+    private float timer;
     void Start()
     {
         _audioManager = AudioManager.Instance;
@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
         _audioManager.PlaySound(AudioManager.AudioType.GameAmbiant);
 
         _globalsVariables = GetComponent<GlobalsVariables>();
-        StartLore(loreBeginning, keyLoreBeginning);
     }
 
     public void StartLore(TextAsset lore, string loreKey)

@@ -9,13 +9,17 @@ VAR loreOrb = 0
 VAR motherQuestCompleted = 0
 VAR tommyQuestCompleted = 0
 VAR lostGirlQuestCompleted = 0
-VAR RgrandmaQuestCompleted = "0"
+VAR RgrandmaQuestCompleted = 0
 
 //Globals variables for side quests
 VAR tripletsQuestCompleted = 0
 VAR manQuestCompleted = 0
 VAR littleBoyQuestCompleted = 0
 VAR sourLadyQuestCompleted = 0
+
+//Globals variables for side dialogues
+VAR TalkOnceToFirendlyMonster = 0
+VAR Test = 0
 
 
 

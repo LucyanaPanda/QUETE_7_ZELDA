@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 16
   nameCreature: Merchand
   description: Sell items
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: db652ababca41994e81e28dddb0516d6, type: 3}
   health: 3
   minHealth: 0
   maxHealth: 3
@@ -33,5 +33,3 @@ MonoBehaviour:
   minMoney: 0
   maxMoney: 0
   questCompletedName: 
-  hasBeenTalkOnceName: 
-  shopKey: shopOpen

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class Quest : MonoBehaviour
@@ -9,6 +10,9 @@ public class Quest : MonoBehaviour
     [Header("TypeOfQuest")]
     [SerializeField] private bool _objectToGive;
     [SerializeField] private bool _monstersToKill;
+    [SerializeField] private bool _talkToNPC;
+    [SerializeField] private bool _talk;
+    [SerializeField] private NPCDialogue target;
     public bool resolved;
 
     [Header("Object to bring back")]
@@ -29,19 +33,19 @@ public class Quest : MonoBehaviour
     [SerializeField] private List<ItemScript> rewardItems;
     [SerializeField] private List<int> rewardQuantities;
 
-    public GlobalsVariables _variables;
+    public GlobalsVariables variables;
+    public SaveGlobalsVariables saveVariables;
     public PlayerInventory playerInventory;
 
     public void IfQuestResolved(Creature npcData)
     {
-        if (_objectToGive && !_monstersToKill && !resolved && _variables.GetVariable(npcData.questCompletedName).ToString() == "0")
+        if (_objectToGive && !_monstersToKill && !_talkToNPC &&!_talk && !resolved && variables.GetVariable(npcData.questCompletedName).ToString() == "0")
         {
             foreach (KeyValuePair<Item, int> entry in playerInventory.inventory)
             {
                 if (entry.Key == _questObject)
                 {
-                    Debug.Log(entry.Value + " " + _quantity);
-                    if (entry.Value < _quantity) { Debug.Log(entry.Value + " " + _quantity);  return; }
+                    if (entry.Value < _quantity) { return; }
                     resolved = true;
 
                     playerInventory.inventory[entry.Key] = entry.Value - _quantity;
@@ -50,16 +54,14 @@ public class Quest : MonoBehaviour
 
                     playerInventory.saveInventory.SaveTheInventory();
                     playerInventory.saveInventory.LoadInventory();
-                    playerInventory.AddMoney(rewardMoney);
                     OnCompletedQuest();
 
-                    _variables.SetVariable(npcData.questCompletedName, 1);
-                    SaveGlobalsVariables.Instance.SaveGlobalsData();
+                    GiveRewards(npcData);
                     break;
                 }
             }
         }
-        else if (!_objectToGive && _monstersToKill && !resolved && _variables.GetVariable(npcData.questCompletedName).ToString() == "0")
+        else if (!_objectToGive && _monstersToKill && !_talkToNPC &&!_talk && !resolved && variables.GetVariable(npcData.questCompletedName).ToString() == "0")
         {
             for (int i = 0; i < _questEnemies.Count; i++)
             {
@@ -70,10 +72,23 @@ public class Quest : MonoBehaviour
             }
 
             OnCompletedQuest();
-            playerInventory.AddMoney(rewardMoney);
-
-            _variables.SetVariable(npcData.questCompletedName, 1);
-            SaveGlobalsVariables.Instance.SaveGlobalsData();
+            GiveRewards(npcData);
+        }
+        else if (!_objectToGive && !_monstersToKill && _talkToNPC &&!_talk && target != null)
+        {
+            if (target.talkToOnce)
+            {
+                OnCompletedQuest();
+                GiveRewards(npcData);
+            }
+        }
+        else if (!_objectToGive && !_monstersToKill && !_talkToNPC && _talk)
+        {
+            if (_questGiver.talkToOnce)
+            {
+                OnCompletedQuest();
+                GiveRewards(npcData);
+            }
         }
     }
 
@@ -88,6 +103,14 @@ public class Quest : MonoBehaviour
                 blocked.SetActive(false);
             }
         }
+    }
+
+    private void GiveRewards(Creature npcData)
+    {
+        playerInventory.AddMoney(rewardMoney);
+
+        variables.SetVariable(npcData.questCompletedName, 1);
+        saveVariables.SaveGlobalsData();
 
         if (rewardItems != null && rewardItems.Count > 0)
         {
@@ -105,6 +128,5 @@ public class Quest : MonoBehaviour
             playerInventory.saveInventory.SaveTheInventory();
             playerInventory.saveInventory.LoadInventory();
         }
-
     }
 }

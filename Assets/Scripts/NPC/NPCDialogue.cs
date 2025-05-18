@@ -7,6 +7,7 @@ public class NPCDialogue : MonoBehaviour
     [Header("NPC has quest")]
     [SerializeField] private Quest _quest;
     [SerializeField] private bool _hasQuest;
+    public bool talkToOnce;
 
     [Header("NPC is a merchand")]
     [SerializeField] private bool _isAMerchand;
@@ -55,6 +56,16 @@ public class NPCDialogue : MonoBehaviour
         }
         else
         {
+            dialogueManager.StartDialogue(inkFile, _npcData, this);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (!checkGlobalsVariables) { return; }
+        if (_hasQuest && !_isAMerchand)
+        {
+            _quest.IfQuestResolved(_npcData);
             dialogueManager.StartDialogue(inkFile, _npcData, this);
         }
     }

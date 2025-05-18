@@ -4,7 +4,7 @@ INCLUDE ../../globals.ink
 -> Quest
 
 === Quest ===
-"*WAHHHHHHHHHHHHHHHHHHHHH*" (crying violently)
+"WAHHHHHHHHHHHHHHHHHHHHH" (crying violently)
 Ma'am please help me, I'm seeing scary people around me !
 MOMMY !
 -> END

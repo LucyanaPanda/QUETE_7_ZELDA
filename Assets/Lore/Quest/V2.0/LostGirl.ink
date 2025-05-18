@@ -19,7 +19,6 @@ Would you mind telling me the way ?
         -> Choices
     * [Left then right then left until you find the bakery]
         -- Thank you miss !
-        -- ~ lostGirlQuestCompleted = 1 // Bind it to globals.ink
         -- Here is something for you !
         --> END
     

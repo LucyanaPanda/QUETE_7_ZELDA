@@ -79,7 +79,8 @@ public class PlayerInventory : MonoBehaviour
         {
             _gameManager.StartLore(_gameManager.loreOrb, _gameManager.keyLoreOrb);
         }
-        else if (ItemInInventory(_concertTicket))
+        
+        if (ItemInInventory(_concertTicket))
         {
             _gameManager.StartLore(_gameManager.loreEnding, _gameManager.keyLoreEnding);
         }
