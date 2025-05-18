@@ -25,6 +25,9 @@ public class PauseManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private PlayerController _player;
 
+    [Header("GameManager")]
+    [SerializeField] GameManager _gameManager;
+
     public void PausedResume(InputAction.CallbackContext context)
     {
         if (context.started) 
@@ -57,7 +60,7 @@ public class PauseManager : MonoBehaviour
         _gameIsPaused = true;
         //Time.timeScale = 0f;
         _player.enabled = false;
-        GameManager.Instance.playerInGame = false;
+        _gameManager.playerInGame = false;
     }
 
     public void ResumeGame()
@@ -65,7 +68,7 @@ public class PauseManager : MonoBehaviour
         _gameIsPaused = false;
         //Time.timeScale = 1f;
         _player.enabled = true;
-        GameManager.Instance.playerInGame = true;
+        _gameManager.playerInGame = true;
     }
 
     public void ShowHideSettings()

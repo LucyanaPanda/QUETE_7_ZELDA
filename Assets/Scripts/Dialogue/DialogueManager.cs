@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager Instance;
+    [Header("Dialogue elements")]
     public NPCDialogue currentNPC;
     public bool dialoguePlayed = false;
     public bool hasChoices = false;
@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     public bool isMerchandStory;
     public NPCShop shop;
 
+    [Header("UI elements for dialogue")]
     [SerializeField] private GameObject _dialoguePanel;
     [SerializeField] private Image _profilImage;
     [SerializeField] private TMP_Text _nameText;
@@ -23,19 +24,14 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject choicePrefab;
 
     private GlobalsVariables _variables;
-    private Story currentStory;
 
-    private void Awake()
-    {
-        if (Instance != null) { Destroy(Instance); }
-        Instance = this;
-        _variables = GlobalsVariables.Instance;
-    }
+    private Story currentStory;
 
     public void StartDialogue( TextAsset inkFile, Creature npcData, NPCDialogue npc)
     {
         currentStory = new Story(inkFile.text);
         _variables.BindToStory(currentStory);
+        _variables.StartListeningStory(currentStory);
         currentNPC = npc;
         ResetDialogue();
         NextLine();
@@ -54,8 +50,10 @@ public class DialogueManager : MonoBehaviour
         {
             ResetDialogue();
             _dialoguePanel.SetActive(false);
+            currentNPC.talkToOnce = true;
             currentNPC.enabled = false;
             dialoguePlayed = false;
+            _variables.StopListeningStroy(currentStory);
         }
     }
 

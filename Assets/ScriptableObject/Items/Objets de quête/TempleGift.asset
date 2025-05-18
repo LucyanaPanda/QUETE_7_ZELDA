@@ -13,16 +13,15 @@ MonoBehaviour:
   m_Name: TempleGift
   m_EditorClassIdentifier: 
   id: 19
-  nameItem: Gift
-  description: Gift for the temple, this will allow you to grant one of your wishes
-    if offered to the temple
+  nameItem: Orange Diamond
+  description: A beautiful jewel.
   image: {fileID: 616224773321597006, guid: a21ee43b12d69814583846502b2c040e, type: 3}
   canBeUse: 0
   isPotion: 0
   isWeapon: 0
   isArmor: 0
   isAccesorie: 0
-  price: 0
+  price: 100
   healthBoost: 0
   speedBoost: 0
   defBoost: 0
@@ -33,3 +32,5 @@ MonoBehaviour:
   attackMalus: 0
   duration: 0
   hasDuration: 0
+  isSword: 0
+  distance: 0

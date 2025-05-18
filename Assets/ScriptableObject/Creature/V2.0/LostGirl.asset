@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783396c44c923044bbc35a10f2a48121, type: 3}
+  m_Name: LostGirl
+  m_EditorClassIdentifier: 
+  id: 20
+  nameCreature: Lost girl
+  description: Some lost girl
+  image: {fileID: 21300000, guid: 78913fcd8ddfa1e40a57018fac1e82f0, type: 3}
+  health: 2
+  minHealth: 0
+  maxHealth: 2
+  defense: 0
+  minDefense: 0
+  maxDefense: 0
+  attack: 0.5
+  minAttack: 0.5
+  maxAttack: 0.5
+  speed: 3
+  minSpeed: 0
+  maxSpeed: 3
+  attackTimer: 0
+  attackMaxTimer: 0
+  minMoney: 5
+  maxMoney: 10
+  questCompletedName: lostGirlQuestCompleted
+  hasBeenTalkOnceName: 
+  shopKey: 

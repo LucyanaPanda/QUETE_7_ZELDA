@@ -12,9 +12,16 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Slot _weaponSlot;
 
     [Header("Attack")]
+    [SerializeField] private GameObject _weaponPosition;
     [SerializeField] private Weapon _swordPrefab;
     [SerializeField] private Weapon _bowPrefab;
     private Weapon _currentWeapon;
+
+    [Header("DialogueManager")]
+    [SerializeField] private DialogueManager _dialogueManager;
+
+    [Header("GameManager")]
+    [SerializeField] private GameManager _gameManager;
 
     private AudioManager _audioManager;
 
@@ -30,14 +37,14 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (_player.attackTimer >= _player.attackMaxTimer && !DialogueManager.Instance.dialoguePlayed && GameManager.Instance.playerInGame)
+        if (_player.attackTimer >= _player.attackMaxTimer && !_dialogueManager.dialoguePlayed && _gameManager.playerInGame)
         {
             GetWeaponFromSlot();
-            GetWeapon();
             _player.attackTimer -= _player.attackMaxTimer;
             _currentWeapon.damage = _player.attack;
             _currentWeapon.Attack();
             _audioManager.PlaySound(AudioManager.AudioType.Attack);
+            Debug.Log("Attacking");
         }
     }
 
@@ -51,12 +58,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void GetWeapon()
     {
-        try
-        {
-            _currentWeapon = GetComponentInChildren<Weapon>();
-            Debug.Log(_currentWeapon);
-        } catch (Exception e ) { Debug.Log(e); }
-        
+        _currentWeapon = GetComponentInChildren<Weapon>();
     }
 
     private void GetWeaponFromSlot()
@@ -65,20 +67,23 @@ public class PlayerAttack : MonoBehaviour
         {
             if (_weaponSlot.dragableItem.currentItem == null)
             {
-                Instantiate(_swordPrefab, transform, false);
+                Instantiate(_swordPrefab, _weaponPosition.transform, false);
+                GetWeapon();
                 return;
             } else
             {
                 if (_weaponSlot.dragableItem.currentItem.isSword)
                 {
-                    Instantiate(_swordPrefab, transform, false);
+                    Instantiate(_swordPrefab, _weaponPosition.transform, false);
+                    GetWeapon();
                     return;
                 }
                 else
                 {
-                    Weapon bow = Instantiate(_bowPrefab, transform, false);
+                    Weapon bow = Instantiate(_bowPrefab, _weaponPosition.transform, false);
                     ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
                     ((Bow)bow).fromPlayer = true;
+                    GetWeapon();
                     return;
                 }
             }
@@ -88,25 +93,24 @@ public class PlayerAttack : MonoBehaviour
             Sword sword = _currentWeapon.GetComponent<Sword>();
             Bow bow = _currentWeapon.GetComponent<Bow>();
 
-            if (sword != null && _weaponSlot.dragableItem.currentItem.isSword) { return; }
-            else if (bow != null && !_weaponSlot.dragableItem.currentItem.isSword) { return; }
+            if (sword != null && _weaponSlot.dragableItem.currentItem.isSword) { GetWeapon(); return; }
+            else if (bow != null && !_weaponSlot.dragableItem.currentItem.isSword) { GetWeapon(); return; }
         }
 
-        foreach (Transform child in transform) { Destroy(child.gameObject); }
+        foreach (Transform child in _weaponPosition.transform) { Destroy(child.gameObject); }
 
         if (_weaponSlot.dragableItem.currentItem.isSword)
             {if (_weaponSlot.dragableItem.currentItem.isSword)
             {
-                Instantiate(_swordPrefab, transform, false);
+                Instantiate(_swordPrefab, _weaponPosition.transform, false);
             }
             else
             {
-                Weapon bow = Instantiate(_bowPrefab, transform, false);
+                Weapon bow = Instantiate(_bowPrefab, _weaponPosition.transform, false);
                 ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
                 ((Bow)bow).fromPlayer = true;
             }
         }
-        
     }
 
 }

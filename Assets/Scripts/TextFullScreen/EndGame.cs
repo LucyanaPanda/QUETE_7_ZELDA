@@ -6,7 +6,7 @@ using Ink.Runtime;
 public class EndGame : InteractableScript
 {
     [SerializeField] private Item _questObject;
-
+    [SerializeField] private SkippableLore _skippableLore;
     [SerializeField] private GameObject _blackScreen;
     [SerializeField] private TMP_Text _text;
     public TextAsset loreEnding;
@@ -30,10 +30,10 @@ public class EndGame : InteractableScript
                     _blackScreen.SetActive(true);
                     _hasOffered = true;
 
-                    SkippableLore.Instance.lore = loreEnding;
-                    SkippableLore.Instance.keyLore = keyLoreEnding;
-                    SkippableLore.Instance.ending = true;
-                    SkippableLore.Instance.IntroductionPanel.SetActive(true);
+                    _skippableLore.lore = loreEnding;
+                    _skippableLore.keyLore = keyLoreEnding;
+                    _skippableLore.ending = true;
+                    _skippableLore.IntroductionPanel.SetActive(true);
                     return;
                 }
             }

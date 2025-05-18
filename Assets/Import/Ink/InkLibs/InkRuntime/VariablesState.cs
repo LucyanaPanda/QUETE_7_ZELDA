@@ -100,7 +100,7 @@ namespace Ink.Runtime
                     if (value == null) {
                         throw new Exception ("Cannot pass null to VariableState");
                     } else {
-                        throw new Exception ("Invalid value passed to VariableState: "+value.ToString());
+                        throw new Exception ("Invalid value passed to VariableState: "+value.ToString() + " " + val);
                     }
                 }
 

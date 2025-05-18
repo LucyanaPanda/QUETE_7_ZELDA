@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
-    public static PlayerManager Instance;   
-
     [Header("Data")]
     public Creature creatureData;
     public float health, minHealth, maxHealth;
@@ -17,6 +15,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public float defense, minDefense, maxDefense;
     public float speed, minSpeed, maxSpeed;
     public Vector3 _spawnpoint;
+    public Vector3 _startingGamePos;
     public readonly static string playerDataSaveKey = "PlayerData";
 
     [Header("Potion Effect")]
@@ -50,18 +49,12 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     private AudioManager _audioManager;
 
-    private void Awake()
-    {
-        if (Instance != null) { Destroy(this); }
-        else { Instance = this; }
-    }
     private void Start()
     {
         if (!LoadPlayerData())
         {
             InitializePlayer();
         }
-
         transform.position = _spawnpoint;
         _onHealthChanged.Invoke();
         _audioManager = AudioManager.Instance;
@@ -79,9 +72,6 @@ public class PlayerManager : MonoBehaviour, IDamageable
 
     private void InitializePlayer()
     {
-        //Sprite
-        _spriteRenderer.sprite = creatureData.image;
-
         //Health
         health = creatureData.health;
         minHealth = creatureData.minHealth;
@@ -106,7 +96,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
         maxSpeed = creatureData.maxSpeed;
 
         //Spawnpoint
-        _spawnpoint = transform.position;
+        _spawnpoint = _startingGamePos;
     }
 
     #region Health/Damage

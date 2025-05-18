@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NPCDialogue : MonoBehaviour
@@ -5,39 +7,65 @@ public class NPCDialogue : MonoBehaviour
     [Header("NPC has quest")]
     [SerializeField] private Quest _quest;
     [SerializeField] private bool _hasQuest;
+    public bool talkToOnce;
 
     [Header("NPC is a merchand")]
     [SerializeField] private bool _isAMerchand;
     [SerializeField] private NPCShop _shop;
 
-    [SerializeField] private Creature npcData;
+    [SerializeField] private Creature _npcData;
+
+    [SerializeField] private GlobalsVariables _variables;
 
     public TextAsset inkFile;
-    private bool checkGlobalsVariables = false;
+    public bool checkGlobalsVariables = false;
+    public DialogueManager dialogueManager;
 
-    private void Start()
+    private float timer = 0f;
+
+    private void Update()
     {
-        if (npcData.questCompletedName != "" && GlobalsVariables.Instance.GetVariable(npcData.questCompletedName).ToString() != "false")
+        if (timer >= 1f && !checkGlobalsVariables)
         {
-            _quest.OnCompletedQuest();
+            if (_hasQuest && _npcData.questCompletedName != "" && _variables.GetVariable(_npcData.questCompletedName).ToString() == "1")
+            {
+                _quest.OnCompletedQuest();
+            }
+            checkGlobalsVariables = true;
+            enabled = false;
+        } else
+        {
+            timer += Time.deltaTime;
         }
-        enabled = false;
-        checkGlobalsVariables = true;
     }
+
+
     private void OnEnable()
     {
         if (!checkGlobalsVariables) { return; }
-
         if (_hasQuest && !_isAMerchand)
         {
-            _quest.IfQuestResolved(npcData);
-            DialogueManager.Instance.StartDialogue(inkFile, npcData, this);
+            _quest.IfQuestResolved(_npcData);
+            dialogueManager.StartDialogue(inkFile, _npcData, this);
         }
         else if (!_hasQuest && _isAMerchand)
         {
-            DialogueManager.Instance.shop = _shop;
-            DialogueManager.Instance.isMerchandStory = true;
-            DialogueManager.Instance.StartDialogue(inkFile, npcData, this);
+            dialogueManager.shop = _shop;
+            dialogueManager.isMerchandStory = true;
+            dialogueManager.StartDialogue(inkFile, _npcData, this);
+        }
+        else
+        {
+            dialogueManager.StartDialogue(inkFile, _npcData, this);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (!checkGlobalsVariables) { return; }
+        if (_hasQuest && !_isAMerchand)
+        {
+            _quest.IfQuestResolved(_npcData);
         }
     }
 }

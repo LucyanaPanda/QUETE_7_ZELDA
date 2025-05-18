@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783396c44c923044bbc35a10f2a48121, type: 3}
+  m_Name: Mother
+  m_EditorClassIdentifier: 
+  id: 17
+  nameCreature: Mother
+  description: Naomi's mother. She is a farmer
+  image: {fileID: -580795432, guid: 9591d0832ed89924fa046332eb90d34f, type: 3}
+  health: 3
+  minHealth: 0
+  maxHealth: 3
+  defense: 1
+  minDefense: 1
+  maxDefense: 1
+  attack: 1
+  minAttack: 1
+  maxAttack: 1
+  speed: 2
+  minSpeed: 2
+  maxSpeed: 2
+  attackTimer: 0
+  attackMaxTimer: 0
+  minMoney: 10
+  maxMoney: 15
+  questCompletedName: motherQuestCompleted
+  hasBeenTalkOnceName: 
+  shopKey: 

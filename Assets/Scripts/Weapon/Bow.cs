@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class Bow : Weapon
 {
-    [SerializeField] private GameObject arrowPrefab;
+    [Header(" Arrow prefab")]
+    [SerializeField] private GameObject _arrowPrefab;
     public float distance;
     public bool fromPlayer;
+
+    [Header("PlayerManager")]
+    [SerializeField] private PlayerManager _playerManager;
 
     public override void Attack()
     {
@@ -14,7 +18,7 @@ public class Bow : Weapon
 
     private void ShootArrow()
     {
-        GameObject gameObject = Instantiate(arrowPrefab, transform.position, Quaternion.identity);
+        GameObject gameObject = Instantiate(_arrowPrefab, transform.position, Quaternion.identity);
         Arrow arrow = gameObject.GetComponent<Arrow>();
         arrow.damage = damage;
 
@@ -44,11 +48,11 @@ public class Bow : Weapon
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         return angle;
-    }
+    }   
 
     private Vector3 GetDirectionTowardsPlayer()
     {
-        Vector3 dir = PlayerManager.Instance.transform.position - transform.position;
+        Vector3 dir = _playerManager.transform.position - transform.position;
         return dir;
     }
 }

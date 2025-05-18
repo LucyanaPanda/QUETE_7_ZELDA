@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7190439157236307973}
-  - component: {fileID: 3301578265927813541}
   - component: {fileID: 1527669934970670117}
   - component: {fileID: 2231298479274037887}
   - component: {fileID: 1422768842670382927}
   - component: {fileID: 5718786972329261453}
+  - component: {fileID: 5118378571093428333}
+  - component: {fileID: 7862693507133590776}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -33,30 +34,10 @@ Transform:
   m_LocalPosition: {x: 602.74554, y: 362.40173, z: -0.5463507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5414424544232008224}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3301578265927813541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4889084955828054765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55810c00c4d01514690ab3286cc1ba2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _blackScreen: {fileID: 0}
-  _text: {fileID: 0}
-  _lines:
-  - You regained consciousness a few days ago
-  - You were found by a young lady who helped and sheltered you
-  - "You found yourself in a world you didn\u2019t know"
-  - Eloise, this young lady, explained everything about this world to you
-  - So, you decide to go on a journey to discover the world and try to recover the
-    memory you lost and to find out how you ended up here
 --- !u!114 &1527669934970670117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +73,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Attack[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3301578265927813541}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BeginGame, Assembly-CSharp
         m_MethodName: OnBeginGame
         m_Mode: 0
@@ -139,6 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da4b1f6fd3e9b6f4cad0b53a86523d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInGame: 0
+  loreBeginning: {fileID: 4900000, guid: 354d2ec5d78a6e043856e0ac71e9fcd4, type: 3}
+  keyLoreBeginning: loreBeginning
 --- !u!114 &1422768842670382927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +138,8 @@ MonoBehaviour:
   currentNPC: {fileID: 0}
   dialoguePlayed: 0
   hasChoices: 0
+  isMerchandStory: 0
+  shop: {fileID: 0}
   _dialoguePanel: {fileID: 0}
   _profilImage: {fileID: 0}
   _nameText: {fileID: 0}
@@ -172,4 +158,91 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2583270a04567f148a90128035a0e30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalsInk: {fileID: 4900000, guid: d1f5b19a510496f48bd693e8876e3e5a, type: 3}
+  globalsInk: {fileID: 4900000, guid: 1ed07cc43a3ea5042b5eb8cd2c1b6fd0, type: 3}
+--- !u!114 &5118378571093428333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889084955828054765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619d68724974aa74992ac2e2fce2e86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7862693507133590776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889084955828054765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3901df16da21f9948b083d71c74c7950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryUi: {fileID: 0}
+--- !u!1001 &2451435306703933659
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7190439157236307973}
+    m_Modifications:
+    - target: {fileID: 5179813331021544306, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_Name
+      value: Audio
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 361.25867
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 197.97406
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.87636685
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+--- !u!4 &5414424544232008224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7576982034097814267, guid: 6136d71cdc1a2da4db0203803b68d42e, type: 3}
+  m_PrefabInstance: {fileID: 2451435306703933659}
+  m_PrefabAsset: {fileID: 0}

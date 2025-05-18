@@ -48,7 +48,7 @@ public class ItemToBuy : MonoBehaviour
         }
         _playerInventory.AddMoney(-item.ItemData.price);
         _playerInventory.saveInventory.SaveMoney();
-        _playerInventory.AddToInventory(item);
+        _playerInventory.AddToInventory(item, 1);
         product.quantity--;
         UpdateQuantity();
         shop.DisplayMoney();

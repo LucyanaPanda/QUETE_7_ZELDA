@@ -19,12 +19,12 @@ public class PlayerHotbar : MonoBehaviour
     [SerializeField] private PlayerUpgradeStat _upgradeStat;
 
     [Header("SFX")]
-    [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _potionItemClip;
+    [SerializeField] private AudioManager _audioManager;
 
     private void Start()
     {
         _inventory = PlayerInventory.Instance;
+        _audioManager = AudioManager.Instance;
     }
 
 
@@ -57,8 +57,7 @@ public class PlayerHotbar : MonoBehaviour
                     else
                         _upgradeStat.UseSpecialItem(entry.Key);
 
-                    _audioSource.clip = _potionItemClip;
-                    _audioSource.Play();
+                    _audioManager.PlaySound(AudioManager.AudioType.Potion);
 
                     _hotbarUi.slots[_currentSlotSelected].UpdateInformation();
                     SaveInventory.Instance.SaveTheInventory();
@@ -69,7 +68,7 @@ public class PlayerHotbar : MonoBehaviour
     }
 
 
-    //Scrolling system
+    #region Scrolling system
     public void OnScroll(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -85,4 +84,5 @@ public class PlayerHotbar : MonoBehaviour
         _hotbarSlotSelected.SetParent(_hotbarUi.slots[_currentSlotSelected].transform);
         _hotbarSlotSelected.localPosition = Vector3.zero;
     }
+    #endregion
 }

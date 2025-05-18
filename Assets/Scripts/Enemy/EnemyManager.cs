@@ -45,7 +45,6 @@ public class EnemyManager : MonoBehaviour, IDamageable
         Debug.Log("damage taken: " + damage + " defense: " + defense);
         health -= damage - defense;
         _spriteRenderer.color = Color.red;
-        _audioManager.PlaySound(AudioManager.AudioType.Death);
         yield return new WaitForSecondsRealtime(0.5f);
         _spriteRenderer.color = Color.white;
         _onHealthChanged.Invoke();

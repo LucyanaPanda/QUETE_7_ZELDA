@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 _lookRight;
     [SerializeField] private Vector3 _lookLeft;
 
+    [Header("Reveal Ennemies")]
+    [SerializeField] private LayerMask _targetLayerMask;
+    [SerializeField] private float _radius;
+    [SerializeField] private Item _itemRevealer;
+    private PlayerInventory _inventory;
     private void Awake()
     {
         if (Instance != null) { Destroy(this); }
@@ -27,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _inventory = GetComponentInParent<PlayerInventory>();
         _parentTransform.position = _player._spawnpoint;
     }
 
@@ -40,7 +46,6 @@ public class PlayerController : MonoBehaviour
         _dir.Normalize();
         _parentTransform.position += _dir * _player.speed * Time.deltaTime;
 
-        // à amélirorer pour qu'on voit derrière et devant
         if (_dir.x < 0)
             LookAtDirection(false);
         else if (_dir.x > 0)
@@ -52,7 +57,6 @@ public class PlayerController : MonoBehaviour
         _dir = context.ReadValue<Vector2>();
     }
 
-    // à amélirorer pour qu'on voit derrière et devant
     private void LookAtDirection(bool isRight)
     {
         if (isRight)
@@ -66,6 +70,25 @@ public class PlayerController : MonoBehaviour
         if (context.started)
             _playerInteractions.TryInteract();
 
+    }
+
+    public void OnReveal(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("Test1");
+            if (_inventory.inventory.ContainsKey(_itemRevealer))
+            {
+                Debug.Log("Test2");
+                Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, _radius, _targetLayerMask);
+
+                foreach (Collider2D target in targets)
+                {
+                    Debug.Log("Test3");
+                    target.GetComponent<EnemyHiddenReveal>().RevealBody();
+                }
+            }
+        }
     }
 }
 

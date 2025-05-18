@@ -12,8 +12,15 @@ public class SaveGlobalsVariables : MonoBehaviour
     {
         if (Instance != null) { Destroy(this); }
         else { Instance = this; }
-        _variables = GlobalsVariables.Instance;
+        _variables = GetComponent<GlobalsVariables>();
+    }
+
+    private void Start()
+    {
         LoadGlobalsData();
+        GameManager manager = GetComponent<GameManager>();
+        Debug.Log(manager + " "+ manager.loreBeginning + " "+ manager.keyLoreBeginning);
+        manager.StartLore(manager.loreBeginning, manager.keyLoreBeginning, false);
     }
 
     public void SaveGlobalsData()

@@ -4,7 +4,7 @@ using UnityEngine;
 public class SaveInventory : MonoBehaviour
 {
     public static SaveInventory Instance;
-    private PlayerInventory playerInventory;
+    public PlayerInventory playerInventory;
     public InventoryUI inventoryUi;
 
     [Header("Money")]
@@ -17,11 +17,11 @@ public class SaveInventory : MonoBehaviour
     {
         if (Instance != null) { Destroy(this); }
         else { Instance = this; }
+        inventoryUi = playerInventory.inventoryUi;
     }
 
     private void Start()
     {
-        playerInventory = PlayerInventory.Instance;
         inventoryUi = playerInventory.inventoryUi;
     }
 
@@ -71,7 +71,6 @@ public class SaveInventory : MonoBehaviour
             playerInventory.inventory.Clear();
             if (inventoryData == null)
             {
-                print("Bouuuu");
                 SaveTheInventory();
                 return;
             }

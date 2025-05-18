@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class GlobalsVariables : MonoBehaviour
 {
-    public static GlobalsVariables Instance;
     public Story globalsStory;
-
     [SerializeField] private TextAsset globalsInk;
 
     private void Awake()
     {
-        if (Instance != null) { Destroy(this); }
-        else { Instance = this; }
         globalsStory = new Story(globalsInk.text);
+    }
+
+    public void StartListeningStory(Story story)
+    {
+        story.variablesState.variableChangedEvent += VariableChanged;
+    }
+
+    public void StopListeningStroy( Story story)
+    {
+        story.variablesState.variableChangedEvent -= VariableChanged;
+    }
+
+    public void VariableChanged(string name, Ink.Runtime.Object value)
+    {
+        Debug.Log("Variable Changed: "+ name +" = " + value);
     }
 
     public void SetVariable(string name, object value)
     {
-
         if (globalsStory.variablesState.Contains(name))
         {
             globalsStory.variablesState[name] = value;

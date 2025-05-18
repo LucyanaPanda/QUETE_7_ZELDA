@@ -1,13 +1,22 @@
+using System.Collections;
 using UnityEngine;
 
 public class Sword : Weapon
 {
     public override void Attack()
     {
-        _spriteRenderer.enabled = true;
-        _boxCollider.enabled = true;
+        
         _animator.SetTrigger("Attack");
+        StartCoroutine(DeactiveComponents());
 
+    }
+
+    IEnumerator DeactiveComponents()
+    {
+        yield return new WaitForSecondsRealtime(0.4f);
+        _spriteRenderer.enabled = false;
+        _boxCollider.enabled = false;
+        Debug.Log("Dactiv");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

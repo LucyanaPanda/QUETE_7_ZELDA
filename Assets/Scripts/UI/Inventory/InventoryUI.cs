@@ -25,6 +25,9 @@ public class InventoryUI : MonoBehaviour
     [Header("SaveInventory")]
     private SaveInventory _saveInventory;
 
+    [Header("GameManager")]
+    [SerializeField] private GameManager _gameManager;
+
     private void Start()
     {
         _playerInventory = PlayerInventory.Instance;
@@ -34,14 +37,12 @@ public class InventoryUI : MonoBehaviour
         InitializeSlotsPositions();
         _inventoryPanel.SetActive(true);
         _playerHpBar.SetActive(false);
-        _playerHpBar.SetActive(false);
         inventoryVisible = true;
         _pauseManager.PauseGame();
 
         LoadAndDisplayInventory();
 
         _inventoryPanel.SetActive(false);
-        _playerHpBar.SetActive(true);
         _playerHpBar.SetActive(true);
         inventoryVisible = false;
         _saveInventory.SaveTheInventory();
@@ -58,11 +59,11 @@ public class InventoryUI : MonoBehaviour
             inventoryVisible = false;
             _saveInventory.SaveTheInventory();
             _pauseManager.ResumeGame();
-            GameManager.Instance.playerInGame = true;
+            _gameManager.playerInGame = true;
         }
         else
         {
-            GameManager.Instance.playerInGame = false;
+            _gameManager.playerInGame = false;
             _inventoryPanel.SetActive(true);
             _playerHpBar.SetActive(false);
             _playerHpBar.SetActive(false);

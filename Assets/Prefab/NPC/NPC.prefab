@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -7838356227777195048, guid: 970781748b2baab4baaf44b5577f0ff3, type: 3}
+  m_Sprite: {fileID: 1555220479, guid: f0aa69402888d8a45bc4a264514c5ba9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5625, y: 0.5}
+  m_Size: {x: 0.6666667, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -122,17 +122,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0003502816, y: -0.14598048}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5625, y: 0.5}
-    newSize: {x: 0.5625, y: 0.5}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.6666667, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 0.5337472, y: 0.2173959}
   m_EdgeRadius: 0
 --- !u!1 &4303715835960440933
 GameObject:
@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 5273278729749077056}
   - component: {fileID: 7933365851120163439}
   - component: {fileID: 5708049931644479377}
-  - component: {fileID: 4484509962616959879}
   - component: {fileID: 6071641243366850594}
   m_Layer: 0
   m_Name: NPC
@@ -206,7 +205,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: -0.5180041}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -216,7 +215,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.9639917}
   m_EdgeRadius: 0
 --- !u!114 &7933365851120163439
 MonoBehaviour:
@@ -230,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e08e010d792cd04695123976b9d95a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dialogueManager: {fileID: 0}
   _interactionPanel: {fileID: 0}
   _dialoguePanel: {fileID: 0}
 --- !u!114 &5708049931644479377
@@ -246,93 +246,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _quest: {fileID: 6071641243366850594}
   _hasQuest: 0
-  _dialoguePanel: {fileID: 0}
-  _profilImage: {fileID: 0}
-  _nameText: {fileID: 0}
-  _dialogueBox: {fileID: 0}
-  dialogueLines: []
---- !u!114 &4484509962616959879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4303715835960440933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4bd5f85a8a320be41b09f1a7573b99c2, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: bfdfadeb-9ddc-452f-be1c-9ba16f8f9c5b
-    m_ActionName: 'Player/PlayerMovement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8f791bc3-ac08-421b-a493-fc5052ef97f7
-    m_ActionName: 'Player/Attack[/Mouse/leftButton]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7933365851120163439}
-        m_TargetAssemblyTypeName: NPCInteraction, Assembly-CSharp
-        m_MethodName: InteractionStarted
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5708049931644479377}
-        m_TargetAssemblyTypeName: NPCDialogue, Assembly-CSharp
-        m_MethodName: OnTextChanged
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 66db40a6-98b0-4809-bb5c-c18256e1babc
-    m_ActionName: 'Player/Interact[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 75a1a5db-1e95-45c6-a511-7f97bd5e6678
-    m_ActionName: 'Player/PauseGame[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fbadde01-5da0-4fd1-934c-0c5a1a181296
-    m_ActionName: 'Player/Inventory[/Keyboard/b]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: e924abeb-f05b-47df-8c43-d708817408e8
-    m_ActionName: 'Player/UseItem[/Mouse/rightButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: d4803041-1914-4cc2-a472-362a24029434
-    m_ActionName: 'Player/ScollItem[/Mouse/scroll/down,/Mouse/scroll/up]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  _isAMerchand: 0
+  _shop: {fileID: 0}
+  npcData: {fileID: 0}
+  inkFile: {fileID: 0}
+  dialogueManager: {fileID: 0}
 --- !u!114 &6071641243366850594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,7 +266,7 @@ MonoBehaviour:
   _questGiver: {fileID: 5708049931644479377}
   _objectToGive: 0
   _monstersToKill: 0
-  _questResolved: 0
+  resolved: 0
   _dialogueBeginning:
   - Do me a favor while you're here.
   - In the cave behind my house, there is a treasure my late grand father left me.
@@ -358,11 +276,15 @@ MonoBehaviour:
   _dialogueEnd:
   - 'Thank you... Trank you very much. '
   _questObject: {fileID: 11400000, guid: cd5c3a7ac2b8c954eb72c762abda32a5, type: 2}
+  _quantity: 0
   _questEnemies:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _playerInventory: {fileID: 0}
+  _pathToblock:
+  - {fileID: 0}
+  _hasAPathBlocked: 0
+  rewardMoney: 0
 --- !u!1 &7399984602713998754
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,12 +361,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7685206120247198685, guid: 970781748b2baab4baaf44b5577f0ff3, type: 3}
+  m_Sprite: {fileID: 3305222884957025545, guid: f0aa69402888d8a45bc4a264514c5ba9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5625, y: 0.5}
+  m_Size: {x: 0.6666667, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +26,5 @@ public class Chest : InteractableScript
             Vector2 position = new Vector2(x + transform.position.x, y + transform.position.y);
             Instantiate(item, position, Quaternion.identity);
         }
-        Destroy(_chest);
     }
 }
