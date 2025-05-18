@@ -33,12 +33,14 @@ public class GameManager : MonoBehaviour
         _globalsVariables = GetComponent<GlobalsVariables>();
     }
 
-    public void StartLore(TextAsset lore, string loreKey)
+    public void StartLore(TextAsset lore, string loreKey, bool isEndGame)
     {
+        if (_globalsVariables == null) { _globalsVariables = GetComponent<GlobalsVariables>(); }
         if (_globalsVariables.GetVariable(loreKey).ToString() == "0")
         {
             _skippableLore.lore = lore;
             _skippableLore.keyLore = loreKey;
+            _skippableLore.ending = isEndGame;
             _skippableLore.IntroductionPanel.SetActive(true);
             return;
         }

@@ -27,11 +27,6 @@ public class DialogueManager : MonoBehaviour
 
     private Story currentStory;
 
-    private void Start()
-    {
-        _variables = GetComponent<GlobalsVariables>();
-    }
-
     public void StartDialogue( TextAsset inkFile, Creature npcData, NPCDialogue npc)
     {
         currentStory = new Story(inkFile.text);

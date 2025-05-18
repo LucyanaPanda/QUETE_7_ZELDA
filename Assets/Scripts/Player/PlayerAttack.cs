@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private Slot _weaponSlot;
 
     [Header("Attack")]
+    [SerializeField] private GameObject _weaponPosition;
     [SerializeField] private Weapon _swordPrefab;
     [SerializeField] private Weapon _bowPrefab;
     private Weapon _currentWeapon;
@@ -66,20 +67,20 @@ public class PlayerAttack : MonoBehaviour
         {
             if (_weaponSlot.dragableItem.currentItem == null)
             {
-                Instantiate(_swordPrefab, transform, false);
+                Instantiate(_swordPrefab, _weaponPosition.transform, false);
                 GetWeapon();
                 return;
             } else
             {
                 if (_weaponSlot.dragableItem.currentItem.isSword)
                 {
-                    Instantiate(_swordPrefab, transform, false);
+                    Instantiate(_swordPrefab, _weaponPosition.transform, false);
                     GetWeapon();
                     return;
                 }
                 else
                 {
-                    Weapon bow = Instantiate(_bowPrefab, transform, false);
+                    Weapon bow = Instantiate(_bowPrefab, _weaponPosition.transform, false);
                     ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
                     ((Bow)bow).fromPlayer = true;
                     GetWeapon();
@@ -96,16 +97,16 @@ public class PlayerAttack : MonoBehaviour
             else if (bow != null && !_weaponSlot.dragableItem.currentItem.isSword) { GetWeapon(); return; }
         }
 
-        foreach (Transform child in transform) { Destroy(child.gameObject); }
+        foreach (Transform child in _weaponPosition.transform) { Destroy(child.gameObject); }
 
         if (_weaponSlot.dragableItem.currentItem.isSword)
             {if (_weaponSlot.dragableItem.currentItem.isSword)
             {
-                Instantiate(_swordPrefab, transform, false);
+                Instantiate(_swordPrefab, _weaponPosition.transform, false);
             }
             else
             {
-                Weapon bow = Instantiate(_bowPrefab, transform, false);
+                Weapon bow = Instantiate(_bowPrefab, _weaponPosition.transform, false);
                 ((Bow)bow).distance = _weaponSlot.dragableItem.currentItem.distance;
                 ((Bow)bow).fromPlayer = true;
             }

@@ -66,7 +66,6 @@ public class NPCDialogue : MonoBehaviour
         if (_hasQuest && !_isAMerchand)
         {
             _quest.IfQuestResolved(_npcData);
-            dialogueManager.StartDialogue(inkFile, _npcData, this);
         }
     }
 }

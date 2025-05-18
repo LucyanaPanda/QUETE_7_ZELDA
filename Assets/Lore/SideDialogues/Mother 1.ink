@@ -4,6 +4,6 @@ INCLUDE ../globals.ink
 -> Main
 
 === Main ===
-Did I put enough sunscreen on her? 
+Did I put enough sunscreen on him? 
 I should’ve double-checked.
 -> END
